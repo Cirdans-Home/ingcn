@@ -1,8 +1,8 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 
-title: Calcolo Numerico - Esercitazioni di Laboratorio
-author: F. Durastante
+title: Calcolo Numerico - Note ed Esercitazioni di Laboratorio
+author: P. Boito, F. Durastante
 logo: logo.png
 
 # Force re-execution of notebooks on each build.
@@ -36,3 +36,5 @@ sphinx:
     language: it
   extra_extensions:
     - sphinx_proof
+  latex_elements:
+    preamble: '\usepackage{pifont}'
