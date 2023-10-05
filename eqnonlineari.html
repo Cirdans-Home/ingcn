@@ -1,0 +1,1066 @@
+
+<!DOCTYPE html>
+
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Risoluzione numerica di equazioni nonlineari &#8212; Calcolo Numerico - Note ed Esercitazioni di Laboratorio</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/translations.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Indice" href="genindex.html" />
+    <link rel="search" title="Cerca" href="search.html" />
+    <link rel="next" title="Laboratorio 3 : Il Metodo di Bisezione" href="laboratorio3.html" />
+    <link rel="prev" title="Laboratorio 2 : L’Aritmetica di Precisione Finita" href="laboratorio2.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="it">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Calcolo Numerico - Note ed Esercitazioni di Laboratorio</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Calcolo Numerico - Appunti ed esercitazioni di Laboratorio
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="laboratorio1.html">
+   Laboratorio 1 : Introduzione a MATLAB
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="aritmeticadimacchina.html">
+   L’Aritmetica di Precisione Finita
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="laboratorio2.html">
+   Laboratorio 2 : L’Aritmetica di Precisione Finita
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Risoluzione numerica di equazioni nonlineari
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="laboratorio3.html">
+   Laboratorio 3 : Il Metodo di Bisezione
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="laboratorio4.html">
+   Laboratorio 4 : Il Metodo di Newton
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="laboratorio5.html">
+   Laboratorio 5 : Soluzione di Sistemi Triangolari
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="laboratorio6.html">
+   Laboratorio 6 : L’Eliminazione di Gauss il Metodo LU
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="laboratorio7.html">
+   Laboratorio 7 : Metodi Stazionari per Sistemi Lineari
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="laboratorio8.html">
+   Laboratorio 8 : Metodi di Quadratura
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="laboratorio9.html">
+   Laboratorio 9 : Metodi per la Soluzione di ODE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="laboratorio10.html">
+   Laboratorio 10 : Metodi di tipo Runge-Kutta
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/Cirdans-Home/ingcn"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/Cirdans-Home/ingcn/issues/new?title=Issue%20on%20page%20%2Feqnonlineari.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/eqnonlineari.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Risoluzione numerica di equazioni nonlineari
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#metodo-di-bisezione">
+   Metodo di bisezione
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ordine-di-convergenza-dei-metodi-iterativi">
+   Ordine di convergenza dei metodi iterativi
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#metodi-di-iterazione-funzionale">
+   Metodi di iterazione funzionale
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#metodo-di-newton">
+   Metodo di Newton
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#criteri-di-arresto">
+   Criteri di arresto
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#altri-metodi-iterativi">
+   Altri metodi iterativi
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bibliografia">
+   Bibliografia
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Risoluzione numerica di equazioni nonlineari</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Risoluzione numerica di equazioni nonlineari
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#metodo-di-bisezione">
+   Metodo di bisezione
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ordine-di-convergenza-dei-metodi-iterativi">
+   Ordine di convergenza dei metodi iterativi
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#metodi-di-iterazione-funzionale">
+   Metodi di iterazione funzionale
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#metodo-di-newton">
+   Metodo di Newton
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#criteri-di-arresto">
+   Criteri di arresto
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#altri-metodi-iterativi">
+   Altri metodi iterativi
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bibliografia">
+   Bibliografia
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="risoluzione-numerica-di-equazioni-nonlineari">
+<h1>Risoluzione numerica di equazioni nonlineari<a class="headerlink" href="#risoluzione-numerica-di-equazioni-nonlineari" title="Link a questa intestazione">#</a></h1>
+<p>Ci interessiamo al problema seguente: data una funzione</p>
+<div class="math notranslate nohighlight">
+\[f:[a,b]\subset\mathbb{R}\longrightarrow\mathbb{R},\]</div>
+<p>trovare (ovvero,
+approssimare numericamente) <span class="math notranslate nohighlight">\(x^*\in [a,b]\)</span> tale che <span class="math notranslate nohighlight">\(f(x^*)=0\)</span>. Si
+assume naturalmente che esista almeno un tale <span class="math notranslate nohighlight">\(x^*\)</span>, detto <em>zero</em> di
+<span class="math notranslate nohighlight">\(f\)</span>. Aggiungeremo poi opportune ipotesi di regolarità su <span class="math notranslate nohighlight">\(f\)</span> a seconda
+dei metodi che tratteremo.</p>
+<p>In generale, per problemi di questo tipo si usano metodi iterativi: si
+parte da un valore iniziale <span class="math notranslate nohighlight">\(x_0\)</span> e si costruisce una successione
+<span class="math notranslate nohighlight">\(\{x_i\}_{i=0,1,2,\ldots}\)</span> in <span class="math notranslate nohighlight">\([a,b]\)</span> che converga a <span class="math notranslate nohighlight">\(x^*\)</span>.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="metodo-di-bisezione">
+<h1>Metodo di bisezione<a class="headerlink" href="#metodo-di-bisezione" title="Link a questa intestazione">#</a></h1>
+<p>Il metodo di bisezione sfrutta il <em>teorema degli zeri</em>:</p>
+<div class="proof theorem admonition" id="theorem-0">
+<p class="admonition-title"><span class="caption-number">Theorem 2 </span></p>
+<section class="theorem-content" id="proof-content">
+<p><em>Sia <span class="math notranslate nohighlight">\(f:[a,b]\longrightarrow\mathbb{R}\)</span> una funzione
+continua tale che <span class="math notranslate nohighlight">\(f(a)f(b)&lt;0\)</span>. Allora esiste <span class="math notranslate nohighlight">\(x^*\in(a,b)\)</span> tale che
+<span class="math notranslate nohighlight">\(f(x^*)=0\)</span>.</em></p>
+</section>
+</div><p>Osserviamo che <span class="math notranslate nohighlight">\(x^*\)</span> potrebbe non essere unico. Osserviamo anche che il
+teorema dà una condizione sufficiente per l’esistenza di <span class="math notranslate nohighlight">\(x^*\)</span>, ma tale
+condizione non è necessaria.</p>
+<p>Supponiamo quindi <span class="math notranslate nohighlight">\(f\in C[a,b]\)</span> con <span class="math notranslate nohighlight">\(f(a)f(b)&lt;0\)</span>. Sia <span class="math notranslate nohighlight">\(c_1=(a+b)/2\)</span> il
+punto medio del segmento <span class="math notranslate nohighlight">\([a,b]\)</span>. Si verifica allora una delle tre
+possibilità seguenti:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(c_1)=0\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(f(a)f(c_1)&lt;0\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(f(c_1)f(b)&lt;0\)</span>.</p></li>
+</ul>
+<p>Nel primo caso (possibile ma molto improbabile!) abbiamo trovato
+<span class="math notranslate nohighlight">\(x^*=c_1\)</span> e quindi il metodo termina. Supponiamo ora che si verifichi
+uno dei restanti due casi, per esempio il secondo. Il teorema degli zeri
+ci assicura l’esistenza di uno zero di <span class="math notranslate nohighlight">\(f\)</span> in <span class="math notranslate nohighlight">\([a,c_1]\)</span>: posso quindi
+ripetere il ragionamento precedente su <span class="math notranslate nohighlight">\([a,c_1]\)</span>, e cosı̀ via.</p>
+<p>Più precisamente, siano <span class="math notranslate nohighlight">\(a_0=a\)</span>, <span class="math notranslate nohighlight">\(b_0=b\)</span>. Per <span class="math notranslate nohighlight">\(i=1,2,\ldots\)</span> definisco</p>
+<div class="math notranslate nohighlight">
+\[c_i=\frac{a_{i-1}+b_{i-1}}{2}.\]</div>
+<p>A questo punto:</p>
+<ul class="simple">
+<li><p>se <span class="math notranslate nohighlight">\(f(a_{i-1})f(c_i)&lt;0\)</span>, pongo <span class="math notranslate nohighlight">\(a_i=a_{i-1}\)</span> e <span class="math notranslate nohighlight">\(b_i=c_i\)</span>;</p></li>
+<li><p>se <span class="math notranslate nohighlight">\(f(c_i)f(b_{i-1})&lt;0\)</span>, pongo <span class="math notranslate nohighlight">\(a_i=c_i\)</span> e <span class="math notranslate nohighlight">\(b_i=b_{i-1}\)</span>;</p></li>
+<li><p>se <span class="math notranslate nohighlight">\(f(c_i)=0\)</span>, ho <span class="math notranslate nohighlight">\(x^*=c_i\)</span> e l’algoritmo si arresta.</p></li>
+</ul>
+<p>Poiché ad ogni passo ci si restringe a lavorare su un intervallo la cui
+lunghezza è dimezzata rispetto all’intervallo precedente, la successione
+<span class="math notranslate nohighlight">\(\{c_i\}_{i=1,2,\ldots}\)</span> converge a <span class="math notranslate nohighlight">\(x^*\)</span> tale che <span class="math notranslate nohighlight">\(f(x^*)=0\)</span>.</p>
+<p>Per implementare questo metodo è necessario fissare un criterio
+d’arresto. Si usa generalmente uno dei seguenti due criteri.</p>
+<p><strong>Criterio sull’ampiezza dell’intervallo.</strong> Fissata una tolleranza
+<span class="math notranslate nohighlight">\(\varepsilon&gt;0\)</span>, si arresta il metodo iterativo quando
+<span class="math notranslate nohighlight">\(b_i-a_i&lt;\varepsilon\)</span> e scelgo <span class="math notranslate nohighlight">\(c_i\)</span> come approssimazione di <span class="math notranslate nohighlight">\(x^*\)</span>.
+Osserviamo che vale</p>
+<div class="math notranslate nohighlight" id="equation-eq-conv-bisezione">
+<span class="eqno">(5)<a class="headerlink" href="#equation-eq-conv-bisezione" title="Permalink a questa equazione">#</a></span>\[|c_i-x^*|&lt;\varepsilon.\]</div>
+<p>È possibile dare una stima del numero di passi che si devono fare per
+soddisfare questa condizione. All”<span class="math notranslate nohighlight">\(i\)</span>-esimo passo del metodo di
+bisezione ottengo un intervallo di lunghezza <span class="math notranslate nohighlight">\((b-a)/2^i\)</span>. Impongo quindi</p>
+<div class="math notranslate nohighlight">
+\[\frac{b-a}{2^i}&lt;\varepsilon,\]</div>
+<p>da cui</p>
+<div class="math notranslate nohighlight">
+\[i&gt;\log_2\frac{b-a}{\varepsilon}.\]</div>
+<p>In altre parole, se eseguo un
+numero di passi superiore a <span class="math notranslate nohighlight">\(\log_2((b-a)/\varepsilon)\)</span> ho la certezza
+che l’approssimazione trovata per <span class="math notranslate nohighlight">\(x^*\)</span> è ad una distanza minore di
+<span class="math notranslate nohighlight">\(\varepsilon\)</span> dal valore esatto di <span class="math notranslate nohighlight">\(x^*\)</span>.</p>
+<p><strong>Criterio sul valore di <span class="math notranslate nohighlight">\(f(c_i)\)</span>.</strong> Fissata una tolleranza
+<span class="math notranslate nohighlight">\(\varepsilon&gt;0\)</span>, il metodo si arresta quando <span class="math notranslate nohighlight">\(|f(c_i)|&lt;\varepsilon\)</span>, e
+si sceglie l’ultimo <span class="math notranslate nohighlight">\(c_i\)</span> calcolato come approssimazione di <span class="math notranslate nohighlight">\(x^*\)</span>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Avvertimento</p>
+<p>A seconda del comportamento della funzione <span class="math notranslate nohighlight">\(f\)</span>, i due
+criteri possono dare risultati sensibilmente diversi.</p>
+</div>
+<div class="admonition-osservazione-2 admonition">
+<p class="admonition-title"><strong>Osservazione 2</strong>.</p>
+<p><em>La proprietà <a class="reference internal" href="#equation-eq-conv-bisezione">(5)</a> assicura la <em>convergenza</em> del metodo,
+ovvero il fatto che, per ogni <span class="math notranslate nohighlight">\(\varepsilon&gt;0\)</span> piccolo a piacere, posso
+trovare <span class="math notranslate nohighlight">\(i\)</span> tale che <span class="math notranslate nohighlight">\(|c_i-x^*|&lt;\varepsilon\)</span>. Equivalentemente possiamo
+dire che <span class="math notranslate nohighlight">\(\lim_{i\rightarrow\infty}|c_i-x^*|=0\)</span>.</em></p>
+</div>
+<p>Il metodo di bisezione ha diversi vantaggi: è di semplice
+implementazione, assicura sempre la convergenza sotto ipotesi abbastanza
+generali, prevede un criterio d’arresto di facile formulazione, richiede
+una sola valutazione di <span class="math notranslate nohighlight">\(f\)</span> a ciascuna iterazione. Osserviamo infatti
+che, in alcune applicazioni, la funzione <span class="math notranslate nohighlight">\(f\)</span> potrebbe essere alquanto
+costosa da valutare, perciò ai fini del costo computazionale è bene
+evitare di effettuare tante valutazioni.</p>
+<p>Osserviamo anche che per applicare questo metodo non abbiamo bisogno di
+un’espressione esplicita per <span class="math notranslate nohighlight">\(f\)</span>, ma ci basta saper valutare <span class="math notranslate nohighlight">\(f(x)\)</span> per
+ogni <span class="math notranslate nohighlight">\(x\in[a,b]\)</span> dato.</p>
+<p>Il principale inconveniente del metodo di bisezione è la convergenza
+lenta. Generalmente questo metodo è usato per dare una prima
+approssimazione grossolana della soluzione, che viene poi raffinata
+applicando metodi a convergenza più veloce (per es. il metodo di
+Newton).</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="ordine-di-convergenza-dei-metodi-iterativi">
+<h1>Ordine di convergenza dei metodi iterativi<a class="headerlink" href="#ordine-di-convergenza-dei-metodi-iterativi" title="Link a questa intestazione">#</a></h1>
+<p>Supponiamo di aver definito un metodo iterativo per risolvere <span class="math notranslate nohighlight">\(f(x)=0\)</span>.
+A partire da un punto iniziale <span class="math notranslate nohighlight">\(x_0\)</span>, il metodo costruisce una
+successione <span class="math notranslate nohighlight">\(\{x_i\}_{i=0,1,\ldots}\)</span>. Ci proponiamo di caratterizzare le
+proprietà di convergenza di tale successione ad uno zero <span class="math notranslate nohighlight">\(\alpha\)</span> di
+<span class="math notranslate nohighlight">\(f\)</span>.</p>
+<div class="proof definition admonition" id="definition-1">
+<p class="admonition-title"><span class="caption-number">Definition 2 </span></p>
+<section class="definition-content" id="proof-content">
+<p><em>Un metodo iterativo si dice <em>globalmente
+convergente</em> se, per ogni <span class="math notranslate nohighlight">\(x_0\in[a,b],\)</span> la successione
+<span class="math notranslate nohighlight">\(\{x_i\}_{i=0,1,\ldots}\)</span> formata a partire da <span class="math notranslate nohighlight">\(x_0\)</span> converge ad <span class="math notranslate nohighlight">\(\alpha\)</span>
+tale che <span class="math notranslate nohighlight">\(f(\alpha)=0\)</span>.</em></p>
+<p><em>Un metodo iterativo si dice <em>localmente convergente</em> se esiste un
+intorno <span class="math notranslate nohighlight">\(I=[\alpha-\rho,\alpha+\rho]\)</span> di <span class="math notranslate nohighlight">\(\alpha\)</span> tale che per ogni
+<span class="math notranslate nohighlight">\(x_0\in I\)</span> la successione <span class="math notranslate nohighlight">\(\{x_i\}_{i=0,1,\ldots}\)</span> formata a partire da
+<span class="math notranslate nohighlight">\(x_0\)</span> converga ad <span class="math notranslate nohighlight">\(\alpha\)</span> tale che <span class="math notranslate nohighlight">\(f(\alpha)=0\)</span>.</em></p>
+</section>
+</div><p>La prossima definizione caratterizza invece la velocità di convergenza
+di un metodo iterativo.</p>
+<div class="proof definition admonition" id="definition-2">
+<p class="admonition-title"><span class="caption-number">Definition 3 </span></p>
+<section class="definition-content" id="proof-content">
+<p>*Sia <span class="math notranslate nohighlight">\(\{x_i\}_{i=0,1,\ldots}\)</span> una successione
+convergente ad <span class="math notranslate nohighlight">\(\alpha\)</span> e supponiamo <span class="math notranslate nohighlight">\(x_i\neq\alpha\)</span> per ogni <span class="math notranslate nohighlight">\(i\)</span>. Se
+esiste un numero reale <span class="math notranslate nohighlight">\(p\geq 1\)</span> tale che</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\lim_{i\rightarrow\infty}\frac{|x_{i+1}-\alpha|}{|x_i-\alpha|^p}=\gamma,
+\qquad {\rm con}\,\,\left\{\begin{array}{ll}
+0&lt;\gamma\leq 1 &amp; {\rm se}\,\, p=1,\\
+\gamma&gt;0 &amp; {\rm se}\,\, p&gt;1,\end{array}\right.\end{split}\]</div>
+<p>si dice che la
+successione ha <em>ordine di convergenza</em> <span class="math notranslate nohighlight">\(p\)</span>, mentre <span class="math notranslate nohighlight">\(\gamma\)</span> è detto
+fattore di convergenza o costante asintotica.*</p>
+<p><em>Se <span class="math notranslate nohighlight">\(p=1\)</span> e <span class="math notranslate nohighlight">\(0&lt;\gamma&lt;1\)</span>, si dice che la convergenza è <em>lineare</em>; se
+<span class="math notranslate nohighlight">\(p=1\)</span> e <span class="math notranslate nohighlight">\(\gamma=1\)</span>, la convergenza è <em>sublineare</em>; se <span class="math notranslate nohighlight">\(p&gt;1\)</span>, si ha
+convergenza <em>superlineare</em>.</em></p>
+</section>
+</div><div class="proof definition admonition" id="definition-3">
+<p class="admonition-title"><span class="caption-number">Definition 4 </span></p>
+<section class="definition-content" id="proof-content">
+<p><em>Un metodo iterativo convergente ad <span class="math notranslate nohighlight">\(\alpha\)</span> si dice
+<em>convergente di ordine</em> <span class="math notranslate nohighlight">\(p\)</span> se, per ogni <span class="math notranslate nohighlight">\(x_0\)</span> in un intorno di
+<span class="math notranslate nohighlight">\(\alpha\)</span>, la successione prodotta dal metodo è convergente di ordine
+<span class="math notranslate nohighlight">\(\geq p\)</span>, e per almeno una scelta di <span class="math notranslate nohighlight">\(x_0\)</span> la successione ha ordine <span class="math notranslate nohighlight">\(p\)</span>.
+Il metodo si dice <em>convergente di ordine almeno</em> <span class="math notranslate nohighlight">\(p\)</span> se, per ogni <span class="math notranslate nohighlight">\(x_0\)</span>
+in un intorno di <span class="math notranslate nohighlight">\(\alpha\)</span>, la successione prodotta dal metodo è
+convergente di ordine <span class="math notranslate nohighlight">\(\geq p\)</span>.</em></p>
+</section>
+</div><p>La definizione di convergenza di ordine <span class="math notranslate nohighlight">\(p\)</span>, nei casi lineare e
+superlineare, implica che, per <span class="math notranslate nohighlight">\(i\)</span> sufficientemente grande, esiste
+<span class="math notranslate nohighlight">\(\beta&gt;0\)</span> tale che</p>
+<div class="math notranslate nohighlight" id="equation-eq-conv">
+<span class="eqno">(6)<a class="headerlink" href="#equation-eq-conv" title="Permalink a questa equazione">#</a></span>\[|x_{i+1}-\alpha|\leq\beta|x_{i}-\alpha|^p\]</div>
+<p>con
+<span class="math notranslate nohighlight">\(\beta&lt;1\)</span> se <span class="math notranslate nohighlight">\(p=1\)</span>. Questa espressione esprime la riduzione dell’errore
+assoluto che avviene a ciascuna iterazione.</p>
+<div class="admonition-esempio admonition">
+<p class="admonition-title">Esempio</p>
+<p>Usiamo la relazione
+<a class="reference internal" href="#equation-eq-conv">(6)</a> per
+confrontare il comportamento di un metodo a convergenza lineare e uno a
+convergenza quadratica. Supponiamo che valga <span class="math notranslate nohighlight">\(|x_0-\alpha|=0,1\)</span> e che la
+<a class="reference internal" href="#equation-eq-conv">(6)</a> si
+possa applicare per <span class="math notranslate nohighlight">\(i\geq 0\)</span>. Per un metodo a convergenza lineare
+(quindi <span class="math notranslate nohighlight">\(p=1\)</span>) con <span class="math notranslate nohighlight">\(\beta=1/2\)</span> si ha la successione di errori assoluti</p>
+<div class="math notranslate nohighlight">
+\[0,1;\,0,05;\,0,025;\,0,0125;\,0,00625;\ldots\]</div>
+<p>In altre parole, per
+«guadagnare» una cifra decimale (in base 10) sull’accuratezza del
+risultato devo eseguire <span class="math notranslate nohighlight">\(3\)</span> o <span class="math notranslate nohighlight">\(4\)</span> iterazioni, perchè
+<span class="math notranslate nohighlight">\((1/2)^3&lt;10^{-1}&lt;(1/2)^4\)</span>.</p>
+<p>Se invece consideriamo un metodo a convergenza quadratica (quindi
+<span class="math notranslate nohighlight">\(p=2\)</span>) con <span class="math notranslate nohighlight">\(\beta=1\)</span>, otteniamo la successione di errori assoluti</p>
+<div class="math notranslate nohighlight">
+\[10^{-1};\,10^{-2};\,10^{-4};\,10^{-8};\,10^{-16};\ldots\]</div>
+<p>cioè il
+numero di cifre significative correttamente individuate raddoppia a
+ciascun passo. Bastano quindi <span class="math notranslate nohighlight">\(4\)</span> iterazioni per raggiungere un errore
+dell’ordine della precisione di macchina.</p>
+</div>
+<p>In certi casi può essere utile adottare una definizione più generale di
+ordine di convergenza: si dice che <span class="math notranslate nohighlight">\(\{x_i\}_{i=0,1,\ldots}\)</span> è
+convergente di ordine <span class="math notranslate nohighlight">\(p\)</span> se</p>
+<div class="math notranslate nohighlight">
+\[\max\lim_{i\rightarrow\infty}\frac{|x_{i+1}-\alpha|}{|x_i-\alpha|^p}
+\qquad {\rm e} \qquad
+\min\lim_{i\rightarrow\infty}\frac{|x_{i+1}-\alpha|}{|x_i-\alpha|^p}\]</div>
+<p>sono finiti e non nulli (si chiede anche che siano <span class="math notranslate nohighlight">\(\leq 1\)</span> nel caso
+<span class="math notranslate nohighlight">\(p=1\)</span>).</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="metodi-di-iterazione-funzionale">
+<h1>Metodi di iterazione funzionale<a class="headerlink" href="#metodi-di-iterazione-funzionale" title="Link a questa intestazione">#</a></h1>
+<p>Una tecnica per costruire una successione <span class="math notranslate nohighlight">\(\{x_i\}_{i=0,1,\ldots}\)</span> che
+converga a <span class="math notranslate nohighlight">\(x^*\)</span> tale che <span class="math notranslate nohighlight">\(f(x^*)=0\)</span> si basa sull”<em>iterazione di punto
+fisso</em>. Si introduce a questo scopo un’opportuna funzione <span class="math notranslate nohighlight">\(g(x)\)</span> tale
+che, se <span class="math notranslate nohighlight">\(\beta\)</span> è punto fisso di <span class="math notranslate nohighlight">\(g(x)\)</span>, cioè</p>
+<div class="math notranslate nohighlight">
+\[\beta=g(\beta)\]</div>
+<p>allora
+<span class="math notranslate nohighlight">\(\beta\)</span> è anche uno zero di <span class="math notranslate nohighlight">\(f(x)\)</span>. Il punto fisso <span class="math notranslate nohighlight">\(\beta\)</span> viene
+approssimato per mezzo del metodo iterativo definito da</p>
+<div class="math notranslate nohighlight">
+\[x_{k+1}=g(x_k),\qquad k=0,1,\ldots\]</div>
+<p>con un’opportuna scelta del
+valore iniziale <span class="math notranslate nohighlight">\(x_0\)</span>.</p>
+<p>Spesso si sceglie <span class="math notranslate nohighlight">\(g(x)\)</span> della forma $<span class="math notranslate nohighlight">\(g(x)=x-\frac{f(x)}{h(x)}.\)</span>$</p>
+<div class="proof theorem admonition" id="theorem-4">
+<p class="admonition-title"><span class="caption-number">Theorem 3 </span></p>
+<section class="theorem-content" id="proof-content">
+<p><em>Supponiamo <span class="math notranslate nohighlight">\(g(x)\in C[a,b]\)</span> e sia
+<span class="math notranslate nohighlight">\(\{x_i\}_{i=0,1,\ldots}\)</span> una successione convergente con limite
+<span class="math notranslate nohighlight">\(\alpha\in [a,b]\)</span>, definita da <span class="math notranslate nohighlight">\(x_{k+1}=g(x_k)\)</span>. Allora <span class="math notranslate nohighlight">\(\alpha\)</span> è punto
+fisso di <span class="math notranslate nohighlight">\(g\)</span>.</em></p>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Si ha</p>
+<div class="math notranslate nohighlight">
+\[\alpha=\lim_{i\rightarrow\infty}x_{i+1}
+= \lim_{i\rightarrow\infty} g(x_i)
+= g(\lim_{i\rightarrow\infty} x_i) = g(\alpha),\]</div>
+<p>dove abbiamo usato la
+continuità di <span class="math notranslate nohighlight">\(g\)</span> nella penultima uguaglianza.</p>
+</div>
+<div class="proof theorem admonition" id="theorem-5">
+<p class="admonition-title"><span class="caption-number">Theorem 4 </span> (Teorema del punto fisso)</p>
+<section class="theorem-content" id="proof-content">
+<p><em>Sia <span class="math notranslate nohighlight">\(\alpha\in\mathbb{R}\)</span> e
+sia <span class="math notranslate nohighlight">\(g\in C^1[\alpha-\rho,\alpha+\rho]\)</span>, con <span class="math notranslate nohighlight">\(\rho&gt;0\)</span>, tale che</em></p>
+<ul class="simple">
+<li><p><em><span class="math notranslate nohighlight">\(|g'(x)|&lt;1\)</span> per ogni <span class="math notranslate nohighlight">\(x\in [\alpha-\rho,\alpha+\rho]\)</span>,</em></p></li>
+<li><p><em><span class="math notranslate nohighlight">\(\alpha=g(\alpha)\)</span>.</em></p></li>
+</ul>
+<p><em>Sia poi <span class="math notranslate nohighlight">\(x_0\in[\alpha-\rho,\alpha+\rho]\)</span> e si definisca la successione
+<span class="math notranslate nohighlight">\(\{x_i\}_{i=0,1,\ldots}\)</span> come</em></p>
+<div class="math notranslate nohighlight">
+\[x_{k+1}=g(x_k).\]</div>
+<p><em>Allora si ha</em></p>
+<div class="math notranslate nohighlight">
+\[|x_k-\alpha|\leq\rho, \qquad k=0,1,\ldots\]</div>
+<p>e</p>
+<div class="math notranslate nohighlight">
+\[\alpha=\lim_{k\rightarrow} x_k.\]</div>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Sia</p>
+<div class="math notranslate nohighlight">
+\[\lambda=\max_{x\in [\alpha-\rho,\alpha+\rho]}|g'(x)|.\]</div>
+<p>Poiché vale l’ipotesi <span class="math notranslate nohighlight">\(|g'(x)|&lt;1\)</span> e <span class="math notranslate nohighlight">\(g'(x)\)</span> è continua su
+<span class="math notranslate nohighlight">\([\alpha-\rho,\alpha+\rho]\)</span>, si ha <span class="math notranslate nohighlight">\(\lambda &lt;1\)</span>.</p>
+<p>Dimostriamo per induzione la proprietà <span class="math notranslate nohighlight">\(|x_i-\alpha|\leq\lambda^i\rho\)</span>,
+che implica <span class="math notranslate nohighlight">\(|x_i-\alpha|\leq\rho\)</span>, ovvero la prima parte della tesi.
+Per <span class="math notranslate nohighlight">\(i=0\)</span>, si ha <span class="math notranslate nohighlight">\(|x_0-\alpha|\leq\rho\)</span> per ipotesi. Vediamo ora il
+passo induttivo. L’ipotesi induttiva è
+<span class="math notranslate nohighlight">\(|x_{i-1}-\alpha|\leq\lambda^{i-1}\rho\)</span> e vogliamo dimostrare
+<span class="math notranslate nohighlight">\(|x_{i}-\alpha|\leq\lambda^{i}\rho\)</span>. Il teorema del valor medio<a class="footnote-reference brackets" href="#id2" id="id1">1</a>
+assicura l’esistenza di <span class="math notranslate nohighlight">\(\xi_{i-1}\in (\alpha-\rho,\alpha+\rho)\)</span> tale
+che</p>
+<div class="math notranslate nohighlight">
+\[x_i-\alpha=g(x_{i-1})-g(\alpha)=g'(\xi_{i-1})(x_{i-1}-\alpha).\]</div>
+<p>Passando ai valori assoluti e sfruttando l’ipotesi <span class="math notranslate nohighlight">\(|g'(x)|\leq\lambda\)</span>
+e l’ipotesi induttiva si ha</p>
+<div class="math notranslate nohighlight">
+\[|x_i-\alpha|=|g'(\xi_{i-1})|\, |x_{i-1}-\alpha|
+\leq\lambda |x_{i-1}-\alpha|\leq \lambda^i\rho.\]</div>
+<p>Passando al limite per
+<span class="math notranslate nohighlight">\(i\rightarrow\infty\)</span> si ottiene</p>
+<div class="math notranslate nohighlight">
+\[\lim_{i\rightarrow\infty} |x_i-\alpha|=0.\]</div>
+</div>
+<div class="proof theorem admonition" id="theorem-6">
+<p class="admonition-title"><span class="caption-number">Theorem 5 </span></p>
+<section class="theorem-content" id="proof-content">
+<p><em>Sia <span class="math notranslate nohighlight">\(\alpha\)</span> punto fisso di <span class="math notranslate nohighlight">\(g\in C^1[a,b]\)</span>. Se
+<span class="math notranslate nohighlight">\(|g'(x)|&lt;1\)</span> per ogni <span class="math notranslate nohighlight">\(x\in [a,b]\)</span>, allora <span class="math notranslate nohighlight">\(\alpha\)</span> è l’unico punto fisso
+di <span class="math notranslate nohighlight">\(g\)</span> in <span class="math notranslate nohighlight">\([a,b]\)</span>.</em></p>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Supponiamo per assurdo che esista in <span class="math notranslate nohighlight">\([a,b]\)</span> un secondo punto
+fisso <span class="math notranslate nohighlight">\(\beta\)</span> per <span class="math notranslate nohighlight">\(g\)</span>, distinto da <span class="math notranslate nohighlight">\(\alpha\)</span>. Allora per il teorema del
+valor medio esiste <span class="math notranslate nohighlight">\(\xi\in [a,b]\)</span> tale che</p>
+<div class="math notranslate nohighlight">
+\[|\alpha-\beta|=|g(\alpha)-g(\beta)|=|g'(\xi)|\,|\alpha-\beta|&lt;|\alpha-\beta|.\]</div>
+<p>Concludiamo che si ha <span class="math notranslate nohighlight">\(\alpha=\beta\)</span>.</p>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="metodo-di-newton">
+<h1>Metodo di Newton<a class="headerlink" href="#metodo-di-newton" title="Link a questa intestazione">#</a></h1>
+<p>Partiamo dalle consuete ipotesi <span class="math notranslate nohighlight">\(f:[a,b]\rightarrow\mathbb{R}\)</span>,
+<span class="math notranslate nohighlight">\(f(\alpha)=0\)</span>, e supponiamo inoltre che la funzione <span class="math notranslate nohighlight">\(f(x)\)</span> sia di classe
+<span class="math notranslate nohighlight">\(C^1\)</span> in un intorno <span class="math notranslate nohighlight">\(I\)</span> dello zero <span class="math notranslate nohighlight">\(\alpha\)</span>, e che valga <span class="math notranslate nohighlight">\(f'(x)\neq 0\)</span>
+per ogni <span class="math notranslate nohighlight">\(x\in I\setminus \{\alpha\}\)</span>. Fissato il punto iniziale <span class="math notranslate nohighlight">\(x_0\)</span>,
+il <em>metodo di Newton</em> è definito da</p>
+<div class="math notranslate nohighlight">
+\[x_{k+1}=x_k-\frac{f(x_k)}{f'(x_k)}.\]</div>
+<p>Questo metodo è anche detto
+<em>metodo delle tangenti</em>, perché <span class="math notranslate nohighlight">\(x_{k+1}\)</span> può essere visto come
+l’ascissa del punto di intersezione tra la tangente al grafico di <span class="math notranslate nohighlight">\(f\)</span>
+nel punto <span class="math notranslate nohighlight">\((x_k,f(x_k))\)</span> e l’asse delle <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>Che cosa possiamo dire sulle proprietà di convergenza?</p>
+<div class="proof definition admonition" id="definition-7">
+<p class="admonition-title"><span class="caption-number">Definition 5 </span></p>
+<section class="definition-content" id="proof-content">
+<p>*Sia <span class="math notranslate nohighlight">\(f\in C^r[a,b]\)</span> e sia <span class="math notranslate nohighlight">\(\alpha\in (a,b)\)</span> tale
+che <span class="math notranslate nohighlight">\(f(\alpha)=0\)</span>. Si dice che <span class="math notranslate nohighlight">\(\alpha\)</span> ha <em>molteplicità</em> <span class="math notranslate nohighlight">\(r\)</span> come zero
+di <span class="math notranslate nohighlight">\(f\)</span> se esiste finito e non nullo il limite
+<span class="math notranslate nohighlight">\(\lim_{x\rightarrow\alpha}\frac{f(x)}{(x-\alpha)^r}\neq 0\)</span>, cioè se vale</p>
+</section>
+</div><div class="proof theorem admonition" id="conv_newton">
+<p class="admonition-title"><span class="caption-number">Theorem 6 </span> (Convergenza Newton)</p>
+<section class="theorem-content" id="proof-content">
+<p><em>Sia <span class="math notranslate nohighlight">\(\alpha\in [a,b]\)</span> soluzione di <span class="math notranslate nohighlight">\(f(x)=0\)</span>, con
+<span class="math notranslate nohighlight">\(f'(x)\neq 0\)</span> per ogni <span class="math notranslate nohighlight">\(x\in[a,b]\setminus \{\alpha\}\)</span>.</em></p>
+<ol class="simple">
+<li><p><em>Se <span class="math notranslate nohighlight">\(\alpha\)</span> ha molteplicità <span class="math notranslate nohighlight">\(1\)</span> e <span class="math notranslate nohighlight">\(f(x)\in C^2[a,b]\)</span>, allora il
+metodo di Newton è localmente convergente con ordine almeno <span class="math notranslate nohighlight">\(2\)</span>. In
+particolare, l’ordine di convergenza è esattamente <span class="math notranslate nohighlight">\(2\)</span> se
+<span class="math notranslate nohighlight">\(f''(\alpha)\neq 0\)</span>.</em></p></li>
+<li><p><em>Se <span class="math notranslate nohighlight">\(\alpha\)</span> ha molteplicità finita <span class="math notranslate nohighlight">\(r\geq 2\)</span> e <span class="math notranslate nohighlight">\(f(x)\in C^r[a,b]\)</span>,
+allora il metodo di Newton è localmente convergente con ordine <span class="math notranslate nohighlight">\(1\)</span> e
+costante asintotica <span class="math notranslate nohighlight">\(1-\frac{1}{r}\)</span>.</em></p></li>
+</ol>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Dividiamo la dimostrazione in due passi</p>
+<ol>
+<li><p>Poiché <span class="math notranslate nohighlight">\(\alpha\)</span> ha molteplicità <span class="math notranslate nohighlight">\(1\)</span>, vale <span class="math notranslate nohighlight">\(f'(\alpha)\neq 0\)</span>.
+Osserviamo inoltre che, con la notazione introdotta in precedenza,
+la funzione</p>
+<div class="math notranslate nohighlight">
+\[g(x)=x-\frac{f(x)}{f'(x)}\]</div>
+<p>è di classe <span class="math notranslate nohighlight">\(C^1\)</span> su
+<span class="math notranslate nohighlight">\([a,b]\)</span>, quindi ha derivata prima continua. Si ha</p>
+<div class="math notranslate nohighlight">
+\[g'(\alpha)=\frac{f(\alpha)f''(\alpha)}{f'(\alpha)^2}=0,\]</div>
+<p>perciò
+esiste un intorno in <span class="math notranslate nohighlight">\(\alpha\)</span> in cui vale <span class="math notranslate nohighlight">\(|g'(x)|&lt;1\)</span>. Si deduce
+quindi la convergenza locale del metodo.</p>
+<p>Per determinare l’ordine di convergenza, sviluppo <span class="math notranslate nohighlight">\(f(x)\)</span> in serie di
+Taylor in un intorno di <span class="math notranslate nohighlight">\(x_k\)</span>. Esiste <span class="math notranslate nohighlight">\(\xi\in [a,b]\)</span> con
+<span class="math notranslate nohighlight">\(|\xi-k_k|&lt;|\alpha-x_k|\)</span> tale che</p>
+<div class="math notranslate nohighlight" id="equation-eq-taylor1">
+<span class="eqno">(7)<a class="headerlink" href="#equation-eq-taylor1" title="Permalink a questa equazione">#</a></span>\[0=f(\alpha)=f(x_k)+(\alpha-x_k)f'(x_k)+\frac12 (\alpha-x_k)^2f''(\xi).\]</div>
+<p>Osservo che si ha</p>
+<div class="math notranslate nohighlight">
+\[f(x_k)+(\alpha-x_k)f'(x_k)
+    = f'(x_k)\left[\frac{f(x_k)}{f'(x_k)}-x_k+\alpha\right]
+    = f'(x_k)[-x_{k+1}+\alpha].\]</div>
+<p>Sostituendo in
+<a class="reference internal" href="#equation-eq-taylor1">(7)</a> si ottiene</p>
+<div class="math notranslate nohighlight">
+\[f'(x_k)(x_{k+1}-\alpha)=\frac12 (\alpha-x_k)^2 f''(\xi),\]</div>
+<p>da cui</p>
+<div class="math notranslate nohighlight">
+\[\frac{x_{k+1}-\alpha}{(x_k-\alpha)^2}=\frac{f''(\xi)}{2f'(x_k)}.\]</div>
+<p>Passando al limite, nell’ipotesi <span class="math notranslate nohighlight">\(f''(\alpha)\neq 0\)</span> si ha</p>
+<div class="math notranslate nohighlight">
+\[\lim_{k\rightarrow\infty}\frac{x_{k+1}-\alpha}{(x_k-\alpha)^2}=
+    \frac{f''(\xi)}{2f'(\alpha)}\neq 0,\]</div>
+<p>quindi l’ordine di convergenza
+è 2. Se invece <span class="math notranslate nohighlight">\(f''(\alpha)= 0\)</span> e <span class="math notranslate nohighlight">\(f(x)\in C^3[a,b]\)</span>, allora
+l’ordine di convergenza è <span class="math notranslate nohighlight">\(\geq 3\)</span>.</p>
+</li>
+<li><p>Ci limitiamo a dimostrare che l’ordine di convergenza è lineare (non
+dimostriamo la convergenza locale). Sviluppiamo <span class="math notranslate nohighlight">\(f(x_k)\)</span> e <span class="math notranslate nohighlight">\(f'(x_k)\)</span>
+in serie di Taylor in un intorno di <span class="math notranslate nohighlight">\(\alpha\)</span>. Per l’ipotesi sulla
+molteplicità sappiamo
+<span class="math notranslate nohighlight">\(f(\alpha)=f'(\alpha)=\ldots=f^{(r-1)}(\alpha)=0\)</span> e
+<span class="math notranslate nohighlight">\(f^{(r)}(\alpha)\neq 0\)</span>. Si ha quindi</p>
+<div class="math notranslate nohighlight">
+\[f(x_k)=\frac{(x_k-\alpha)^r}{r!}f^{(r)}(\xi_k),\qquad
+    f'(x_k)=\frac{(x_k-\alpha)^{r-1}}{(r-1)!}f^{(r)}(\eta_k),\]</div>
+<p>per
+opportuni valori <span class="math notranslate nohighlight">\(\xi_k,\eta_k\)</span> compresi tra <span class="math notranslate nohighlight">\(x_k\)</span> e <span class="math notranslate nohighlight">\(\alpha\)</span>. Di
+conseguenza l’iterazione di Newton si può scrivere come</p>
+<div class="math notranslate nohighlight">
+\[x_{k+1}=x_k-\frac{f(x_k)}{f'(x_k)}=x_k-\frac{(x_k-\alpha)f^{(r)}(\xi_k)}{rf^{(r)}(\eta_k)}\]</div>
+<p>da cui</p>
+<div class="math notranslate nohighlight">
+\[x_{k+1}-\alpha =x_k-\alpha-\frac{(x_k-\alpha)f^{(r)}(\xi_k)}{rf^{(r)}(\eta_k)}=(x_k-\alpha)\left(1-\frac{f^{(r)}(\xi_k)}{rf^{(r)}(\eta_k)}\right)\]</div>
+<p>e passando al limite per <span class="math notranslate nohighlight">\(k\rightarrow \infty\)</span> si ottiene</p>
+<div class="math notranslate nohighlight">
+\[\lim_{k\rightarrow \infty}\frac{x_{k+1}-\alpha}{x_k-\alpha}=1-\frac{1}{r}.\]</div>
+</li>
+</ol>
+</div>
+<p>Abbiamo osservato che in generale il metodo di Newton è localmente
+convergente. In alcuni casi è possibile dare condizioni sufficienti di
+convergenza su intervalli, per esempio sotto opportune ipotesi di
+convessità. Enunciamo ora un criterio di questo tipo.</p>
+<div class="proof theorem admonition" id="theorem-9">
+<p class="admonition-title"><span class="caption-number">Theorem 7 </span></p>
+<section class="theorem-content" id="proof-content">
+<p><em>Sia <span class="math notranslate nohighlight">\(f\in C^2[\alpha,\alpha+\rho]\)</span> con <span class="math notranslate nohighlight">\(\rho&gt;0\)</span>,
+<span class="math notranslate nohighlight">\(f(\alpha)=0\)</span>. Supponiamo che valga <span class="math notranslate nohighlight">\(f(x)f''(x)&gt;0\)</span> e <span class="math notranslate nohighlight">\(f'(x)\neq 0\)</span> per
+ogni <span class="math notranslate nohighlight">\(x\in (\alpha,\alpha+\rho]\)</span>. Allora, per qualunque valore iniziale
+<span class="math notranslate nohighlight">\(x_0\in (\alpha,\alpha+\rho]\)</span>, la successione generata dal metodo di
+Newton è decrescente e convergente ad <span class="math notranslate nohighlight">\(\alpha\)</span>.</em></p>
+</section>
+</div><p>Analogamente si ha</p>
+<div class="proof theorem admonition" id="theorem-10">
+<p class="admonition-title"><span class="caption-number">Theorem 8 </span></p>
+<section class="theorem-content" id="proof-content">
+<p><em>Sia <span class="math notranslate nohighlight">\(f\in C^2[\alpha-\rho,\alpha]\)</span> con <span class="math notranslate nohighlight">\(\rho&gt;0\)</span>,
+<span class="math notranslate nohighlight">\(f(\alpha)=0\)</span>. Supponiamo che valga <span class="math notranslate nohighlight">\(f(x)f''(x)&gt;0\)</span> e <span class="math notranslate nohighlight">\(f'(x)\neq 0\)</span> per
+ogni <span class="math notranslate nohighlight">\(x\in [\alpha-\rho,\alpha)\)</span>. Allora, per qualunque valore iniziale
+<span class="math notranslate nohighlight">\(x_0\in [\alpha-\rho,\alpha)\)</span>, la successione generata dal metodo di
+Newton è crescente e convergente ad <span class="math notranslate nohighlight">\(\alpha\)</span>.</em></p>
+</section>
+</div><div class="admonition-osservazione admonition">
+<p class="admonition-title">Osservazione</p>
+<p>Nel caso in cui <span class="math notranslate nohighlight">\(\alpha\)</span> abbia molteplicità <span class="math notranslate nohighlight">\(r&gt;1\)</span>
+e il metodo di Newton abbia quindi convergenza lineare, si introduce il
+<em>metodo di Newton modificato</em>, definito dall’iterazione</p>
+<div class="math notranslate nohighlight">
+\[x_{k+1}=x_k-r\frac{f(x_k)}{f'(x_k)}\]</div>
+<p>che ha convergenza almeno
+quadratica in un intorno di <span class="math notranslate nohighlight">\(\alpha\)</span>. (Si può verificare che l’ordine di
+convergenza è <span class="math notranslate nohighlight">\(2\)</span> se <span class="math notranslate nohighlight">\(f^{(r+1)}(\alpha)\neq 0\)</span>, con un ragionamento
+simile alla dimostrazione del <a class="reference internal" href="#conv_newton">Theorem 6</a>.</p>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="criteri-di-arresto">
+<h1>Criteri di arresto<a class="headerlink" href="#criteri-di-arresto" title="Link a questa intestazione">#</a></h1>
+<p>Idealmente vorremmo arrestare un metodo iterativo <span class="math notranslate nohighlight">\(x_{k+1}=g(x_k)\)</span>
+quando <span class="math notranslate nohighlight">\(|x_k-\alpha|&lt;\varepsilon\)</span>, dove <span class="math notranslate nohighlight">\(\varepsilon&gt;0\)</span> è una tolleranza
+prefissata. Naturalmente però non sappiamo quanto valga l’errore di
+approssimazione <span class="math notranslate nohighlight">\(|x_k-\alpha|\)</span>, perché non conosciamo <span class="math notranslate nohighlight">\(\alpha\)</span>. Dobbiamo
+quindi usare criteri basati su quantità che sappiamo calcolare.</p>
+<p>I due criteri principali usati per un metodo iterativo sono:</p>
+<ul class="simple">
+<li><p>il criterio del residuo:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[|f(x_k)|&lt;\varepsilon,\]</div>
+<ul class="simple">
+<li><p>il criterio dell’incremento:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[|x_{k+1}-x_k|&lt;\varepsilon.\]</div>
+<p>Supponiamo di applicare il criterio del residuo, con <span class="math notranslate nohighlight">\(f(x)\)</span> di classe
+<span class="math notranslate nohighlight">\(C^1\)</span>. Dal teorema del valor medio si ha</p>
+<div class="math notranslate nohighlight">
+\[f(x_k)=f(\alpha)+(x_k-\alpha)f'(\xi_k),\qquad {\rm con}\,\, |\xi_k-\alpha|&lt;|x_k-\alpha|,\]</div>
+<p>e, poiché <span class="math notranslate nohighlight">\(f(\alpha)=0\)</span>, otteniamo</p>
+<div class="math notranslate nohighlight">
+\[|x_k-\alpha|=\frac{f(x_k)}{f'(\xi_k)}&lt;
+\frac{\varepsilon}{f'(\xi_k)}\simeq \frac{\varepsilon}{f'(\alpha)},\]</div>
+<p>dove l’ultima approssimazione è valida per <span class="math notranslate nohighlight">\(k\)</span> sufficientemente grande.
+Abbiamo quindi tre casi:</p>
+<ol class="simple">
+<li><p>se <span class="math notranslate nohighlight">\(|f'(\alpha)|\)</span> è vicino a 1, allora ho una buona stima
+dell’errore assoluto di approssimazione;</p></li>
+<li><p>se <span class="math notranslate nohighlight">\(|f'(\alpha)|\ll 1\)</span>, allora l’errore assoluto di approssimazione
+potrebbe essere molto più grande di <span class="math notranslate nohighlight">\(\varepsilon\)</span>, quindi rischiamo
+di avere un’approssimazione poco accurata;</p></li>
+<li><p>se <span class="math notranslate nohighlight">\(|f'(\alpha)|\gg 1\)</span>, allora l’errore assoluto di approssimazione
+è molto più piccolo di <span class="math notranslate nohighlight">\(\varepsilon\)</span>; stiamo usando un criterio
+troppo restrittivo, che ci costringe ad usare più iterazioni del
+necessario.</p></li>
+</ol>
+<p>Per il metodo di Newton si usa generalmente il metodo dell’incremento. A
+giustificazione di questo criterio, osserviamo che si ha</p>
+<div class="math notranslate nohighlight">
+\[x_{k+1}-x_k=-\frac{f(x_k)}{f'(x_k)}\]</div>
+<div class="math notranslate nohighlight">
+\[|x_{k+1}-x_k|=\frac{|f(x_k)|}{|f'(x_k)|}
+\simeq\frac{|f(x_k)|}{|f'(\xi_k)|}=|x-\alpha|,\]</div>
+<p>dove l’ultima
+uguaglianza viene dal teorema del valor medio, mentre l’approssimazione
+si intende per <span class="math notranslate nohighlight">\(k\)</span> sufficientemente grande.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="altri-metodi-iterativi">
+<h1>Altri metodi iterativi<a class="headerlink" href="#altri-metodi-iterativi" title="Link a questa intestazione">#</a></h1>
+<p>Il <strong>metodo delle corde</strong> è definito dall’iterazione</p>
+<div class="math notranslate nohighlight">
+\[x_{k+1}=x_k-\frac{f(x_k)}{m},\qquad k=0,1,\ldots.\]</div>
+<p>Geometricamente
+questo significa che <span class="math notranslate nohighlight">\(x_{k+1}\)</span> è l’ascissa del punto di intersezione tra
+l’asse delle <span class="math notranslate nohighlight">\(x\)</span> e la retta passante per <span class="math notranslate nohighlight">\((x_k,f(x_k))\)</span> con coefficiente
+angolare <span class="math notranslate nohighlight">\(m\)</span>.</p>
+<p>Se <span class="math notranslate nohighlight">\(f(x)\in C^1[a,b]\)</span>, possiamo applicare il teorema del punto fisso e
+concludere che la successione definita dal metodo delle corde è
+convergente se</p>
+<div class="math notranslate nohighlight">
+\[|g'(x)|=\left|1-\frac{f'(x)}{m}\right|&lt;1\]</div>
+<p>in un
+intorno <span class="math notranslate nohighlight">\(I\)</span> di <span class="math notranslate nohighlight">\(\alpha\)</span>, nel quale supponiamo di aver scelto il punto
+iniziale <span class="math notranslate nohighlight">\(x_0\)</span>. Si deducono quindi le seguenti condizioni sufficienti
+per la convergenza:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+&amp;&amp;f'(x)\neq 0 \,\,{\rm per}\,x\in I, \\
+&amp;&amp; mf'(x)&gt;0,\\
+&amp;&amp;|m|&gt;\frac12\max_{x\in I}|f'(x)|.
+\end{aligned}\end{split}\]</div>
+<p>Si dimostra che la convergenza è lineare, tranne quando
+<span class="math notranslate nohighlight">\(m=f'(\alpha)\)</span>, nel qual caso ha ordine <span class="math notranslate nohighlight">\(2\)</span>. È sufficiente una sola
+valutazione di <span class="math notranslate nohighlight">\(f(x)\)</span> per iterazione.</p>
+<p>Il <strong>metodo delle secanti</strong> è definito dall’iterazione</p>
+<div class="math notranslate nohighlight">
+\[x_{k+1}=x_k-f(x_k)\frac{x_k-x_{k-1}}{f(x_k)-f(x_{k-1})},\qquad k=1,2,\ldots,\]</div>
+<p>dove si suppone di aver fissato <span class="math notranslate nohighlight">\(x_0\)</span> e <span class="math notranslate nohighlight">\(x_1\)</span>.</p>
+<p>Geometricamente questo significa che <span class="math notranslate nohighlight">\(x_{k+1}\)</span> è l’ascissa del punto di
+intersezione tra l’asse delle <span class="math notranslate nohighlight">\(x\)</span> e la retta (secante) passante per i
+punti di coordinate <span class="math notranslate nohighlight">\((x_{k-1},f(x_{k-1}))\)</span> e <span class="math notranslate nohighlight">\((x_k,f(x_k))\)</span>.</p>
+<p>Si dimostra che, per <span class="math notranslate nohighlight">\(f\in C^2[a,b]\)</span> e <span class="math notranslate nohighlight">\(f'(\alpha)\neq 0\)</span>, vale la
+convergenza locale con ordine <span class="math notranslate nohighlight">\(\frac{1+\sqrt{5}}{2}\approx 1,618\)</span>. Ad
+ogni iterazione è sufficiente una sola valutazione di <span class="math notranslate nohighlight">\(f(x)\)</span>, come per
+il metodo delle corde e per il metodo di bisezione.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="bibliografia">
+<h1>Bibliografia<a class="headerlink" href="#bibliografia" title="Link a questa intestazione">#</a></h1>
+<ul class="simple">
+<li><p>D. Bini, M. Capovani, O. Menchi, <em>Metodi numerici per l’algebra
+lineare</em>, Zanichelli 1988.</p></li>
+<li><p>R. Bevilacqua, D. Bini, M. Capovani,
+O. Menchi, <em>Metodi numerici</em>, Zanichelli 1992.</p></li>
+</ul>
+<hr class="footnotes docutils" />
+<dl class="footnote brackets">
+<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p><em>Teorema del valor medio o di Lagrange:</em> sia <span class="math notranslate nohighlight">\(f(x)\)</span> funzione
+continua su <span class="math notranslate nohighlight">\([a,b]\)</span> e derivabile su <span class="math notranslate nohighlight">\((a,b)\)</span>; allora esiste
+<span class="math notranslate nohighlight">\(\xi\in(a,b)\)</span> tale che <span class="math notranslate nohighlight">\(f(b)-f(a)=(b-a)f'(\xi)\)</span>.</p>
+</dd>
+</dl>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="laboratorio2.html" title="precedente pagina">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">precedente</p>
+            <p class="prev-next-title">Laboratorio 2 : L’Aritmetica di Precisione Finita</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="laboratorio3.html" title="successivo pagina">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">successivo</p>
+        <p class="prev-next-title">Laboratorio 3 : Il Metodo di Bisezione</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By P. Boito, F. Durastante<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

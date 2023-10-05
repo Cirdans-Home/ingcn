@@ -134,6 +134,11 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="eqnonlineari.html">
+   Risoluzione numerica di equazioni nonlineari
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="laboratorio3.html">
    Laboratorio 3 : Il Metodo di Bisezione
   </a>
@@ -568,19 +573,19 @@ conoscete sin dal corso di <em>algebra lineare</em>.</p>
 <span class="math notranslate nohighlight">\(L_{ii} = 1\)</span>, <span class="math notranslate nohighlight">\(i=1,\ldots,n\)</span>, possiamo ricavare che i termini della matrice
 <span class="math notranslate nohighlight">\(U\)</span> sono dati da</p>
 <div class="math notranslate nohighlight" id="equation-lu1">
-<span class="eqno">(9)<a class="headerlink" href="#equation-lu1" title="Permalink a questa equazione">#</a></span>\[\begin{split}\forall\,j\quad &amp; \begin{array}{ll}
+<span class="eqno">(12)<a class="headerlink" href="#equation-lu1" title="Permalink a questa equazione">#</a></span>\[\begin{split}\forall\,j\quad &amp; \begin{array}{ll}
 i = 1, &amp; u_{i,j} = a_{i,j},\\
 i &gt; 1, &amp; u_{i,j} = \displaystyle a_{i,j} - \sum_{k=1}^{i} l_{ik} u_{k,j},
 \end{array}\end{split}\]</div>
 <p>mentre quelli della matrice <span class="math notranslate nohighlight">\(L\)</span> sono dati da:</p>
 <div class="math notranslate nohighlight" id="equation-lu2">
-<span class="eqno">(10)<a class="headerlink" href="#equation-lu2" title="Permalink a questa equazione">#</a></span>\[\begin{split}\forall\,i\quad &amp; \begin{array}{ll}
+<span class="eqno">(13)<a class="headerlink" href="#equation-lu2" title="Permalink a questa equazione">#</a></span>\[\begin{split}\forall\,i\quad &amp; \begin{array}{ll}
 j = 1, &amp; l_{ij} = \frac{a_{ij}}{u_{jj}}, \\
 j &gt; 1, &amp; l_{ij} = \displaystyle \frac{a_{ij} - \sum_{k=1}^{j} l_{ik} u_{kj} }{u_{jj}}.
 \end{array}\end{split}\]</div>
 <div class="admonition-esercizio admonition">
 <p class="admonition-title">Esercizio</p>
-<p>Si usino le relazioni <a class="reference internal" href="#equation-lu1">(9)</a> e <a class="reference internal" href="#equation-lu2">(10)</a> per implementare la versione di
+<p>Si usino le relazioni <a class="reference internal" href="#equation-lu1">(12)</a> e <a class="reference internal" href="#equation-lu2">(13)</a> per implementare la versione di
 Doolittle dell’algoritmo <span class="math notranslate nohighlight">\(LU\)</span> per una matrice quadrata. Un prototipo della
 funzione è dato da:</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span>[L,U]<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">doolittlelu</span><span class="p">(</span>A<span class="p">)</span><span class="w"></span>
@@ -604,8 +609,8 @@ funzione è dato da:</p>
 </div>
 <ul class="simple">
 <li><p>Si faccia un <strong>controllo dell’input</strong>: la matrice <span class="math notranslate nohighlight">\(A\)</span> è quadrata?</p></li>
-<li><p>Si utilizzino operazioni vettorizzate per le somme che compaiono in <a class="reference internal" href="#equation-lu1">(9)</a>
-e <a class="reference internal" href="#equation-lu2">(10)</a></p></li>
+<li><p>Si utilizzino operazioni vettorizzate per le somme che compaiono in <a class="reference internal" href="#equation-lu1">(12)</a>
+e <a class="reference internal" href="#equation-lu2">(13)</a></p></li>
 </ul>
 <p>Per verificare la buona riuscita dell’implementazione si può usare il seguente
 problema di test.</p>
@@ -630,7 +635,7 @@ problema di test.</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Suggerimento</p>
-<p>Guardando alla formulazione delle equazioni <a class="reference internal" href="#equation-lu1">(9)</a> e <a class="reference internal" href="#equation-lu2">(10)</a> potremmo
+<p>Guardando alla formulazione delle equazioni <a class="reference internal" href="#equation-lu1">(12)</a> e <a class="reference internal" href="#equation-lu2">(13)</a> potremmo
 osservare che in realtà possiamo sovrascrivere le entrate della matrice <span class="math notranslate nohighlight">\(A\)</span>
 con la fattorizzazione <span class="math notranslate nohighlight">\(LU\)</span>. Se avete concluso la prima parte pensate a come
 è possibile realizzare questa versione.</p>
@@ -769,8 +774,8 @@ pivoting parziale per una matrice <span class="math notranslate nohighlight">\(A
 </div>
 <ul class="simple">
 <li><p>Si faccia un <strong>controllo dell’input</strong>: la matrice <span class="math notranslate nohighlight">\(A\)</span> è quadrata?</p></li>
-<li><p>Si utilizzino operazioni vettorizzate per le somme che compaiono in <a class="reference internal" href="#equation-lu1">(9)</a>
-e <a class="reference internal" href="#equation-lu2">(10)</a>.</p></li>
+<li><p>Si utilizzino operazioni vettorizzate per le somme che compaiono in <a class="reference internal" href="#equation-lu1">(12)</a>
+e <a class="reference internal" href="#equation-lu2">(13)</a>.</p></li>
 </ul>
 <div class="admonition tip">
 <p class="admonition-title">Suggerimento</p>
@@ -968,7 +973,7 @@ permutazione <span class="math notranslate nohighlight">\(P\)</span> e <span cla
 è significativamente più efficiente della versione con tre output.</p></li>
 </ul>
 <div class="proof definition admonition" id="definition-0">
-<p class="admonition-title"><span class="caption-number">Definition 2 </span></p>
+<p class="admonition-title"><span class="caption-number">Definition 6 </span></p>
 <section class="definition-content" id="proof-content">
 <p>Una <strong>matrice sparsa</strong> o <strong>array sparso</strong> è una matrice in cui la maggior parte
 degli elementi è zero. Per dare una definizione rigorosa riguardo alla
