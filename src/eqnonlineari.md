@@ -238,7 +238,9 @@ $$x_{k+1}=g(x_k),\qquad k=0,1,\ldots$$
 con un'opportuna scelta del
 valore iniziale $x_0$.
 
-Spesso si sceglie $g(x)$ della forma $$g(x)=x-\frac{f(x)}{h(x)}.$$
+Spesso si sceglie $g(x)$ della forma
+
+$$g(x)=x-\frac{f(x)}{h(x)}.$$
 
 ````{prf:theorem}
 *Supponiamo $g(x)\in C[a,b]$ e sia
