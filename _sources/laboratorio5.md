@@ -1,4 +1,4 @@
-# Laboratorio 5 : Soluzione di Sistemi Triangolari
+# Laboratorio 3 : Soluzione di Sistemi Triangolari
 
 I sistemi triangolari giocano un ruolo fondamentale nei calcoli matriciali.
 Molti metodi sono costruiti sull'idea di ridurre un problema alla soluzione di uno o più sistemi triangolari, questo include praticamente tutti i **metodi diretti** per la risoluzione di sistemi lineari.

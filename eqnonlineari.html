@@ -1,114 +1,180 @@
 
 <!DOCTYPE html>
 
-<html lang="it">
+
+<html lang="it" data-content_root="./" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Risoluzione numerica di equazioni nonlineari &#8212; Calcolo Numerico - Note ed Esercitazioni di Laboratorio</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="_static/documentation_options.js?v=8d586cc4"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/translations.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/translations.js?v=da26b4cc"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'eqnonlineari';</script>
     <link rel="index" title="Indice" href="genindex.html" />
     <link rel="search" title="Cerca" href="search.html" />
-    <link rel="next" title="Laboratorio 3 : Il Metodo di Bisezione" href="laboratorio3.html" />
-    <link rel="prev" title="Laboratorio 2 : L’Aritmetica di Precisione Finita" href="laboratorio2.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="it">
-    
-
-    <!-- Google Analytics -->
-    
+    <link rel="next" title="Laboratorio 6 : Il Metodo di Bisezione" href="laboratorio3.html" />
+    <link rel="prev" title="Laboratorio 5 : Metodi Stazionari per Sistemi Lineari" href="laboratorio7.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="it"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Passa ai contenuti principali</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Torna in alto</button>
 
-    
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="index.html">
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Avvertimento sulla versione"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Calcolo Numerico - Note ed Esercitazioni di Laboratorio</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Calcolo Numerico - Note ed Esercitazioni di Laboratorio - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Calcolo Numerico - Note ed Esercitazioni di Laboratorio - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Cerca" aria-label="Cerca" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Cerca</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -118,354 +184,248 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="laboratorio1.html">
-   Laboratorio 1 : Introduzione a MATLAB
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="aritmeticadimacchina.html">
-   L’Aritmetica di Precisione Finita
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="laboratorio2.html">
-   Laboratorio 2 : L’Aritmetica di Precisione Finita
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Risoluzione numerica di equazioni nonlineari
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="laboratorio3.html">
-   Laboratorio 3 : Il Metodo di Bisezione
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="laboratorio4.html">
-   Laboratorio 4 : Il Metodo di Newton
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="laboratorio5.html">
-   Laboratorio 5 : Soluzione di Sistemi Triangolari
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="laboratorio6.html">
-   Laboratorio 6 : L’Eliminazione di Gauss il Metodo LU
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="laboratorio7.html">
-   Laboratorio 7 : Metodi Stazionari per Sistemi Lineari
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="laboratorio8.html">
-   Laboratorio 8 : Metodi di Quadratura
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="laboratorio9.html">
-   Laboratorio 9 : Metodi per la Soluzione di ODE
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="laboratorio10.html">
-   Laboratorio 10 : Metodi di tipo Runge-Kutta
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio1.html">Laboratorio 1 : Introduzione a MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aritmeticadimacchina.html">L’Aritmetica di Precisione Finita</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="laboratorio2.html">Laboratorio 2 : L’Aritmetica di Precisione Finita</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio5.html">Laboratorio 3 : Soluzione di Sistemi Triangolari</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio6.html">Laboratorio 4 : L’Eliminazione di Gauss il Metodo LU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio7.html">Laboratorio 5 : Metodi Stazionari per Sistemi Lineari</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Risoluzione numerica di equazioni nonlineari</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="laboratorio3.html">Laboratorio 6 : Il Metodo di Bisezione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio4.html">Laboratorio 7 : Il Metodo di Newton</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio8.html">Laboratorio 8 : Metodi di Quadratura</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio9.html">Laboratorio 9 : Metodi per la Soluzione di ODE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio10.html">Laboratorio 10 : Metodi di tipo Runge-Kutta</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Cirdans-Home/ingcn" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repository di origine"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Cirdans-Home/ingcn/issues/new?title=Issue%20on%20page%20%2Feqnonlineari.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Apri un problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
 
 
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
 
 
 
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Scarica questa pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/eqnonlineari.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Scarica il file sorgente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
   </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Stampa in PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Modalità schermo intero"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="chiaro/scuro" aria-label="chiaro/scuro" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/Cirdans-Home/ingcn"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
 
-      </li>
-      
-      <li>
-        <a href="https://github.com/Cirdans-Home/ingcn/issues/new?title=Issue%20on%20page%20%2Feqnonlineari.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Cerca" aria-label="Cerca" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="_sources/eqnonlineari.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.md</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </button>
-
-      </li>
+</div></div>
       
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
+    </div>
   
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
-    </div>
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Risoluzione numerica di equazioni nonlineari
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#metodo-di-bisezione">
-   Metodo di bisezione
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#ordine-di-convergenza-dei-metodi-iterativi">
-   Ordine di convergenza dei metodi iterativi
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#metodi-di-iterazione-funzionale">
-   Metodi di iterazione funzionale
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#metodo-di-newton">
-   Metodo di Newton
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#criteri-di-arresto">
-   Criteri di arresto
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#altri-metodi-iterativi">
-   Altri metodi iterativi
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#bibliografia">
-   Bibliografia
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Risoluzione numerica di equazioni nonlineari</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Risoluzione numerica di equazioni nonlineari
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#metodo-di-bisezione">
-   Metodo di bisezione
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#ordine-di-convergenza-dei-metodi-iterativi">
-   Ordine di convergenza dei metodi iterativi
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#metodi-di-iterazione-funzionale">
-   Metodi di iterazione funzionale
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#metodo-di-newton">
-   Metodo di Newton
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#criteri-di-arresto">
-   Criteri di arresto
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#altri-metodi-iterativi">
-   Altri metodi iterativi
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#bibliografia">
-   Bibliografia
-  </a>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Risoluzione numerica di equazioni nonlineari</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenuti </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Risoluzione numerica di equazioni nonlineari</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-di-bisezione">Metodo di bisezione</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ordine-di-convergenza-dei-metodi-iterativi">Ordine di convergenza dei metodi iterativi</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#metodi-di-iterazione-funzionale">Metodi di iterazione funzionale</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-di-newton">Metodo di Newton</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#criteri-di-arresto">Criteri di arresto</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#altri-metodi-iterativi">Altri metodi iterativi</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#bibliografia">Bibliografia</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="risoluzione-numerica-di-equazioni-nonlineari">
-<h1>Risoluzione numerica di equazioni nonlineari<a class="headerlink" href="#risoluzione-numerica-di-equazioni-nonlineari" title="Link a questa intestazione">#</a></h1>
+<h1>Risoluzione numerica di equazioni nonlineari<a class="headerlink" href="#risoluzione-numerica-di-equazioni-nonlineari" title="Link to this heading">#</a></h1>
 <p>Ci interessiamo al problema seguente: data una funzione</p>
 <div class="math notranslate nohighlight">
 \[f:[a,b]\subset\mathbb{R}\longrightarrow\mathbb{R},\]</div>
@@ -479,10 +439,10 @@ parte da un valore iniziale <span class="math notranslate nohighlight">\(x_0\)</
 <span class="math notranslate nohighlight">\(\{x_i\}_{i=0,1,2,\ldots}\)</span> in <span class="math notranslate nohighlight">\([a,b]\)</span> che converga a <span class="math notranslate nohighlight">\(x^*\)</span>.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="metodo-di-bisezione">
-<h1>Metodo di bisezione<a class="headerlink" href="#metodo-di-bisezione" title="Link a questa intestazione">#</a></h1>
+<h1>Metodo di bisezione<a class="headerlink" href="#metodo-di-bisezione" title="Link to this heading">#</a></h1>
 <p>Il metodo di bisezione sfrutta il <em>teorema degli zeri</em>:</p>
 <div class="proof theorem admonition" id="theorem-0">
-<p class="admonition-title"><span class="caption-number">Theorem 2 </span></p>
+<p class="admonition-title"><span class="caption-number">Teorema 2 </span></p>
 <section class="theorem-content" id="proof-content">
 <p><em>Sia <span class="math notranslate nohighlight">\(f:[a,b]\longrightarrow\mathbb{R}\)</span> una funzione
 continua tale che <span class="math notranslate nohighlight">\(f(a)f(b)&lt;0\)</span>. Allora esiste <span class="math notranslate nohighlight">\(x^*\in(a,b)\)</span> tale che
@@ -523,7 +483,7 @@ d’arresto. Si usa generalmente uno dei seguenti due criteri.</p>
 <span class="math notranslate nohighlight">\(b_i-a_i&lt;\varepsilon\)</span> e scelgo <span class="math notranslate nohighlight">\(c_i\)</span> come approssimazione di <span class="math notranslate nohighlight">\(x^*\)</span>.
 Osserviamo che vale</p>
 <div class="math notranslate nohighlight" id="equation-eq-conv-bisezione">
-<span class="eqno">(5)<a class="headerlink" href="#equation-eq-conv-bisezione" title="Permalink a questa equazione">#</a></span>\[|c_i-x^*|&lt;\varepsilon.\]</div>
+<span class="eqno">(8)<a class="headerlink" href="#equation-eq-conv-bisezione" title="Link to this equation">#</a></span>\[|c_i-x^*|&lt;\varepsilon.\]</div>
 <p>È possibile dare una stima del numero di passi che si devono fare per
 soddisfare questa condizione. All”<span class="math notranslate nohighlight">\(i\)</span>-esimo passo del metodo di
 bisezione ottengo un intervallo di lunghezza <span class="math notranslate nohighlight">\((b-a)/2^i\)</span>. Impongo quindi</p>
@@ -546,7 +506,7 @@ criteri possono dare risultati sensibilmente diversi.</p>
 </div>
 <div class="admonition-osservazione-2 admonition">
 <p class="admonition-title"><strong>Osservazione 2</strong>.</p>
-<p><em>La proprietà <a class="reference internal" href="#equation-eq-conv-bisezione">(5)</a> assicura la <em>convergenza</em> del metodo,
+<p><em>La proprietà <a class="reference internal" href="#equation-eq-conv-bisezione">(8)</a> assicura la <em>convergenza</em> del metodo,
 ovvero il fatto che, per ogni <span class="math notranslate nohighlight">\(\varepsilon&gt;0\)</span> piccolo a piacere, posso
 trovare <span class="math notranslate nohighlight">\(i\)</span> tale che <span class="math notranslate nohighlight">\(|c_i-x^*|&lt;\varepsilon\)</span>. Equivalentemente possiamo
 dire che <span class="math notranslate nohighlight">\(\lim_{i\rightarrow\infty}|c_i-x^*|=0\)</span>.</em></p>
@@ -568,14 +528,14 @@ applicando metodi a convergenza più veloce (per es. il metodo di
 Newton).</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="ordine-di-convergenza-dei-metodi-iterativi">
-<h1>Ordine di convergenza dei metodi iterativi<a class="headerlink" href="#ordine-di-convergenza-dei-metodi-iterativi" title="Link a questa intestazione">#</a></h1>
+<h1>Ordine di convergenza dei metodi iterativi<a class="headerlink" href="#ordine-di-convergenza-dei-metodi-iterativi" title="Link to this heading">#</a></h1>
 <p>Supponiamo di aver definito un metodo iterativo per risolvere <span class="math notranslate nohighlight">\(f(x)=0\)</span>.
 A partire da un punto iniziale <span class="math notranslate nohighlight">\(x_0\)</span>, il metodo costruisce una
 successione <span class="math notranslate nohighlight">\(\{x_i\}_{i=0,1,\ldots}\)</span>. Ci proponiamo di caratterizzare le
 proprietà di convergenza di tale successione ad uno zero <span class="math notranslate nohighlight">\(\alpha\)</span> di
 <span class="math notranslate nohighlight">\(f\)</span>.</p>
 <div class="proof definition admonition" id="definition-1">
-<p class="admonition-title"><span class="caption-number">Definition 2 </span></p>
+<p class="admonition-title"><span class="caption-number">Definizione 3 </span></p>
 <section class="definition-content" id="proof-content">
 <p><em>Un metodo iterativo si dice <em>globalmente
 convergente</em> se, per ogni <span class="math notranslate nohighlight">\(x_0\in[a,b],\)</span> la successione
@@ -589,7 +549,7 @@ intorno <span class="math notranslate nohighlight">\(I=[\alpha-\rho,\alpha+\rho]
 </div><p>La prossima definizione caratterizza invece la velocità di convergenza
 di un metodo iterativo.</p>
 <div class="proof definition admonition" id="definition-2">
-<p class="admonition-title"><span class="caption-number">Definition 3 </span></p>
+<p class="admonition-title"><span class="caption-number">Definizione 4 </span></p>
 <section class="definition-content" id="proof-content">
 <p>*Sia <span class="math notranslate nohighlight">\(\{x_i\}_{i=0,1,\ldots}\)</span> una successione
 convergente ad <span class="math notranslate nohighlight">\(\alpha\)</span> e supponiamo <span class="math notranslate nohighlight">\(x_i\neq\alpha\)</span> per ogni <span class="math notranslate nohighlight">\(i\)</span>. Se
@@ -607,7 +567,7 @@ fattore di convergenza o costante asintotica.*</p>
 convergenza <em>superlineare</em>.</em></p>
 </section>
 </div><div class="proof definition admonition" id="definition-3">
-<p class="admonition-title"><span class="caption-number">Definition 4 </span></p>
+<p class="admonition-title"><span class="caption-number">Definizione 5 </span></p>
 <section class="definition-content" id="proof-content">
 <p><em>Un metodo iterativo convergente ad <span class="math notranslate nohighlight">\(\alpha\)</span> si dice
 <em>convergente di ordine</em> <span class="math notranslate nohighlight">\(p\)</span> se, per ogni <span class="math notranslate nohighlight">\(x_0\)</span> in un intorno di
@@ -621,17 +581,17 @@ convergente di ordine <span class="math notranslate nohighlight">\(\geq p\)</spa
 superlineare, implica che, per <span class="math notranslate nohighlight">\(i\)</span> sufficientemente grande, esiste
 <span class="math notranslate nohighlight">\(\beta&gt;0\)</span> tale che</p>
 <div class="math notranslate nohighlight" id="equation-eq-conv">
-<span class="eqno">(6)<a class="headerlink" href="#equation-eq-conv" title="Permalink a questa equazione">#</a></span>\[|x_{i+1}-\alpha|\leq\beta|x_{i}-\alpha|^p\]</div>
+<span class="eqno">(9)<a class="headerlink" href="#equation-eq-conv" title="Link to this equation">#</a></span>\[|x_{i+1}-\alpha|\leq\beta|x_{i}-\alpha|^p\]</div>
 <p>con
 <span class="math notranslate nohighlight">\(\beta&lt;1\)</span> se <span class="math notranslate nohighlight">\(p=1\)</span>. Questa espressione esprime la riduzione dell’errore
 assoluto che avviene a ciascuna iterazione.</p>
 <div class="admonition-esempio admonition">
 <p class="admonition-title">Esempio</p>
 <p>Usiamo la relazione
-<a class="reference internal" href="#equation-eq-conv">(6)</a> per
+<a class="reference internal" href="#equation-eq-conv">(9)</a> per
 confrontare il comportamento di un metodo a convergenza lineare e uno a
 convergenza quadratica. Supponiamo che valga <span class="math notranslate nohighlight">\(|x_0-\alpha|=0,1\)</span> e che la
-<a class="reference internal" href="#equation-eq-conv">(6)</a> si
+<a class="reference internal" href="#equation-eq-conv">(9)</a> si
 possa applicare per <span class="math notranslate nohighlight">\(i\geq 0\)</span>. Per un metodo a convergenza lineare
 (quindi <span class="math notranslate nohighlight">\(p=1\)</span>) con <span class="math notranslate nohighlight">\(\beta=1/2\)</span> si ha la successione di errori assoluti</p>
 <div class="math notranslate nohighlight">
@@ -660,7 +620,7 @@ convergente di ordine <span class="math notranslate nohighlight">\(p\)</span> se
 <span class="math notranslate nohighlight">\(p=1\)</span>).</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="metodi-di-iterazione-funzionale">
-<h1>Metodi di iterazione funzionale<a class="headerlink" href="#metodi-di-iterazione-funzionale" title="Link a questa intestazione">#</a></h1>
+<h1>Metodi di iterazione funzionale<a class="headerlink" href="#metodi-di-iterazione-funzionale" title="Link to this heading">#</a></h1>
 <p>Una tecnica per costruire una successione <span class="math notranslate nohighlight">\(\{x_i\}_{i=0,1,\ldots}\)</span> che
 converga a <span class="math notranslate nohighlight">\(x^*\)</span> tale che <span class="math notranslate nohighlight">\(f(x^*)=0\)</span> si basa sull”<em>iterazione di punto
 fisso</em>. Si introduce a questo scopo un’opportuna funzione <span class="math notranslate nohighlight">\(g(x)\)</span> tale
@@ -678,7 +638,7 @@ valore iniziale <span class="math notranslate nohighlight">\(x_0\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[g(x)=x-\frac{f(x)}{h(x)}.\]</div>
 <div class="proof theorem admonition" id="theorem-4">
-<p class="admonition-title"><span class="caption-number">Theorem 3 </span></p>
+<p class="admonition-title"><span class="caption-number">Teorema 3 </span></p>
 <section class="theorem-content" id="proof-content">
 <p><em>Supponiamo <span class="math notranslate nohighlight">\(g(x)\in C[a,b]\)</span> e sia
 <span class="math notranslate nohighlight">\(\{x_i\}_{i=0,1,\ldots}\)</span> una successione convergente con limite
@@ -695,7 +655,7 @@ fisso di <span class="math notranslate nohighlight">\(g\)</span>.</em></p>
 continuità di <span class="math notranslate nohighlight">\(g\)</span> nella penultima uguaglianza.</p>
 </div>
 <div class="proof theorem admonition" id="theorem-5">
-<p class="admonition-title"><span class="caption-number">Theorem 4 </span> (Teorema del punto fisso)</p>
+<p class="admonition-title"><span class="caption-number">Teorema 4 </span> (Teorema del punto fisso)</p>
 <section class="theorem-content" id="proof-content">
 <p><em>Sia <span class="math notranslate nohighlight">\(\alpha\in\mathbb{R}\)</span> e
 sia <span class="math notranslate nohighlight">\(g\in C^1[\alpha-\rho,\alpha+\rho]\)</span>, con <span class="math notranslate nohighlight">\(\rho&gt;0\)</span>, tale che</em></p>
@@ -725,7 +685,7 @@ che implica <span class="math notranslate nohighlight">\(|x_i-\alpha|\leq\rho\)<
 Per <span class="math notranslate nohighlight">\(i=0\)</span>, si ha <span class="math notranslate nohighlight">\(|x_0-\alpha|\leq\rho\)</span> per ipotesi. Vediamo ora il
 passo induttivo. L’ipotesi induttiva è
 <span class="math notranslate nohighlight">\(|x_{i-1}-\alpha|\leq\lambda^{i-1}\rho\)</span> e vogliamo dimostrare
-<span class="math notranslate nohighlight">\(|x_{i}-\alpha|\leq\lambda^{i}\rho\)</span>. Il teorema del valor medio<a class="footnote-reference brackets" href="#id2" id="id1">1</a>
+<span class="math notranslate nohighlight">\(|x_{i}-\alpha|\leq\lambda^{i}\rho\)</span>. Il teorema del valor medio<a class="footnote-reference brackets" href="#id2" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>
 assicura l’esistenza di <span class="math notranslate nohighlight">\(\xi_{i-1}\in (\alpha-\rho,\alpha+\rho)\)</span> tale
 che</p>
 <div class="math notranslate nohighlight">
@@ -741,7 +701,7 @@ e l’ipotesi induttiva si ha</p>
 \[\lim_{i\rightarrow\infty} |x_i-\alpha|=0.\]</div>
 </div>
 <div class="proof theorem admonition" id="theorem-6">
-<p class="admonition-title"><span class="caption-number">Theorem 5 </span></p>
+<p class="admonition-title"><span class="caption-number">Teorema 5 </span></p>
 <section class="theorem-content" id="proof-content">
 <p><em>Sia <span class="math notranslate nohighlight">\(\alpha\)</span> punto fisso di <span class="math notranslate nohighlight">\(g\in C^1[a,b]\)</span>. Se
 <span class="math notranslate nohighlight">\(|g'(x)|&lt;1\)</span> per ogni <span class="math notranslate nohighlight">\(x\in [a,b]\)</span>, allora <span class="math notranslate nohighlight">\(\alpha\)</span> è l’unico punto fisso
@@ -757,7 +717,7 @@ valor medio esiste <span class="math notranslate nohighlight">\(\xi\in [a,b]\)</
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="metodo-di-newton">
-<h1>Metodo di Newton<a class="headerlink" href="#metodo-di-newton" title="Link a questa intestazione">#</a></h1>
+<h1>Metodo di Newton<a class="headerlink" href="#metodo-di-newton" title="Link to this heading">#</a></h1>
 <p>Partiamo dalle consuete ipotesi <span class="math notranslate nohighlight">\(f:[a,b]\rightarrow\mathbb{R}\)</span>,
 <span class="math notranslate nohighlight">\(f(\alpha)=0\)</span>, e supponiamo inoltre che la funzione <span class="math notranslate nohighlight">\(f(x)\)</span> sia di classe
 <span class="math notranslate nohighlight">\(C^1\)</span> in un intorno <span class="math notranslate nohighlight">\(I\)</span> dello zero <span class="math notranslate nohighlight">\(\alpha\)</span>, e che valga <span class="math notranslate nohighlight">\(f'(x)\neq 0\)</span>
@@ -771,7 +731,7 @@ l’ascissa del punto di intersezione tra la tangente al grafico di <span class=
 nel punto <span class="math notranslate nohighlight">\((x_k,f(x_k))\)</span> e l’asse delle <span class="math notranslate nohighlight">\(x\)</span>.</p>
 <p>Che cosa possiamo dire sulle proprietà di convergenza?</p>
 <div class="proof definition admonition" id="definition-7">
-<p class="admonition-title"><span class="caption-number">Definition 5 </span></p>
+<p class="admonition-title"><span class="caption-number">Definizione 6 </span></p>
 <section class="definition-content" id="proof-content">
 <p>*Sia <span class="math notranslate nohighlight">\(f\in C^r[a,b]\)</span> e sia <span class="math notranslate nohighlight">\(\alpha\in (a,b)\)</span> tale
 che <span class="math notranslate nohighlight">\(f(\alpha)=0\)</span>. Si dice che <span class="math notranslate nohighlight">\(\alpha\)</span> ha <em>molteplicità</em> <span class="math notranslate nohighlight">\(r\)</span> come zero
@@ -779,11 +739,11 @@ di <span class="math notranslate nohighlight">\(f\)</span> se esiste finito e no
 <span class="math notranslate nohighlight">\(\lim_{x\rightarrow\alpha}\frac{f(x)}{(x-\alpha)^r}\neq 0\)</span>, cioè se vale</p>
 </section>
 </div><div class="proof theorem admonition" id="conv_newton">
-<p class="admonition-title"><span class="caption-number">Theorem 6 </span> (Convergenza Newton)</p>
+<p class="admonition-title"><span class="caption-number">Teorema 6 </span> (Convergenza Newton)</p>
 <section class="theorem-content" id="proof-content">
 <p><em>Sia <span class="math notranslate nohighlight">\(\alpha\in [a,b]\)</span> soluzione di <span class="math notranslate nohighlight">\(f(x)=0\)</span>, con
 <span class="math notranslate nohighlight">\(f'(x)\neq 0\)</span> per ogni <span class="math notranslate nohighlight">\(x\in[a,b]\setminus \{\alpha\}\)</span>.</em></p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p><em>Se <span class="math notranslate nohighlight">\(\alpha\)</span> ha molteplicità <span class="math notranslate nohighlight">\(1\)</span> e <span class="math notranslate nohighlight">\(f(x)\in C^2[a,b]\)</span>, allora il
 metodo di Newton è localmente convergente con ordine almeno <span class="math notranslate nohighlight">\(2\)</span>. In
 particolare, l’ordine di convergenza è esattamente <span class="math notranslate nohighlight">\(2\)</span> se
@@ -795,7 +755,7 @@ costante asintotica <span class="math notranslate nohighlight">\(1-\frac{1}{r}\)
 </section>
 </div><div class="proof admonition" id="proof">
 <p>Proof. Dividiamo la dimostrazione in due passi</p>
-<ol>
+<ol class="arabic">
 <li><p>Poiché <span class="math notranslate nohighlight">\(\alpha\)</span> ha molteplicità <span class="math notranslate nohighlight">\(1\)</span>, vale <span class="math notranslate nohighlight">\(f'(\alpha)\neq 0\)</span>.
 Osserviamo inoltre che, con la notazione introdotta in precedenza,
 la funzione</p>
@@ -812,14 +772,14 @@ quindi la convergenza locale del metodo.</p>
 Taylor in un intorno di <span class="math notranslate nohighlight">\(x_k\)</span>. Esiste <span class="math notranslate nohighlight">\(\xi\in [a,b]\)</span> con
 <span class="math notranslate nohighlight">\(|\xi-k_k|&lt;|\alpha-x_k|\)</span> tale che</p>
 <div class="math notranslate nohighlight" id="equation-eq-taylor1">
-<span class="eqno">(7)<a class="headerlink" href="#equation-eq-taylor1" title="Permalink a questa equazione">#</a></span>\[0=f(\alpha)=f(x_k)+(\alpha-x_k)f'(x_k)+\frac12 (\alpha-x_k)^2f''(\xi).\]</div>
+<span class="eqno">(10)<a class="headerlink" href="#equation-eq-taylor1" title="Link to this equation">#</a></span>\[0=f(\alpha)=f(x_k)+(\alpha-x_k)f'(x_k)+\frac12 (\alpha-x_k)^2f''(\xi).\]</div>
 <p>Osservo che si ha</p>
 <div class="math notranslate nohighlight">
 \[f(x_k)+(\alpha-x_k)f'(x_k)
     = f'(x_k)\left[\frac{f(x_k)}{f'(x_k)}-x_k+\alpha\right]
     = f'(x_k)[-x_{k+1}+\alpha].\]</div>
 <p>Sostituendo in
-<a class="reference internal" href="#equation-eq-taylor1">(7)</a> si ottiene</p>
+<a class="reference internal" href="#equation-eq-taylor1">(10)</a> si ottiene</p>
 <div class="math notranslate nohighlight">
 \[f'(x_k)(x_{k+1}-\alpha)=\frac12 (\alpha-x_k)^2 f''(\xi),\]</div>
 <p>da cui</p>
@@ -861,7 +821,7 @@ convergente. In alcuni casi è possibile dare condizioni sufficienti di
 convergenza su intervalli, per esempio sotto opportune ipotesi di
 convessità. Enunciamo ora un criterio di questo tipo.</p>
 <div class="proof theorem admonition" id="theorem-9">
-<p class="admonition-title"><span class="caption-number">Theorem 7 </span></p>
+<p class="admonition-title"><span class="caption-number">Teorema 7 </span></p>
 <section class="theorem-content" id="proof-content">
 <p><em>Sia <span class="math notranslate nohighlight">\(f\in C^2[\alpha,\alpha+\rho]\)</span> con <span class="math notranslate nohighlight">\(\rho&gt;0\)</span>,
 <span class="math notranslate nohighlight">\(f(\alpha)=0\)</span>. Supponiamo che valga <span class="math notranslate nohighlight">\(f(x)f''(x)&gt;0\)</span> e <span class="math notranslate nohighlight">\(f'(x)\neq 0\)</span> per
@@ -871,7 +831,7 @@ Newton è decrescente e convergente ad <span class="math notranslate nohighlight
 </section>
 </div><p>Analogamente si ha</p>
 <div class="proof theorem admonition" id="theorem-10">
-<p class="admonition-title"><span class="caption-number">Theorem 8 </span></p>
+<p class="admonition-title"><span class="caption-number">Teorema 8 </span></p>
 <section class="theorem-content" id="proof-content">
 <p><em>Sia <span class="math notranslate nohighlight">\(f\in C^2[\alpha-\rho,\alpha]\)</span> con <span class="math notranslate nohighlight">\(\rho&gt;0\)</span>,
 <span class="math notranslate nohighlight">\(f(\alpha)=0\)</span>. Supponiamo che valga <span class="math notranslate nohighlight">\(f(x)f''(x)&gt;0\)</span> e <span class="math notranslate nohighlight">\(f'(x)\neq 0\)</span> per
@@ -889,11 +849,11 @@ e il metodo di Newton abbia quindi convergenza lineare, si introduce il
 <p>che ha convergenza almeno
 quadratica in un intorno di <span class="math notranslate nohighlight">\(\alpha\)</span>. (Si può verificare che l’ordine di
 convergenza è <span class="math notranslate nohighlight">\(2\)</span> se <span class="math notranslate nohighlight">\(f^{(r+1)}(\alpha)\neq 0\)</span>, con un ragionamento
-simile alla dimostrazione del <a class="reference internal" href="#conv_newton">Theorem 6</a>.</p>
+simile alla dimostrazione del <a class="reference internal" href="#conv_newton">Teorema 6</a>.</p>
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="criteri-di-arresto">
-<h1>Criteri di arresto<a class="headerlink" href="#criteri-di-arresto" title="Link a questa intestazione">#</a></h1>
+<h1>Criteri di arresto<a class="headerlink" href="#criteri-di-arresto" title="Link to this heading">#</a></h1>
 <p>Idealmente vorremmo arrestare un metodo iterativo <span class="math notranslate nohighlight">\(x_{k+1}=g(x_k)\)</span>
 quando <span class="math notranslate nohighlight">\(|x_k-\alpha|&lt;\varepsilon\)</span>, dove <span class="math notranslate nohighlight">\(\varepsilon&gt;0\)</span> è una tolleranza
 prefissata. Naturalmente però non sappiamo quanto valga l’errore di
@@ -920,7 +880,7 @@ quindi usare criteri basati su quantità che sappiamo calcolare.</p>
 \frac{\varepsilon}{f'(\xi_k)}\simeq \frac{\varepsilon}{f'(\alpha)},\]</div>
 <p>dove l’ultima approssimazione è valida per <span class="math notranslate nohighlight">\(k\)</span> sufficientemente grande.
 Abbiamo quindi tre casi:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>se <span class="math notranslate nohighlight">\(|f'(\alpha)|\)</span> è vicino a 1, allora ho una buona stima
 dell’errore assoluto di approssimazione;</p></li>
 <li><p>se <span class="math notranslate nohighlight">\(|f'(\alpha)|\ll 1\)</span>, allora l’errore assoluto di approssimazione
@@ -943,7 +903,7 @@ uguaglianza viene dal teorema del valor medio, mentre l’approssimazione
 si intende per <span class="math notranslate nohighlight">\(k\)</span> sufficientemente grande.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="altri-metodi-iterativi">
-<h1>Altri metodi iterativi<a class="headerlink" href="#altri-metodi-iterativi" title="Link a questa intestazione">#</a></h1>
+<h1>Altri metodi iterativi<a class="headerlink" href="#altri-metodi-iterativi" title="Link to this heading">#</a></h1>
 <p>Il <strong>metodo delle corde</strong> è definito dall’iterazione</p>
 <div class="math notranslate nohighlight">
 \[x_{k+1}=x_k-\frac{f(x_k)}{m},\qquad k=0,1,\ldots.\]</div>
@@ -982,7 +942,7 @@ ogni iterazione è sufficiente una sola valutazione di <span class="math notrans
 il metodo delle corde e per il metodo di bisezione.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="bibliografia">
-<h1>Bibliografia<a class="headerlink" href="#bibliografia" title="Link a questa intestazione">#</a></h1>
+<h1>Bibliografia<a class="headerlink" href="#bibliografia" title="Link to this heading">#</a></h1>
 <ul class="simple">
 <li><p>D. Bini, M. Capovani, O. Menchi, <em>Metodi numerici per l’algebra
 lineare</em>, Zanichelli 1988.</p></li>
@@ -990,13 +950,14 @@ lineare</em>, Zanichelli 1988.</p></li>
 O. Menchi, <em>Metodi numerici</em>, Zanichelli 1992.</p></li>
 </ul>
 <hr class="footnotes docutils" />
-<dl class="footnote brackets">
-<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p><em>Teorema del valor medio o di Lagrange:</em> sia <span class="math notranslate nohighlight">\(f(x)\)</span> funzione
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id2" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p><em>Teorema del valor medio o di Lagrange:</em> sia <span class="math notranslate nohighlight">\(f(x)\)</span> funzione
 continua su <span class="math notranslate nohighlight">\([a,b]\)</span> e derivabile su <span class="math notranslate nohighlight">\((a,b)\)</span>; allora esiste
 <span class="math notranslate nohighlight">\(\xi\in(a,b)\)</span> tale che <span class="math notranslate nohighlight">\(f(b)-f(a)=(b-a)f'(\xi)\)</span>.</p>
-</dd>
-</dl>
+</aside>
+</aside>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1011,7 +972,7 @@ continua su <span class="math notranslate nohighlight">\([a,b]\)</span> e deriva
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./."
         },
         predefinedOutput: true
@@ -1019,50 +980,111 @@ continua su <span class="math notranslate nohighlight">\([a,b]\)</span> e deriva
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="laboratorio2.html" title="precedente pagina">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">precedente</p>
-            <p class="prev-next-title">Laboratorio 2 : L’Aritmetica di Precisione Finita</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="laboratorio3.html" title="successivo pagina">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">successivo</p>
-        <p class="prev-next-title">Laboratorio 3 : Il Metodo di Bisezione</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By P. Boito, F. Durastante<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
-    
-</div>
 
-
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="laboratorio7.html"
+       title="pagina precedente">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">precedente</p>
+        <p class="prev-next-title">Laboratorio 5 : Metodi Stazionari per Sistemi Lineari</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="laboratorio3.html"
+       title="pagina seguente">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">successivo</p>
+        <p class="prev-next-title">Laboratorio 6 : Il Metodo di Bisezione</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenuti
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Risoluzione numerica di equazioni nonlineari</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-di-bisezione">Metodo di bisezione</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ordine-di-convergenza-dei-metodi-iterativi">Ordine di convergenza dei metodi iterativi</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#metodi-di-iterazione-funzionale">Metodi di iterazione funzionale</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-di-newton">Metodo di Newton</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#criteri-di-arresto">Criteri di arresto</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#altri-metodi-iterativi">Altri metodi iterativi</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#bibliografia">Bibliografia</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Di P. Boito, F. Durastante
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

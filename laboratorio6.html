@@ -1,114 +1,180 @@
 
 <!DOCTYPE html>
 
-<html lang="it">
+
+<html lang="it" data-content_root="./" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Laboratorio 6 : L’Eliminazione di Gauss il Metodo LU &#8212; Calcolo Numerico - Note ed Esercitazioni di Laboratorio</title>
-    
+    <title>Laboratorio 4 : L’Eliminazione di Gauss il Metodo LU &#8212; Calcolo Numerico - Note ed Esercitazioni di Laboratorio</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="_static/documentation_options.js?v=8d586cc4"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/translations.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/translations.js?v=da26b4cc"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'laboratorio6';</script>
     <link rel="index" title="Indice" href="genindex.html" />
     <link rel="search" title="Cerca" href="search.html" />
-    <link rel="next" title="Laboratorio 7 : Metodi Stazionari per Sistemi Lineari" href="laboratorio7.html" />
-    <link rel="prev" title="Laboratorio 5 : Soluzione di Sistemi Triangolari" href="laboratorio5.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="it">
-    
-
-    <!-- Google Analytics -->
-    
+    <link rel="next" title="Laboratorio 5 : Metodi Stazionari per Sistemi Lineari" href="laboratorio7.html" />
+    <link rel="prev" title="Laboratorio 3 : Soluzione di Sistemi Triangolari" href="laboratorio5.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="it"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Passa ai contenuti principali</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Torna in alto</button>
 
-    
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="index.html">
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Avvertimento sulla versione"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Calcolo Numerico - Note ed Esercitazioni di Laboratorio</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Calcolo Numerico - Note ed Esercitazioni di Laboratorio - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Calcolo Numerico - Note ed Esercitazioni di Laboratorio - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Cerca" aria-label="Cerca" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Cerca</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -118,344 +184,251 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="laboratorio1.html">
-   Laboratorio 1 : Introduzione a MATLAB
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="aritmeticadimacchina.html">
-   L’Aritmetica di Precisione Finita
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="laboratorio2.html">
-   Laboratorio 2 : L’Aritmetica di Precisione Finita
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="eqnonlineari.html">
-   Risoluzione numerica di equazioni nonlineari
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="laboratorio3.html">
-   Laboratorio 3 : Il Metodo di Bisezione
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="laboratorio4.html">
-   Laboratorio 4 : Il Metodo di Newton
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="laboratorio5.html">
-   Laboratorio 5 : Soluzione di Sistemi Triangolari
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Laboratorio 6 : L’Eliminazione di Gauss il Metodo LU
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="laboratorio7.html">
-   Laboratorio 7 : Metodi Stazionari per Sistemi Lineari
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="laboratorio8.html">
-   Laboratorio 8 : Metodi di Quadratura
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="laboratorio9.html">
-   Laboratorio 9 : Metodi per la Soluzione di ODE
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="laboratorio10.html">
-   Laboratorio 10 : Metodi di tipo Runge-Kutta
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio1.html">Laboratorio 1 : Introduzione a MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aritmeticadimacchina.html">L’Aritmetica di Precisione Finita</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="laboratorio2.html">Laboratorio 2 : L’Aritmetica di Precisione Finita</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio5.html">Laboratorio 3 : Soluzione di Sistemi Triangolari</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Laboratorio 4 : L’Eliminazione di Gauss il Metodo LU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio7.html">Laboratorio 5 : Metodi Stazionari per Sistemi Lineari</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eqnonlineari.html">Risoluzione numerica di equazioni nonlineari</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="laboratorio3.html">Laboratorio 6 : Il Metodo di Bisezione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio4.html">Laboratorio 7 : Il Metodo di Newton</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio8.html">Laboratorio 8 : Metodi di Quadratura</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio9.html">Laboratorio 9 : Metodi per la Soluzione di ODE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio10.html">Laboratorio 10 : Metodi di tipo Runge-Kutta</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Cirdans-Home/ingcn" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Repository di origine"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Cirdans-Home/ingcn/issues/new?title=Issue%20on%20page%20%2Flaboratorio6.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Apri un problema"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
 
 
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
 
 
 
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Scarica questa pagina">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/laboratorio6.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Scarica il file sorgente"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
   </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Stampa in PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Modalità schermo intero"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="chiaro/scuro" aria-label="chiaro/scuro" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/Cirdans-Home/ingcn"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
 
-      </li>
-      
-      <li>
-        <a href="https://github.com/Cirdans-Home/ingcn/issues/new?title=Issue%20on%20page%20%2Flaboratorio6.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Cerca" aria-label="Cerca" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="_sources/laboratorio6.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.md</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </button>
-
-      </li>
+</div></div>
       
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
+    </div>
   
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
-    </div>
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#implementare-la-fattorizzazione-lu">
-   Implementare la fattorizzazione LU
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#la-fattorizzazione-con-pivoting">
-     La fattorizzazione con
-     <em>
-      pivoting
-     </em>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#calcolo-del-determinante">
-     Calcolo del determinante
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#esercizi">
-   Esercizi
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#le-funzioni-di-matlab">
-   Le funzioni di MATLAB
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#bibliografia">
-   Bibliografia
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Laboratorio 6 : L’Eliminazione di Gauss il Metodo LU</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#implementare-la-fattorizzazione-lu">
-   Implementare la fattorizzazione LU
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#la-fattorizzazione-con-pivoting">
-     La fattorizzazione con
-     <em>
-      pivoting
-     </em>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#calcolo-del-determinante">
-     Calcolo del determinante
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#esercizi">
-   Esercizi
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#le-funzioni-di-matlab">
-   Le funzioni di MATLAB
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#bibliografia">
-   Bibliografia
-  </a>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Laboratorio 4 : L’Eliminazione di Gauss il Metodo LU</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenuti </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#i-comandi-per-le-fattorizzazioni-in-matlab">I comandi per le fattorizzazioni in Matlab</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-del-comando-lu-in-matlab">Uso del comando <code class="docutils literal notranslate"><span class="pre">lu</span></code> in MATLAB</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fattorizzazione-per-matrici-sparse">Fattorizzazione per matrici sparse</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#soluzione-diretta-del-sistema-senza-passare-per-la-fattorizzazione">Soluzione diretta del sistema senza passare per la fattorizzazione</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementare-la-fattorizzazione-lu-facoltativo">Implementare la fattorizzazione LU (facoltativo)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-fattorizzazione-con-pivoting">La fattorizzazione con <em>pivoting</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calcolo-del-determinante">Calcolo del determinante</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">Esercizi</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
-  <section class="tex2jax_ignore mathjax_ignore" id="laboratorio-6-l-eliminazione-di-gauss-il-metodo-lu">
-<h1>Laboratorio 6 : L’Eliminazione di Gauss il Metodo LU<a class="headerlink" href="#laboratorio-6-l-eliminazione-di-gauss-il-metodo-lu" title="Link a questa intestazione">#</a></h1>
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="laboratorio-4-l-eliminazione-di-gauss-il-metodo-lu">
+<h1>Laboratorio 4 : L’Eliminazione di Gauss il Metodo LU<a class="headerlink" href="#laboratorio-4-l-eliminazione-di-gauss-il-metodo-lu" title="Link to this heading">#</a></h1>
 <p>L”<strong>eliminazione gaussiana</strong> (Carl Friedrich Gauss, 1777-1855), noto anche come
 algoritmo di riduzione per le righe, è un algoritmo per risolvere sistemi
 quadrati di equazioni lineari. Come avete visto a lezione si riduce ad una
@@ -482,16 +455,16 @@ costo computazionale. Il valore predefinito è <span class="math notranslate noh
 <em>quasi sempre</em> una stima corretta entro un fattore 2.</p></li>
 </ul>
 <p>Si provi ad eseguire il seguente comando:</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">gallery</span><span class="p">(</span><span class="s">&#39;grcar&#39;</span><span class="p">,</span><span class="mi">8</span><span class="p">);</span><span class="w"></span>
-<span class="p">[</span><span class="nb">cond</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="mi">1</span><span class="o">/</span><span class="nb">rcond</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="w"> </span><span class="nb">condest</span><span class="p">(</span><span class="n">A</span><span class="p">)]</span><span class="w"></span>
-<span class="p">[</span><span class="nb">cond</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="mi">1</span><span class="o">/</span><span class="nb">rcond</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="w"> </span><span class="nb">condest</span><span class="p">(</span><span class="n">A</span><span class="p">)]</span><span class="w"></span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">gallery</span><span class="p">(</span><span class="s">&#39;grcar&#39;</span><span class="p">,</span><span class="mi">8</span><span class="p">);</span>
+<span class="p">[</span><span class="nb">cond</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="mi">1</span><span class="o">/</span><span class="nb">rcond</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="w"> </span><span class="nb">condest</span><span class="p">(</span><span class="n">A</span><span class="p">)]</span>
+<span class="p">[</span><span class="nb">cond</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="mi">1</span><span class="o">/</span><span class="nb">rcond</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="w"> </span><span class="nb">condest</span><span class="p">(</span><span class="n">A</span><span class="p">)]</span>
 </pre></div>
 </div>
 <p>Come illustra questo esempio, <code class="docutils literal notranslate"><span class="pre">condest</span></code> non restituisce necessariamente lo
 stesso risultato ad ogni chiamata, poiché fa uso della funzione <code class="docutils literal notranslate"><span class="pre">rand</span></code> al suo
 interno (si tratta di uno stimatore stocastico).</p>
-<section id="implementare-la-fattorizzazione-lu">
-<h2>Implementare la fattorizzazione LU<a class="headerlink" href="#implementare-la-fattorizzazione-lu" title="Link a questa intestazione">#</a></h2>
+<section id="i-comandi-per-le-fattorizzazioni-in-matlab">
+<h2>I comandi per le fattorizzazioni in Matlab<a class="headerlink" href="#i-comandi-per-le-fattorizzazioni-in-matlab" title="Link to this heading">#</a></h2>
 <p>Se <span class="math notranslate nohighlight">\(A\)</span> è una matrice <span class="math notranslate nohighlight">\(n\)</span> per <span class="math notranslate nohighlight">\(n\)</span> su un campo <span class="math notranslate nohighlight">\(\mathbb{K}\)</span> (<span class="math notranslate nohighlight">\(A  \in M_n(\mathbb{K})\)</span>),
 allora <span class="math notranslate nohighlight">\(A\)</span> si dice «avere una fattorizzazione <span class="math notranslate nohighlight">\(LU\)</span>» se esiste una matrice
 <strong>triangolare inferiore</strong> <span class="math notranslate nohighlight">\(L \in  M_n(\mathbb{K})\)</span> e una matrice <strong>triangolare
@@ -542,12 +515,8 @@ per una data <span class="math notranslate nohighlight">\(A\)</span> sono infini
 necessario porre determinati vincoli su <span class="math notranslate nohighlight">\(L\)</span> o <span class="math notranslate nohighlight">\(U\)</span> (<a class="reference internal" href="#tipidilu"><span class="std std-numref">Tabella 9</span></a>).</p>
 <aside class="margin sidebar">
 <p class="sidebar-title">Varianti dell’algoritmo <span class="math notranslate nohighlight">\(LU\)</span>.</p>
-<table class="table" id="tipidilu">
-<caption><span class="caption-number">Tabella 9 </span><span class="caption-text">Varianti dell’algoritmo <span class="math notranslate nohighlight">\(LU\)</span>.</span><a class="headerlink" href="#tipidilu" title="Link a questa tabella">#</a></caption>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
+<div class="pst-scrollable-table-container"><table class="table" id="tipidilu">
+<caption><span class="caption-number">Tabella 9 </span><span class="caption-text">Varianti dell’algoritmo <span class="math notranslate nohighlight">\(LU\)</span>.</span><a class="headerlink" href="#tipidilu" title="Link to this table">#</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Nome</p></th>
 <th class="head"><p>Vincoli</p></th>
@@ -565,7 +534,143 @@ necessario porre determinati vincoli su <span class="math notranslate nohighligh
 </tr>
 </tbody>
 </table>
+</div>
 </aside>
+<section id="uso-del-comando-lu-in-matlab">
+<h3>Uso del comando <code class="docutils literal notranslate"><span class="pre">lu</span></code> in MATLAB<a class="headerlink" href="#uso-del-comando-lu-in-matlab" title="Link to this heading">#</a></h3>
+<p>MATLAB fornisce il comando <code class="docutils literal notranslate"><span class="pre">lu</span></code> per calcolare la fattorizzazione <span class="math notranslate nohighlight">\(LU\)</span> di una matrice. Questa funzione è ottimizzata, stabile numericamente e offre diverse modalità d’uso a seconda delle esigenze.</p>
+<p>La forma più semplice del comando è:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">L</span><span class="p">,</span><span class="n">U</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">lu</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>che restituisce una matrice triangolare superiore <code class="docutils literal notranslate"><span class="pre">U</span></code> e una matrice triangolare inferiore <strong>permutata</strong> <code class="docutils literal notranslate"><span class="pre">L</span></code> tali che <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">=</span> <span class="pre">L*U</span></code>. Questa forma è utile per computazioni rapide ma non fornisce esplicitamente la matrice di permutazione.</p>
+<p>Per ottenere la classica fattorizzazione <span class="math notranslate nohighlight">\(PA = LU\)</span>, si utilizza:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">L</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">P</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">lu</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Questa forma restituisce:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">L</span></code>: matrice triangolare inferiore con diagonale unitaria</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">U</span></code>: matrice triangolare superiore</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">P</span></code>: matrice di permutazione tale che <code class="docutils literal notranslate"><span class="pre">P*A</span> <span class="pre">=</span> <span class="pre">L*U</span></code></p></li>
+</ul>
+<p>La matrice <code class="docutils literal notranslate"><span class="pre">P</span></code> può essere restituita in due formati:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">L</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">P</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">lu</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="s">&#39;matrix&#39;</span><span class="p">)</span><span class="w">  </span><span class="c">% P è una matrice (default)</span>
+<span class="p">[</span><span class="n">L</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">P</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">lu</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="s">&#39;vector&#39;</span><span class="p">)</span><span class="w">  </span><span class="c">% P è un vettore di indici</span>
+</pre></div>
+</div>
+<p>Nel formato vettoriale, <code class="docutils literal notranslate"><span class="pre">P</span></code> contiene gli indici di permutazione tali che <code class="docutils literal notranslate"><span class="pre">A(P,:)</span> <span class="pre">=</span> <span class="pre">L*U</span></code>.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="w">  </span><span class="mi">4</span><span class="p">;</span>
+<span class="w">  </span><span class="o">-</span><span class="mi">2</span><span class="w">  </span><span class="mi">0</span><span class="w">  </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">   </span><span class="n">7</span><span class="w">  </span><span class="s">2</span><span class="w"> </span><span class="o">-</span><span class="mi">2</span><span class="p">];</span>
+<span class="w">   </span>
+<span class="c">% Fattorizzazione base</span>
+<span class="p">[</span><span class="n">L</span><span class="p">,</span><span class="n">U</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">lu</span><span class="p">(</span><span class="n">A</span><span class="p">);</span>
+<span class="nb">norm</span><span class="p">(</span><span class="n">A</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">L</span><span class="o">*</span><span class="n">U</span><span class="p">)</span><span class="w">  </span><span class="c">% Verifica: dovrebbe essere piccolo</span>
+
+<span class="c">% Con matrice di permutazione</span>
+<span class="p">[</span><span class="n">L</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">P</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">lu</span><span class="p">(</span><span class="n">A</span><span class="p">);</span>
+<span class="nb">norm</span><span class="p">(</span><span class="n">P</span><span class="o">*</span><span class="n">A</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">L</span><span class="o">*</span><span class="n">U</span><span class="p">)</span><span class="w">  </span><span class="c">% Verifica: dovrebbe essere ~0</span>
+
+<span class="c">% Formato vettoriale</span>
+<span class="p">[</span><span class="n">L</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">p</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">lu</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="s">&#39;vector&#39;</span><span class="p">);</span>
+<span class="nb">norm</span><span class="p">(</span><span class="n">A</span><span class="p">(</span><span class="n">p</span><span class="p">,:)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">L</span><span class="o">*</span><span class="n">U</span><span class="p">)</span><span class="w">  </span><span class="c">% Equivalente alla forma matriciale</span>
+</pre></div>
+</div>
+<p>Il comando <code class="docutils literal notranslate"><span class="pre">lu</span></code> di MATLAB implementa automaticamente:</p>
+<ul class="simple">
+<li><p><strong>Pivoting parziale</strong> per garantire stabilità numerica</p></li>
+<li><p><strong>Ottimizzazioni</strong> per matrici dense e sparse</p></li>
+<li><p><strong>Scaling</strong> automatico quando necessario</p></li>
+<li><p><strong>Gestione efficiente</strong> della memoria</p></li>
+</ul>
+<p>Per questa ragione, è generalmente preferibile usare <code class="docutils literal notranslate"><span class="pre">lu</span></code> piuttosto che implementazioni personalizzate, a meno che non si abbiano esigenze didattiche o di ricerca particolari.</p>
+<section id="fattorizzazione-per-matrici-sparse">
+<h4>Fattorizzazione per matrici sparse<a class="headerlink" href="#fattorizzazione-per-matrici-sparse" title="Link to this heading">#</a></h4>
+<div class="proof definition admonition" id="definition-0">
+<p class="admonition-title"><span class="caption-number">Definizione 2 </span></p>
+<section class="definition-content" id="proof-content">
+<p>Una <strong>matrice sparsa</strong> o <strong>array sparso</strong> è una matrice in cui la maggior parte
+degli elementi è zero. Per dare una definizione rigorosa riguardo alla
+proporzione di elementi di valore zero affinché una matrice sia qualificata
+come sparsa è tipicamente necessario considerare la sorgente del problema che la
+ha generata, e.g., la discretizzazione di una PDE. Un <strong>criterio comune</strong> è che
+il numero di elementi diversi da zero sia approssimativamente uguale al numero
+di righe o colonne.</p>
+<p>Al contrario, se la maggior parte degli elementi è diversa da zero, la matrice è
+considerata densa.</p>
+</section>
+</div><p>Per matrici sparse, MATLAB utilizza una struttura dati ottimizzata che memorizza solo gli elementi non nulli e le loro posizioni. Questo approccio permette di:</p>
+<ul class="simple">
+<li><p><strong>Ridurre significativamente</strong> l’uso di memoria</p></li>
+<li><p><strong>Accelerare</strong> le operazioni che coinvolgono molti zeri</p></li>
+<li><p><strong>Gestire</strong> matrici di dimensioni molto grandi che sarebbero impraticabili in formato denso</p></li>
+</ul>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Esempio: matrice sparsa tridiagonale</span>
+<span class="n">n</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span>
+<span class="n">A_sparse</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">spdiags</span><span class="p">(</span><span class="nb">ones</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="mi">2</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+
+<span class="c">% Informazioni sulla sparsità</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;Elementi totali: %d\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="o">^</span><span class="mi">2</span><span class="p">);</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;Elementi non nulli: %d\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">nnz</span><span class="p">(</span><span class="n">A_sparse</span><span class="p">));</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;Percentuale di sparsità: %.2f%%\n&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">  </span><span class="mi">100</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">nnz</span><span class="p">(</span><span class="n">A_sparse</span><span class="p">)</span><span class="o">/</span><span class="n">n</span><span class="o">^</span><span class="mi">2</span><span class="p">));</span>
+
+<span class="c">% Confronto di memoria</span>
+<span class="nb">whos</span><span class="w"> </span><span class="n">A_sparse</span><span class="w">  </span><span class="c">% Mostra l&#39;uso di memoria</span>
+
+<span class="c">% Conversione da densa a sparsa e viceversa</span>
+<span class="n">A_full</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">full</span><span class="p">(</span><span class="n">A_sparse</span><span class="p">);</span><span class="w">  </span><span class="c">% Converte in formato denso</span>
+<span class="n">A_sp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">sparse</span><span class="p">(</span><span class="n">A_full</span><span class="p">);</span><span class="w">    </span><span class="c">% Converte in formato sparso</span>
+</pre></div>
+</div>
+<aside class="margin sidebar">
+<p class="sidebar-title">Visualizzare una matrice sparsa.</p>
+<p>Il comando <code class="docutils literal notranslate"><span class="pre">spy</span></code> in MATLAB è utilizzato per visualizzare la struttura di una matrice sparsa. Mostra un grafico in cui ogni punto rappresenta un elemento non nullo della matrice, permettendo di avere una rapida comprensione della distribuzione degli elementi non nulli. La sintassi di base è:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">spy</span><span class="p">(</span><span class="n">A_sparse</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Dove <code class="docutils literal notranslate"><span class="pre">A_sparse</span></code> è la matrice sparsa che si desidera visualizzare. Questo comando è particolarmente utile per analizzare la sparsità e la struttura delle matrici in applicazioni ingegneristiche e scientifiche.</p>
+</aside>
+<p>Esempi comuni di matrici sparse di interesse ingegneristico includono:</p>
+<ul class="simple">
+<li><p><strong>Matrici tridiagonali</strong>: derivanti dalla discretizzazione di equazioni differenziali con il metodo delle differenze finite (es. problemi di conduzione termica, diffusione)</p></li>
+<li><p><strong>Matrici a banda</strong>: tipiche dell’analisi strutturale con elementi finiti per travi, telai e strutture reticolari</p></li>
+<li><p><strong>Matrici di connettività</strong>: rappresentanti reti elettriche, idrauliche o di trasporto mediante grafi</p></li>
+<li><p><strong>Laplaciani discreti</strong>: dalla discretizzazione di operatori differenziali in problemi di campo (elettromagnetismo, fluidodinamica)</p></li>
+</ul>
+<p>Per matrici sparse, MATLAB offre una versione più efficiente con doppio pivoting:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">L</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">P</span><span class="p">,</span><span class="n">Q</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">lu</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>che calcola la fattorizzazione <span class="math notranslate nohighlight">\(PAQ = LU\)</span>, dove sia <code class="docutils literal notranslate"><span class="pre">P</span></code> che <code class="docutils literal notranslate"><span class="pre">Q</span></code> sono matrici di permutazione. Questa variante minimizza il <em>fill-in</em> (creazione di nuovi elementi non nulli) durante la fattorizzazione, rendendo il calcolo significativamente più efficiente per matrici sparse di grandi dimensioni.</p>
+</section>
+</section>
+<section id="soluzione-diretta-del-sistema-senza-passare-per-la-fattorizzazione">
+<h3>Soluzione diretta del sistema senza passare per la fattorizzazione<a class="headerlink" href="#soluzione-diretta-del-sistema-senza-passare-per-la-fattorizzazione" title="Link to this heading">#</a></h3>
+<p>La funzione per <strong>risolvere i sistemi lineari</strong> è la funzione <code class="docutils literal notranslate"><span class="pre">mldivide</span></code> <code class="docutils literal notranslate"><span class="pre">\</span></code>.
+Si tratta di una delle funzioni più elaborate di MATLAB, il comando <code class="docutils literal notranslate"><span class="pre">A\B</span></code> è la
+<em>divisione matriciale</em> di <code class="docutils literal notranslate"><span class="pre">A</span></code> in <code class="docutils literal notranslate"><span class="pre">B</span></code>, moralmente è la stessa operazione di
+<code class="docutils literal notranslate"><span class="pre">INV(A)*B</span></code>, ma è <strong>calcolata in modo diverso</strong>, <strong>stabile</strong> ed <strong>efficiente</strong>.</p>
+<p>Se <span class="math notranslate nohighlight">\(A\)</span> è una matrice <span class="math notranslate nohighlight">\(N\)</span> per <span class="math notranslate nohighlight">\(N\)</span> e <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> è un vettore colonna con <span class="math notranslate nohighlight">\(N\)</span>
+componenti, o una matrice con più di queste colonne, allora <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">A\b</span></code> è la
+soluzione dell’equazione <code class="docutils literal notranslate"><span class="pre">A*X</span> <span class="pre">=</span> <span class="pre">B</span></code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Avvertimento</p>
+<p>Viene stampato un messaggio di avviso se A è scalata male o malcondizionata, ad
+<strong>esempio</strong></p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">hilb</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span><span class="o">\</span><span class="nb">ones</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>restituisce</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">Warning</span><span class="p">:</span> <span class="n">Matrix</span> <span class="ow">is</span> <span class="n">close</span> <span class="n">to</span> <span class="n">singular</span> <span class="ow">or</span> <span class="n">badly</span> <span class="n">scaled</span><span class="o">.</span> <span class="n">Results</span> <span class="n">may</span> <span class="n">be</span> <span class="n">inaccurate</span><span class="o">.</span>
+<span class="n">RCOND</span> <span class="o">=</span>  <span class="mf">5.460912e-19</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="implementare-la-fattorizzazione-lu-facoltativo">
+<h3>Implementare la fattorizzazione LU (facoltativo)<a class="headerlink" href="#implementare-la-fattorizzazione-lu-facoltativo" title="Link to this heading">#</a></h3>
 <p>Come primo esercizio implementeremo la fattorizzazione <span class="math notranslate nohighlight">\(LU\)</span> nella forma di Doolittle,
 che è quella più strettamente legata all’algoritmo di eleminazione di Gauss che
 conoscete sin dal corso di <em>algebra lineare</em>.</p>
@@ -573,69 +678,69 @@ conoscete sin dal corso di <em>algebra lineare</em>.</p>
 <span class="math notranslate nohighlight">\(L_{ii} = 1\)</span>, <span class="math notranslate nohighlight">\(i=1,\ldots,n\)</span>, possiamo ricavare che i termini della matrice
 <span class="math notranslate nohighlight">\(U\)</span> sono dati da</p>
 <div class="math notranslate nohighlight" id="equation-lu1">
-<span class="eqno">(12)<a class="headerlink" href="#equation-lu1" title="Permalink a questa equazione">#</a></span>\[\begin{split}\forall\,j\quad &amp; \begin{array}{ll}
+<span class="eqno">(6)<a class="headerlink" href="#equation-lu1" title="Link to this equation">#</a></span>\[\begin{split}\forall\,j\quad &amp; \begin{array}{ll}
 i = 1, &amp; u_{i,j} = a_{i,j},\\
 i &gt; 1, &amp; u_{i,j} = \displaystyle a_{i,j} - \sum_{k=1}^{i-1} l_{ik} u_{k,j},
 \end{array}\end{split}\]</div>
 <p>mentre quelli della matrice <span class="math notranslate nohighlight">\(L\)</span> sono dati da:</p>
 <div class="math notranslate nohighlight" id="equation-lu2">
-<span class="eqno">(13)<a class="headerlink" href="#equation-lu2" title="Permalink a questa equazione">#</a></span>\[\begin{split}\forall\,i\quad &amp; \begin{array}{ll}
+<span class="eqno">(7)<a class="headerlink" href="#equation-lu2" title="Link to this equation">#</a></span>\[\begin{split}\forall\,i\quad &amp; \begin{array}{ll}
 j = 1, &amp; l_{ij} = \frac{a_{ij}}{u_{jj}}, \\
 j &gt; 1, &amp; l_{ij} = \displaystyle \frac{a_{ij} - \sum_{k=1}^{j-1} l_{ik} u_{kj} }{u_{jj}}.
 \end{array}\end{split}\]</div>
 <div class="admonition-esercizio admonition">
 <p class="admonition-title">Esercizio</p>
-<p>Si usino le relazioni <a class="reference internal" href="#equation-lu1">(12)</a> e <a class="reference internal" href="#equation-lu2">(13)</a> per implementare la versione di
+<p>Si usino le relazioni <a class="reference internal" href="#equation-lu1">(6)</a> e <a class="reference internal" href="#equation-lu2">(7)</a> per implementare la versione di
 Doolittle dell’algoritmo <span class="math notranslate nohighlight">\(LU\)</span> per una matrice quadrata. Un prototipo della
 funzione è dato da:</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span>[L,U]<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">doolittlelu</span><span class="p">(</span>A<span class="p">)</span><span class="w"></span>
-<span class="c">%%DOOLITTLELU Calcola la fattorizzazione LU della matrice A con i vincolo di</span><span class="w"></span>
-<span class="c">%Doolittle.</span><span class="w"></span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span>[L,U]<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">doolittlelu</span><span class="p">(</span>A<span class="p">)</span>
+<span class="c">%%DOOLITTLELU Calcola la fattorizzazione LU della matrice A con i vincolo di</span>
+<span class="c">%Doolittle.</span>
 
-<span class="c">% Controllo degli input:</span><span class="w"></span>
+<span class="c">% Controllo degli input:</span>
 
-<span class="c">% Pre-allocazione memoria:</span><span class="w"></span>
-<span class="n">L</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">eye</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">);</span><span class="w"></span>
-<span class="n">U</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">);</span><span class="w"></span>
-<span class="c">%!! Questa potrebbe essere anche:</span><span class="w"></span>
-<span class="c">% L = zeros(n,n);</span><span class="w"></span>
-<span class="c">% U = zeros(n,n);</span><span class="w"></span>
-<span class="c">% Dipende da come decidete di utilizzare le formule...</span><span class="w"></span>
+<span class="c">% Pre-allocazione memoria:</span>
+<span class="n">L</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">eye</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+<span class="n">U</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+<span class="c">%!! Questa potrebbe essere anche:</span>
+<span class="c">% L = zeros(n,n);</span>
+<span class="c">% U = zeros(n,n);</span>
+<span class="c">% Dipende da come decidete di utilizzare le formule...</span>
 
-<span class="c">% Utilizzo delle formule per l_{ij} e u_{ij}.</span><span class="w"></span>
+<span class="c">% Utilizzo delle formule per l_{ij} e u_{ij}.</span>
 
-<span class="k">end</span><span class="w"></span>
+<span class="k">end</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>Si faccia un <strong>controllo dell’input</strong>: la matrice <span class="math notranslate nohighlight">\(A\)</span> è quadrata?</p></li>
-<li><p>Si utilizzino operazioni vettorizzate per le somme che compaiono in <a class="reference internal" href="#equation-lu1">(12)</a>
-e <a class="reference internal" href="#equation-lu2">(13)</a></p></li>
+<li><p>Si utilizzino operazioni vettorizzate per le somme che compaiono in <a class="reference internal" href="#equation-lu1">(6)</a>
+e <a class="reference internal" href="#equation-lu2">(7)</a></p></li>
 </ul>
 <p>Per verificare la buona riuscita dell’implementazione si può usare il seguente
 problema di test.</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">%% Test della versione di Doolittle dell&#39;algoritmo LU  </span><span class="w"></span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">%% Test della versione di Doolittle dell&#39;algoritmo LU  </span>
 
-<span class="nb">clear</span><span class="p">;</span><span class="w"> </span><span class="nb">clc</span><span class="p">;</span><span class="w"></span>
+<span class="nb">clear</span><span class="p">;</span><span class="w"> </span><span class="nb">clc</span><span class="p">;</span>
 
-<span class="n">A</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="w">  </span><span class="mi">4</span><span class="p">;</span><span class="w"></span>
-<span class="w">     </span><span class="o">-</span><span class="mi">2</span><span class="w">  </span><span class="mi">0</span><span class="w">  </span><span class="mi">5</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="n">7</span><span class="w">  </span><span class="s">2</span><span class="w"> </span><span class="o">-</span><span class="mi">2</span><span class="w"> </span><span class="p">];</span><span class="w"></span>
-<span class="p">[</span><span class="n">L</span><span class="p">,</span><span class="n">U</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">doolittlelu</span><span class="p">(</span><span class="n">A</span><span class="p">);</span><span class="w"></span>
-<span class="nb">fprintf</span><span class="p">(</span><span class="s">&quot;|| A - LU || = %1.2e\n&quot;</span><span class="p">,</span><span class="nb">norm</span><span class="p">(</span><span class="n">A</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">L</span><span class="o">*</span><span class="n">U</span><span class="p">,</span><span class="mi">2</span><span class="p">));</span><span class="w"></span>
+<span class="n">A</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="w">  </span><span class="mi">4</span><span class="p">;</span>
+<span class="w">     </span><span class="o">-</span><span class="mi">2</span><span class="w">  </span><span class="mi">0</span><span class="w">  </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">      </span><span class="n">7</span><span class="w">  </span><span class="s">2</span><span class="w"> </span><span class="o">-</span><span class="mi">2</span><span class="w"> </span><span class="p">];</span>
+<span class="p">[</span><span class="n">L</span><span class="p">,</span><span class="n">U</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">doolittlelu</span><span class="p">(</span><span class="n">A</span><span class="p">);</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s">&quot;|| A - LU || = %1.2e\n&quot;</span><span class="p">,</span><span class="nb">norm</span><span class="p">(</span><span class="n">A</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">L</span><span class="o">*</span><span class="n">U</span><span class="p">,</span><span class="mi">2</span><span class="p">));</span>
 
-<span class="c">% Vediamone gli ingressi:</span><span class="w"></span>
-<span class="nb">format</span><span class="w"> </span><span class="nb">rat</span><span class="w"></span>
-<span class="nb">disp</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="w"></span>
-<span class="nb">disp</span><span class="p">(</span><span class="n">L</span><span class="p">)</span><span class="w"></span>
-<span class="nb">disp</span><span class="p">(</span><span class="n">U</span><span class="p">)</span><span class="w"></span>
-<span class="nb">disp</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">U</span><span class="p">)</span><span class="w"></span>
-<span class="nb">format</span><span class="w"> </span><span class="n">short</span><span class="w"></span>
+<span class="c">% Vediamone gli ingressi:</span>
+<span class="nb">format</span><span class="w"> </span><span class="nb">rat</span>
+<span class="nb">disp</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">disp</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+<span class="nb">disp</span><span class="p">(</span><span class="n">U</span><span class="p">)</span>
+<span class="nb">disp</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">U</span><span class="p">)</span>
+<span class="nb">format</span><span class="w"> </span><span class="n">short</span>
 </pre></div>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Suggerimento</p>
-<p>Guardando alla formulazione delle equazioni <a class="reference internal" href="#equation-lu1">(12)</a> e <a class="reference internal" href="#equation-lu2">(13)</a> potremmo
+<p>Guardando alla formulazione delle equazioni <a class="reference internal" href="#equation-lu1">(6)</a> e <a class="reference internal" href="#equation-lu2">(7)</a> potremmo
 osservare che in realtà possiamo sovrascrivere le entrate della matrice <span class="math notranslate nohighlight">\(A\)</span>
 con la fattorizzazione <span class="math notranslate nohighlight">\(LU\)</span>. Se avete concluso la prima parte pensate a come
 è possibile realizzare questa versione.</p>
@@ -643,12 +748,12 @@ con la fattorizzazione <span class="math notranslate nohighlight">\(LU\)</span>.
 <div class="tip dropdown admonition">
 <p class="admonition-title">Un suggerimento più estensivo</p>
 <p>Possiamo sviluppare il ciclo di istruzioni sostanzialmente in due ordine, in un primo procediamo alla fattorizzazioni <strong>colonna per colonna</strong>, ovvero:</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="w"></span>
-<span class="w">    </span><span class="n">L</span><span class="p">(</span><span class="n">k</span><span class="p">:</span><span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">A</span><span class="p">(</span><span class="n">k</span><span class="p">:</span><span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">A</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">);</span><span class="w"> </span><span class="c">% Dividiamo per il Pivot</span><span class="w"></span>
-<span class="w">    </span><span class="n">U</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">A</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">);</span><span class="w">          </span><span class="c">% Aggiorniamo le entrate della U</span><span class="w"></span>
-<span class="w">    </span><span class="n">A</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">A</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">L</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">*</span><span class="n">A</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">);</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
-<span class="n">U</span><span class="p">(:,</span><span class="k">end</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">A</span><span class="p">(:,</span><span class="k">end</span><span class="p">);</span><span class="w"></span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span>
+<span class="w">    </span><span class="n">L</span><span class="p">(</span><span class="n">k</span><span class="p">:</span><span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">A</span><span class="p">(</span><span class="n">k</span><span class="p">:</span><span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">A</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">);</span><span class="w"> </span><span class="c">% Dividiamo per il Pivot</span>
+<span class="w">    </span><span class="n">U</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">A</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">);</span><span class="w">          </span><span class="c">% Aggiorniamo le entrate della U</span>
+<span class="w">    </span><span class="n">A</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">A</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">L</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">)</span><span class="o">*</span><span class="n">A</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">);</span>
+<span class="k">end</span>
+<span class="n">U</span><span class="p">(:,</span><span class="k">end</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">A</span><span class="p">(:,</span><span class="k">end</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Nel caso dell”<strong>esempio</strong> vediamo:</p>
@@ -662,13 +767,13 @@ con la fattorizzazione <span class="math notranslate nohighlight">\(LU\)</span>.
 \[\begin{split}k = 3, \qquad L^{(3)} = \left(\begin{array}{ccc} 1 &amp; 0 &amp; 0\\ -\frac{2}{3} &amp; 1 &amp; 0\\ \frac{7}{3} &amp; -\frac{13}{2} &amp; 1 \end{array}\right), \qquad U^{(3)} = \left(\begin{array}{ccc} 3 &amp; -1 &amp; 4\\ 0 &amp; -\frac{2}{3} &amp; \frac{23}{3}\\ 0 &amp; 0 &amp; \frac{77}{2} \end{array}\right), \qquad A^{(3)} = \left(\begin{array}{ccc} 3 &amp; -1 &amp; 4\\ 0 &amp; -\frac{2}{3} &amp; \frac{23}{3}\\ 0 &amp; 0 &amp; \frac{77}{2} \end{array}\right)\end{split}\]</div>
 <p>La <strong>seconda alternativa</strong> è quella di eseguire questo ciclo procedendo lungo le
 righe della matrice</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="w"></span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nb">j</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:(</span><span class="nb">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
-<span class="w">        </span><span class="n">L</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">A</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">L</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="mi">1</span><span class="p">:(</span><span class="nb">j</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="n">U</span><span class="p">(</span><span class="mi">1</span><span class="p">:(</span><span class="nb">j</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span><span class="nb">j</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">U</span><span class="p">(</span><span class="nb">j</span><span class="p">,</span><span class="nb">j</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="k">end</span><span class="w"></span>
-<span class="w">    </span><span class="nb">j</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">i</span><span class="p">:</span><span class="n">n</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="n">U</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">A</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">L</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="mi">1</span><span class="p">:(</span><span class="nb">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="n">U</span><span class="p">(</span><span class="mi">1</span><span class="p">:(</span><span class="nb">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span><span class="nb">j</span><span class="p">);</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nb">j</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:(</span><span class="nb">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">        </span><span class="n">L</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="n">A</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">L</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="mi">1</span><span class="p">:(</span><span class="nb">j</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="n">U</span><span class="p">(</span><span class="mi">1</span><span class="p">:(</span><span class="nb">j</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span><span class="nb">j</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">U</span><span class="p">(</span><span class="nb">j</span><span class="p">,</span><span class="nb">j</span><span class="p">);</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="nb">j</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">i</span><span class="p">:</span><span class="n">n</span><span class="p">;</span>
+<span class="w">    </span><span class="n">U</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">A</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="nb">j</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">L</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span><span class="mi">1</span><span class="p">:(</span><span class="nb">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="n">U</span><span class="p">(</span><span class="mi">1</span><span class="p">:(</span><span class="nb">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span><span class="nb">j</span><span class="p">);</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 <p>Nel caso dell”<strong>esempio</strong> vediamo:</p>
@@ -683,47 +788,48 @@ righe della matrice</p>
 <p>L”<strong>unica differenza</strong> tra le due implementazioni è l’ordine, per colonna e per riga rispettivamente, in cui facciamo le operazioni.</p>
 </div>
 </div>
+</section>
 <section id="la-fattorizzazione-con-pivoting">
-<span id="pivoting"></span><h3>La fattorizzazione con <em>pivoting</em><a class="headerlink" href="#la-fattorizzazione-con-pivoting" title="Link a questa intestazione">#</a></h3>
+<span id="pivoting"></span><h3>La fattorizzazione con <em>pivoting</em><a class="headerlink" href="#la-fattorizzazione-con-pivoting" title="Link to this heading">#</a></h3>
 <p>Consideriamo il seguente esempio numerico in cui andiamo a confrontare gli errori
 assoluti e relativi,</p>
 <div class="math notranslate nohighlight">
 \[E_{\text{abs}} = \| A - LU\|_2, \qquad E_{\text{rel}} = \frac{\| A - LU\|_2}{\| A\|_2},\]</div>
 <p>tra la matrice <span class="math notranslate nohighlight">\(A\)</span> ed il prodotto dei termini <span class="math notranslate nohighlight">\(LU\)</span> ottenuto con l’algoritmo
 implementato nell’esercizio precedente.</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">clear</span><span class="p">;</span><span class="w"> </span><span class="nb">clc</span><span class="p">;</span><span class="w"> </span><span class="n">close</span><span class="w"> </span><span class="s">all</span><span class="p">;</span><span class="w"></span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">clear</span><span class="p">;</span><span class="w"> </span><span class="nb">clc</span><span class="p">;</span><span class="w"> </span><span class="n">close</span><span class="w"> </span><span class="s">all</span><span class="p">;</span>
 
-<span class="n">sizes</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">100</span><span class="p">:</span><span class="mi">100</span><span class="p">:</span><span class="mi">1500</span><span class="p">;</span><span class="w"></span>
-<span class="n">N</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">length</span><span class="p">(</span><span class="n">sizes</span><span class="p">);</span><span class="w"></span>
-<span class="n">maxerr</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
-<span class="n">relerr</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
-<span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="n">N</span><span class="w"></span>
-<span class="w">   </span><span class="n">A</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">rand</span><span class="p">(</span><span class="n">sizes</span><span class="p">(</span><span class="nb">i</span><span class="p">),</span><span class="n">sizes</span><span class="p">(</span><span class="nb">i</span><span class="p">));</span><span class="w"></span>
-<span class="w">   </span><span class="p">[</span><span class="n">L</span><span class="p">,</span><span class="n">U</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">doolittlelu</span><span class="p">(</span><span class="n">A</span><span class="p">);</span><span class="w"></span>
-<span class="w">   </span><span class="p">[</span><span class="n">Lm</span><span class="p">,</span><span class="n">Um</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">lu</span><span class="p">(</span><span class="n">A</span><span class="p">);</span><span class="w"></span>
-<span class="w">   </span><span class="n">normA</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">norm</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
-<span class="w">   </span><span class="n">maxerr</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">norm</span><span class="p">(</span><span class="n">A</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">L</span><span class="o">*</span><span class="n">U</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
-<span class="w">   </span><span class="n">relerr</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">maxerr</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="o">/</span><span class="n">normA</span><span class="p">;</span><span class="w"></span>
-<span class="w">   </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">&quot;Dimensione %d\n\t || A - LU || = %1.2e\n&quot;</span><span class="p">,</span><span class="n">sizes</span><span class="p">(</span><span class="nb">i</span><span class="p">),</span><span class="n">maxerr</span><span class="p">(</span><span class="nb">i</span><span class="p">));</span><span class="w"></span>
-<span class="w">   </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">&quot;\t || A - LU ||/||A|| = %1.2e\n&quot;</span><span class="p">,</span><span class="n">relerr</span><span class="p">(</span><span class="nb">i</span><span class="p">));</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<span class="n">sizes</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">100</span><span class="p">:</span><span class="mi">100</span><span class="p">:</span><span class="mi">1500</span><span class="p">;</span>
+<span class="n">N</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">length</span><span class="p">(</span><span class="n">sizes</span><span class="p">);</span>
+<span class="n">maxerr</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">relerr</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="n">N</span>
+<span class="w">   </span><span class="n">A</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">rand</span><span class="p">(</span><span class="n">sizes</span><span class="p">(</span><span class="nb">i</span><span class="p">),</span><span class="n">sizes</span><span class="p">(</span><span class="nb">i</span><span class="p">));</span>
+<span class="w">   </span><span class="p">[</span><span class="n">L</span><span class="p">,</span><span class="n">U</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">doolittlelu</span><span class="p">(</span><span class="n">A</span><span class="p">);</span>
+<span class="w">   </span><span class="p">[</span><span class="n">Lm</span><span class="p">,</span><span class="n">Um</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">lu</span><span class="p">(</span><span class="n">A</span><span class="p">);</span>
+<span class="w">   </span><span class="n">normA</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">norm</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+<span class="w">   </span><span class="n">maxerr</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">norm</span><span class="p">(</span><span class="n">A</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">L</span><span class="o">*</span><span class="n">U</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+<span class="w">   </span><span class="n">relerr</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">maxerr</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="o">/</span><span class="n">normA</span><span class="p">;</span>
+<span class="w">   </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">&quot;Dimensione %d\n\t || A - LU || = %1.2e\n&quot;</span><span class="p">,</span><span class="n">sizes</span><span class="p">(</span><span class="nb">i</span><span class="p">),</span><span class="n">maxerr</span><span class="p">(</span><span class="nb">i</span><span class="p">));</span>
+<span class="w">   </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">&quot;\t || A - LU ||/||A|| = %1.2e\n&quot;</span><span class="p">,</span><span class="n">relerr</span><span class="p">(</span><span class="nb">i</span><span class="p">));</span>
+<span class="k">end</span>
 
-<span class="nb">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
-<span class="nb">loglog</span><span class="p">(</span><span class="n">sizes</span><span class="p">,</span><span class="n">maxerr</span><span class="p">,</span><span class="s">&#39;o-&#39;</span><span class="p">,</span><span class="n">sizes</span><span class="p">,</span><span class="n">relerr</span><span class="p">,</span><span class="s">&#39;x-&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
-<span class="nb">xlabel</span><span class="p">(</span><span class="s">&#39;Dimensione&#39;</span><span class="p">);</span><span class="w"></span>
-<span class="nb">legend</span><span class="p">({</span><span class="s">&#39;Errore Assoluto&#39;</span><span class="p">,</span><span class="s">&#39;Errore Relativo&#39;</span><span class="p">},</span><span class="k">...</span><span class="w"></span>
-<span class="w">    </span><span class="s">&#39;Location&#39;</span><span class="p">,</span><span class="s">&#39;best&#39;</span><span class="p">,</span><span class="s">&#39;FontSize&#39;</span><span class="p">,</span><span class="mi">14</span><span class="p">);</span><span class="w"></span>
+<span class="nb">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">loglog</span><span class="p">(</span><span class="n">sizes</span><span class="p">,</span><span class="n">maxerr</span><span class="p">,</span><span class="s">&#39;o-&#39;</span><span class="p">,</span><span class="n">sizes</span><span class="p">,</span><span class="n">relerr</span><span class="p">,</span><span class="s">&#39;x-&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+<span class="nb">xlabel</span><span class="p">(</span><span class="s">&#39;Dimensione&#39;</span><span class="p">);</span>
+<span class="nb">legend</span><span class="p">({</span><span class="s">&#39;Errore Assoluto&#39;</span><span class="p">,</span><span class="s">&#39;Errore Relativo&#39;</span><span class="p">},</span><span class="k">...</span>
+<span class="w">    </span><span class="s">&#39;Location&#39;</span><span class="p">,</span><span class="s">&#39;best&#39;</span><span class="p">,</span><span class="s">&#39;FontSize&#39;</span><span class="p">,</span><span class="mi">14</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Quello che osserviamo nella figura è una crescita di più di un’ordine di
 grandezza nella costruzione fatta dalla fattorizzazione <span class="math notranslate nohighlight">\(LU\)</span> accompagnato da un
-certo numero di oscillazioni <a class="reference internal" href="#lunopivoting"><span class="std std-numref">Fig. 13</span></a>.</p>
+certo numero di oscillazioni <a class="reference internal" href="#lunopivoting"><span class="std std-numref">Fig. 5</span></a>.</p>
 <figure class="align-default" id="lunopivoting">
 <img alt="_images/lunopivoting.png" src="_images/lunopivoting.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 13 </span><span class="caption-text">Errori assoluti e relativi tra una matrice <span class="math notranslate nohighlight">\(A\)</span> ad entrate casuali
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text">Errori assoluti e relativi tra una matrice <span class="math notranslate nohighlight">\(A\)</span> ad entrate casuali
 uniformemente distribuite in <span class="math notranslate nohighlight">\([0,1]\)</span> e la relativa fattorizzazione <span class="math notranslate nohighlight">\(LU\)</span> calcolata
-<strong>senza</strong> pivoting.</span><a class="headerlink" href="#lunopivoting" title="Link a questa immagine">#</a></p>
+<strong>senza</strong> pivoting.</span><a class="headerlink" href="#lunopivoting" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Ci aspetteremo che almeno l”<strong>errore relativo</strong> si comportasse meglio. Quello
@@ -741,11 +847,11 @@ quando si incontrano <em>pivot</em> nulli) possiamo introdurre una strategia di
 <p>in cui <span class="math notranslate nohighlight">\(P\)</span> è una <strong>matrice di permutazione</strong>. Strutturalmente una matrice di
 permutazione non è nient’altro che una matrice identità di cui abbiamo permutato
 le righe. Vediamo un <em>veloce esempio</em>:</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">format</span><span class="w"> </span><span class="nb">rat</span><span class="w"></span>
-<span class="n">H</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">hilb</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="w"></span>
-<span class="n">P</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">eye</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="w"></span>
-<span class="n">P</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">P</span><span class="p">([</span><span class="mi">5</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">],:)</span><span class="w"></span>
-<span class="n">P</span><span class="o">*</span><span class="n">H</span><span class="w"></span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">format</span><span class="w"> </span><span class="nb">rat</span>
+<span class="n">H</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">hilb</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">P</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">eye</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">P</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">P</span><span class="p">([</span><span class="mi">5</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">],:)</span>
+<span class="n">P</span><span class="o">*</span><span class="n">H</span>
 </pre></div>
 </div>
 <p>che costruisce le matrici</p>
@@ -758,30 +864,30 @@ fatta in casa della fattorizzazione LU con pivoting in MATLAB.</p>
 <p class="admonition-title">Esercizio</p>
 <p>Si costruisca una funzione <code class="docutils literal notranslate"><span class="pre">ludecomp</span></code> per costruire la fattorizzazione <span class="math notranslate nohighlight">\(LU\)</span> con
 pivoting parziale per una matrice <span class="math notranslate nohighlight">\(A\)</span>. Un prototipo della funzione è quindi:</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span>[L,U,P]<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">ludecomp</span><span class="p">(</span>A<span class="p">)</span><span class="w"></span>
-<span class="c">%%LUDECOMPP Fattorizzazione LU con pivoting parziale.</span><span class="w"></span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span>[L,U,P]<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">ludecomp</span><span class="p">(</span>A<span class="p">)</span>
+<span class="c">%%LUDECOMPP Fattorizzazione LU con pivoting parziale.</span>
 
-<span class="c">% Contrllo dell&#39;input:</span><span class="w"></span>
+<span class="c">% Contrllo dell&#39;input:</span>
 
-<span class="c">% Allocazione della memoria:</span><span class="w"></span>
-<span class="n">L</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">);</span><span class="w"></span>
-<span class="n">U</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">);</span><span class="w"></span>
-<span class="n">P</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">eye</span><span class="p">(</span><span class="n">n</span><span class="p">);</span><span class="w"></span>
+<span class="c">% Allocazione della memoria:</span>
+<span class="n">L</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+<span class="n">U</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+<span class="n">P</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">eye</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
 
-<span class="c">% Fattorizzazione con Pivoting</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<span class="c">% Fattorizzazione con Pivoting</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>Si faccia un <strong>controllo dell’input</strong>: la matrice <span class="math notranslate nohighlight">\(A\)</span> è quadrata?</p></li>
-<li><p>Si utilizzino operazioni vettorizzate per le somme che compaiono in <a class="reference internal" href="#equation-lu1">(12)</a>
-e <a class="reference internal" href="#equation-lu2">(13)</a>.</p></li>
+<li><p>Si utilizzino operazioni vettorizzate per le somme che compaiono in <a class="reference internal" href="#equation-lu1">(6)</a>
+e <a class="reference internal" href="#equation-lu2">(7)</a>.</p></li>
 </ul>
 <div class="admonition tip">
 <p class="admonition-title">Suggerimento</p>
 <p>Se il ciclo esterno è per <span class="math notranslate nohighlight">\(k=1,\ldots,n\)</span> possiamo <strong>individuare il pivot</strong> facendo:</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">~</span><span class="p">,</span><span class="n">r</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">A</span><span class="p">(</span><span class="n">k</span><span class="p">:</span><span class="k">end</span><span class="p">,</span><span class="n">k</span><span class="p">)));</span><span class="w"></span>
-<span class="n">r</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">n</span><span class="o">-</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">r</span><span class="p">;</span><span class="w"> </span><span class="c">% Trasliamo l&#39;indice in questione</span><span class="w"></span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">~</span><span class="p">,</span><span class="n">r</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">A</span><span class="p">(</span><span class="n">k</span><span class="p">:</span><span class="k">end</span><span class="p">,</span><span class="n">k</span><span class="p">)));</span>
+<span class="n">r</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">n</span><span class="o">-</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">r</span><span class="p">;</span><span class="w"> </span><span class="c">% Trasliamo l&#39;indice in questione</span>
 </pre></div>
 </div>
 <p>Qual è l’effetto della traslazione di indice?</p>
@@ -790,34 +896,34 @@ e <a class="reference internal" href="#equation-lu2">(13)</a>.</p></li>
 <p>Possiamo <strong>verificare</strong> l’implementazione della versione con <em>pivoting parziale</em>
 facendone un paragone con la versione dell’esercizio precedente con il seguente
 codice:</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">sizes</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">100</span><span class="p">:</span><span class="mi">100</span><span class="p">:</span><span class="mi">1500</span><span class="p">;</span><span class="w"></span>
-<span class="n">N</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">length</span><span class="p">(</span><span class="n">sizes</span><span class="p">);</span><span class="w"></span>
-<span class="n">maxerr</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
-<span class="n">relerr</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
-<span class="n">maxerrm</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
-<span class="n">relerrm</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
-<span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="n">N</span><span class="w"></span>
-<span class="w">   </span><span class="n">A</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">rand</span><span class="p">(</span><span class="n">sizes</span><span class="p">(</span><span class="nb">i</span><span class="p">),</span><span class="n">sizes</span><span class="p">(</span><span class="nb">i</span><span class="p">));</span><span class="w"></span>
-<span class="w">   </span><span class="p">[</span><span class="n">L</span><span class="p">,</span><span class="n">U</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">doolittlelu</span><span class="p">(</span><span class="n">A</span><span class="p">);</span><span class="w"></span>
-<span class="w">   </span><span class="p">[</span><span class="n">Lm</span><span class="p">,</span><span class="n">Um</span><span class="p">,</span><span class="n">P</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ludecomp</span><span class="p">(</span><span class="n">A</span><span class="p">);</span><span class="w"></span>
-<span class="w">   </span><span class="n">normA</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">norm</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
-<span class="w">   </span><span class="n">maxerr</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">norm</span><span class="p">(</span><span class="n">A</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">L</span><span class="o">*</span><span class="n">U</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
-<span class="w">   </span><span class="n">relerr</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">maxerr</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="o">/</span><span class="n">normA</span><span class="p">;</span><span class="w"></span>
-<span class="w">   </span><span class="n">maxerrm</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">norm</span><span class="p">(</span><span class="n">P</span><span class="o">*</span><span class="n">A</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Lm</span><span class="o">*</span><span class="n">Um</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
-<span class="w">   </span><span class="n">relerrm</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">maxerrm</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="o">/</span><span class="n">normA</span><span class="p">;</span><span class="w"></span>
-<span class="w">   </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">&quot;Dimensione %d\n \t || A - LU || = %1.2e\n&quot;</span><span class="p">,</span><span class="n">sizes</span><span class="p">(</span><span class="nb">i</span><span class="p">),</span><span class="n">maxerr</span><span class="p">(</span><span class="nb">i</span><span class="p">));</span><span class="w"></span>
-<span class="w">   </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">&quot;\t || A - LU ||/||A|| = %1.2e\n&quot;</span><span class="p">,</span><span class="n">relerr</span><span class="p">(</span><span class="nb">i</span><span class="p">));</span><span class="w"></span>
-<span class="w">   </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">&quot;\t || P*A - LU ||/||A|| = %1.2e\n&quot;</span><span class="p">,</span><span class="n">maxerrm</span><span class="p">(</span><span class="nb">i</span><span class="p">));</span><span class="w"></span>
-<span class="w">   </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">&quot;\t || P*A - LU ||/||A|| = %1.2e\n&quot;</span><span class="p">,</span><span class="n">relerrm</span><span class="p">(</span><span class="nb">i</span><span class="p">));</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">sizes</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">100</span><span class="p">:</span><span class="mi">100</span><span class="p">:</span><span class="mi">1500</span><span class="p">;</span>
+<span class="n">N</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">length</span><span class="p">(</span><span class="n">sizes</span><span class="p">);</span>
+<span class="n">maxerr</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">relerr</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">maxerrm</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">relerrm</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="n">N</span>
+<span class="w">   </span><span class="n">A</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">rand</span><span class="p">(</span><span class="n">sizes</span><span class="p">(</span><span class="nb">i</span><span class="p">),</span><span class="n">sizes</span><span class="p">(</span><span class="nb">i</span><span class="p">));</span>
+<span class="w">   </span><span class="p">[</span><span class="n">L</span><span class="p">,</span><span class="n">U</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">doolittlelu</span><span class="p">(</span><span class="n">A</span><span class="p">);</span>
+<span class="w">   </span><span class="p">[</span><span class="n">Lm</span><span class="p">,</span><span class="n">Um</span><span class="p">,</span><span class="n">P</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ludecomp</span><span class="p">(</span><span class="n">A</span><span class="p">);</span>
+<span class="w">   </span><span class="n">normA</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">norm</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+<span class="w">   </span><span class="n">maxerr</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">norm</span><span class="p">(</span><span class="n">A</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">L</span><span class="o">*</span><span class="n">U</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+<span class="w">   </span><span class="n">relerr</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">maxerr</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="o">/</span><span class="n">normA</span><span class="p">;</span>
+<span class="w">   </span><span class="n">maxerrm</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">norm</span><span class="p">(</span><span class="n">P</span><span class="o">*</span><span class="n">A</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Lm</span><span class="o">*</span><span class="n">Um</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+<span class="w">   </span><span class="n">relerrm</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">maxerrm</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="o">/</span><span class="n">normA</span><span class="p">;</span>
+<span class="w">   </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">&quot;Dimensione %d\n \t || A - LU || = %1.2e\n&quot;</span><span class="p">,</span><span class="n">sizes</span><span class="p">(</span><span class="nb">i</span><span class="p">),</span><span class="n">maxerr</span><span class="p">(</span><span class="nb">i</span><span class="p">));</span>
+<span class="w">   </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">&quot;\t || A - LU ||/||A|| = %1.2e\n&quot;</span><span class="p">,</span><span class="n">relerr</span><span class="p">(</span><span class="nb">i</span><span class="p">));</span>
+<span class="w">   </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">&quot;\t || P*A - LU ||/||A|| = %1.2e\n&quot;</span><span class="p">,</span><span class="n">maxerrm</span><span class="p">(</span><span class="nb">i</span><span class="p">));</span>
+<span class="w">   </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">&quot;\t || P*A - LU ||/||A|| = %1.2e\n&quot;</span><span class="p">,</span><span class="n">relerrm</span><span class="p">(</span><span class="nb">i</span><span class="p">));</span>
+<span class="k">end</span>
 
-<span class="nb">figure</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
-<span class="nb">loglog</span><span class="p">(</span><span class="n">sizes</span><span class="p">,</span><span class="n">maxerr</span><span class="p">,</span><span class="s">&#39;o-&#39;</span><span class="p">,</span><span class="n">sizes</span><span class="p">,</span><span class="n">relerr</span><span class="p">,</span><span class="s">&#39;x-&#39;</span><span class="p">,</span><span class="k">...</span><span class="w"></span>
-<span class="w">    </span><span class="n">sizes</span><span class="p">,</span><span class="n">maxerrm</span><span class="p">,</span><span class="s">&#39;o-&#39;</span><span class="p">,</span><span class="n">sizes</span><span class="p">,</span><span class="n">relerrm</span><span class="p">,</span><span class="s">&#39;x-&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
-<span class="nb">xlabel</span><span class="p">(</span><span class="s">&#39;Dimensione&#39;</span><span class="p">);</span><span class="w"></span>
-<span class="nb">legend</span><span class="p">({</span><span class="s">&#39;Errore Assoluto&#39;</span><span class="p">,</span><span class="s">&#39;Errore Relativo&#39;</span><span class="p">,</span><span class="k">...</span><span class="w"></span>
-<span class="w">    </span><span class="s">&#39;Errore Assoluto (Pivoting)&#39;</span><span class="p">,</span><span class="s">&#39;Errore Relativo (Pivoting)&#39;</span><span class="p">},</span><span class="k">...</span><span class="w"></span>
-<span class="w">    </span><span class="s">&#39;Location&#39;</span><span class="p">,</span><span class="s">&#39;best&#39;</span><span class="p">,</span><span class="s">&#39;FontSize&#39;</span><span class="p">,</span><span class="mi">14</span><span class="p">);</span><span class="w"></span>
+<span class="nb">figure</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">loglog</span><span class="p">(</span><span class="n">sizes</span><span class="p">,</span><span class="n">maxerr</span><span class="p">,</span><span class="s">&#39;o-&#39;</span><span class="p">,</span><span class="n">sizes</span><span class="p">,</span><span class="n">relerr</span><span class="p">,</span><span class="s">&#39;x-&#39;</span><span class="p">,</span><span class="k">...</span>
+<span class="w">    </span><span class="n">sizes</span><span class="p">,</span><span class="n">maxerrm</span><span class="p">,</span><span class="s">&#39;o-&#39;</span><span class="p">,</span><span class="n">sizes</span><span class="p">,</span><span class="n">relerrm</span><span class="p">,</span><span class="s">&#39;x-&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+<span class="nb">xlabel</span><span class="p">(</span><span class="s">&#39;Dimensione&#39;</span><span class="p">);</span>
+<span class="nb">legend</span><span class="p">({</span><span class="s">&#39;Errore Assoluto&#39;</span><span class="p">,</span><span class="s">&#39;Errore Relativo&#39;</span><span class="p">,</span><span class="k">...</span>
+<span class="w">    </span><span class="s">&#39;Errore Assoluto (Pivoting)&#39;</span><span class="p">,</span><span class="s">&#39;Errore Relativo (Pivoting)&#39;</span><span class="p">},</span><span class="k">...</span>
+<span class="w">    </span><span class="s">&#39;Location&#39;</span><span class="p">,</span><span class="s">&#39;best&#39;</span><span class="p">,</span><span class="s">&#39;FontSize&#39;</span><span class="p">,</span><span class="mi">14</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Con questa esecuzione possiamo osservare che abbiamo mantenuto un errore
@@ -827,14 +933,14 @@ l’ordinamento di partenza.</p>
 <figure class="align-default" id="lusipivoting">
 <img alt="_images/lusipivoting.png" src="_images/lusipivoting.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 14 </span><span class="caption-text">Errori assoluti e relativi tra una matrice <span class="math notranslate nohighlight">\(A\)</span> ad entrate casuali
+<p><span class="caption-number">Fig. 6 </span><span class="caption-text">Errori assoluti e relativi tra una matrice <span class="math notranslate nohighlight">\(A\)</span> ad entrate casuali
 uniformemente distribuite in <span class="math notranslate nohighlight">\([0,1]\)</span> e la relativa fattorizzazione <span class="math notranslate nohighlight">\(LU\)</span>
-calcolata <strong>senza</strong> e <strong>con</strong> pivoting.</span><a class="headerlink" href="#lusipivoting" title="Link a questa immagine">#</a></p>
+calcolata <strong>senza</strong> e <strong>con</strong> pivoting.</span><a class="headerlink" href="#lusipivoting" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="calcolo-del-determinante">
-<h3>Calcolo del determinante<a class="headerlink" href="#calcolo-del-determinante" title="Link a questa intestazione">#</a></h3>
+<h3>Calcolo del determinante<a class="headerlink" href="#calcolo-del-determinante" title="Link to this heading">#</a></h3>
 <p>Dopo aver calcolato la fattorizzazione <span class="math notranslate nohighlight">\(LU\)</span> di una matrice <span class="math notranslate nohighlight">\(A\)</span> è possibile
 utilizzarla anche per calcolare il determinante della matrice <span class="math notranslate nohighlight">\(A\)</span>. Si può fare
 sfruttando il <strong>teorema di Binet</strong> che ricordiamo collega il prodotto fra
@@ -848,17 +954,17 @@ matrici quadrate con il determinante:</p>
 <div class="math notranslate nohighlight">
 \[\det(A) = \det(LU) = \det(L)\det(U) = \prod_{i=1}^{n} l_{ii} \prod_{i=1}^n u_{ii} = 1 \prod_{i=1}^n u_{ii} = \prod_{i=1}^n u_{ii}.\]</div>
 <p>Che possiamo riportare facilmente su MATLAB come:</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span>res<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">ludet</span><span class="p">(</span>A<span class="p">)</span><span class="w"></span>
-<span class="c">%%LUDET Calcola il determinante della matrice A sfruttando la sua fattorizzazione</span><span class="w"></span>
-<span class="c">%LU in forma di Doolittle e senza pivoting.</span><span class="w"></span>
-<span class="p">[</span><span class="o">~</span><span class="p">,</span><span class="n">U</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">doolittlelu</span><span class="p">(</span><span class="n">A</span><span class="p">);</span><span class="w"></span>
-<span class="n">res</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">prod</span><span class="p">(</span><span class="nb">diag</span><span class="p">(</span><span class="n">U</span><span class="p">));</span><span class="w"></span>
-<span class="k">end</span><span class="w"></span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span>res<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">ludet</span><span class="p">(</span>A<span class="p">)</span>
+<span class="c">%%LUDET Calcola il determinante della matrice A sfruttando la sua fattorizzazione</span>
+<span class="c">%LU in forma di Doolittle e senza pivoting.</span>
+<span class="p">[</span><span class="o">~</span><span class="p">,</span><span class="n">U</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">doolittlelu</span><span class="p">(</span><span class="n">A</span><span class="p">);</span>
+<span class="n">res</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">prod</span><span class="p">(</span><span class="nb">diag</span><span class="p">(</span><span class="n">U</span><span class="p">));</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 <p>e testare rapidamente con:</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">pascal</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
-<span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;Errore relativo: %1.2e\n&#39;</span><span class="p">,</span><span class="nb">abs</span><span class="p">(</span><span class="n">ludet</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">det</span><span class="p">(</span><span class="n">A</span><span class="p">))</span><span class="o">/</span><span class="nb">abs</span><span class="p">(</span><span class="nb">det</span><span class="p">(</span><span class="n">A</span><span class="p">)));</span><span class="w"></span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">pascal</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s">&#39;Errore relativo: %1.2e\n&#39;</span><span class="p">,</span><span class="nb">abs</span><span class="p">(</span><span class="n">ludet</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">det</span><span class="p">(</span><span class="n">A</span><span class="p">))</span><span class="o">/</span><span class="nb">abs</span><span class="p">(</span><span class="nb">det</span><span class="p">(</span><span class="n">A</span><span class="p">)));</span>
 </pre></div>
 </div>
 <p>che ci dovrebbe restituire un errore relativo, rispetto alla funzione <code class="docutils literal notranslate"><span class="pre">det</span></code>
@@ -871,36 +977,36 @@ scambi di righe effettuati.</p>
 </section>
 </section>
 <section id="esercizi">
-<h2>Esercizi<a class="headerlink" href="#esercizi" title="Link a questa intestazione">#</a></h2>
+<h2>Esercizi<a class="headerlink" href="#esercizi" title="Link to this heading">#</a></h2>
 <p>Consideriamo alcune applicazioni <em>ingegneristiche</em> del problema calcolare le
-soluzione di un sistema <span id="id1">[<a class="reference internal" href="#id10" title="Jaan Kiusalaas. Numerical Methods in Engineering with MATLAB®. Cambridge University Press, 3 edition, 2015. doi:10.1017/CBO9781316341599.">Kiu15</a>]</span>.</p>
+soluzione di un sistema <span id="id1">[<a class="reference internal" href="laboratorio4.html#id10" title="Jaan Kiusalaas. Numerical Methods in Engineering with MATLAB®. Cambridge University Press, 3 edition, 2015. doi:10.1017/CBO9781316341599.">Kiu15</a>]</span>.</p>
 <div class="admonition-esercizio admonition">
 <p class="admonition-title">Esercizio</p>
 <p>La formulazione per gli spostamenti di una trave reticolare piana è simile a
 quella di un sistema di masse e molle. Le differenze sono che</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>i termini di rigidità sono dati da <span class="math notranslate nohighlight">\(k_{i} = (E A/L)_ {i}\)</span>, dove <span class="math notranslate nohighlight">\(E\)</span> è il modulo
 di elasticità, <span class="math notranslate nohighlight">\(A\)</span> rappresenta l’area della sezione di taglio e <span class="math notranslate nohighlight">\(L\)</span> è la
 lunghezza dell’elemento;</p></li>
 <li><p>ci sono due componenti dello scostamento in ogni punto di giuntura.</p></li>
 </ol>
 <p>Per la trave reticolare in figura:</p>
-<figure class="align-default" id="id13">
+<figure class="align-default" id="id2">
 <img alt="_images/planetruss.png" src="_images/planetruss.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 15 </span><span class="caption-text">Profilo di un elemento della trave reticolare piana.</span><a class="headerlink" href="#id13" title="Link a questa immagine">#</a></p>
+<p><span class="caption-number">Fig. 7 </span><span class="caption-text">Profilo di un elemento della trave reticolare piana.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>si ottiene quindi il seguente sistema di equazioni lineari</p>
 <div class="math notranslate nohighlight">
 \[K \mathbf{u} = \mathbf{p}\]</div>
 <p>dove</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">K</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mf">27.58</span><span class="w">  </span><span class="mf">7.004</span><span class="w"> </span><span class="o">-</span><span class="mf">7.004</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
-<span class="w">     </span><span class="mf">7.004</span><span class="w"> </span><span class="mf">29.57</span><span class="w">  </span><span class="o">-</span><span class="mf">5.253</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">-</span><span class="mf">24.32</span><span class="w"></span>
-<span class="w">    </span><span class="o">-</span><span class="mf">7.004</span><span class="w"> </span><span class="o">-</span><span class="mf">5.253</span><span class="w"> </span><span class="mf">29.57</span><span class="w">  </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
-<span class="w">    </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">27.58</span><span class="w"> </span><span class="o">-</span><span class="mf">7.004</span><span class="w"></span>
-<span class="w">    </span><span class="mi">0</span><span class="w"> </span><span class="o">-</span><span class="mf">24.32</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">-</span><span class="mf">7.004</span><span class="w"> </span><span class="mf">29.57</span><span class="p">];</span><span class="w"></span>
-<span class="n">p</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">-</span><span class="mi">45</span><span class="p">]</span><span class="o">&#39;</span><span class="p">;</span><span class="w"> </span><span class="c">% kN</span><span class="w"></span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">K</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mf">27.58</span><span class="w">  </span><span class="mf">7.004</span><span class="w"> </span><span class="o">-</span><span class="mf">7.004</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">     </span><span class="mf">7.004</span><span class="w"> </span><span class="mf">29.57</span><span class="w">  </span><span class="o">-</span><span class="mf">5.253</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">-</span><span class="mf">24.32</span>
+<span class="w">    </span><span class="o">-</span><span class="mf">7.004</span><span class="w"> </span><span class="o">-</span><span class="mf">5.253</span><span class="w"> </span><span class="mf">29.57</span><span class="w">  </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">27.58</span><span class="w"> </span><span class="o">-</span><span class="mf">7.004</span>
+<span class="w">    </span><span class="mi">0</span><span class="w"> </span><span class="o">-</span><span class="mf">24.32</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">-</span><span class="mf">7.004</span><span class="w"> </span><span class="mf">29.57</span><span class="p">];</span>
+<span class="n">p</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">-</span><span class="mi">45</span><span class="p">]</span><span class="o">&#39;</span><span class="p">;</span><span class="w"> </span><span class="c">% kN</span>
 </pre></div>
 </div>
 <p>si determinino tutti gli scostamenti <span class="math notranslate nohighlight">\(u_i\)</span> per il sistema.</p>
@@ -925,13 +1031,13 @@ i più grandi valori di <span class="math notranslate nohighlight">\(n\)</span> 
 <figure class="align-default" id="springlsys">
 <img alt="_images/springlsys.png" src="_images/springlsys.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 16 </span><span class="caption-text">Sistema lineare di molle.</span><a class="headerlink" href="#springlsys" title="Link a questa immagine">#</a></p>
+<p><span class="caption-number">Fig. 8 </span><span class="caption-text">Sistema lineare di molle.</span><a class="headerlink" href="#springlsys" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </aside>
 <div class="admonition-esercizio admonition">
 <p class="admonition-title">Esercizio</p>
-<p>Il sistema mostrato in <a class="reference internal" href="#springlsys"><span class="std std-numref">Fig. 16</span></a> è costituito da <span class="math notranslate nohighlight">\(n\)</span> molle lineari che supportano
+<p>Il sistema mostrato in <a class="reference internal" href="#springlsys"><span class="std std-numref">Fig. 8</span></a> è costituito da <span class="math notranslate nohighlight">\(n\)</span> molle lineari che supportano
 <span class="math notranslate nohighlight">\(n\)</span> masse. Le costanti elastiche delle molle sono indicate con <span class="math notranslate nohighlight">\(k_i\)</span>, i pesi
 delle masse sono <span class="math notranslate nohighlight">\(W_i\)</span>, e <span class="math notranslate nohighlight">\(x_i\)</span> sono gli spostamenti delle masse (misurati dalle
 posizioni in cui le molle sono indeformate). La cosiddetta formulazione dello
@@ -950,72 +1056,83 @@ sostituendo le forze elastiche con <span class="math notranslate nohighlight">\(
 k_1 = k_2 = k_3 = 10\, \text{N}/\text{mm}\;\; k_4 = k_5 = 5\, \text{N}/\text{mm}\\ W_1 = W_3 = W_5 = 100\,\text{N},\qquad W_2 = W_4 = 50\,\text{N}.
 \end{split}\end{split}\]</div>
 </div>
-</section>
-<section id="le-funzioni-di-matlab">
-<h2>Le funzioni di MATLAB<a class="headerlink" href="#le-funzioni-di-matlab" title="Link a questa intestazione">#</a></h2>
-<p>MATLAB implementa ovviamente una sua versione della fattorizzazione <span class="math notranslate nohighlight">\(LU\)</span> ed un
-suo algoritmo per la soluzione dei sistemi lineari.</p>
-<p>Per la fattorizzazione il comando ha il medesimo nome <code class="docutils literal notranslate"><span class="pre">lu</span></code> e permette una certa
-flessibilità.</p>
+<div class="admonition-esercizio-risoluzione-di-un-problema-termico-con-fem admonition">
+<p class="admonition-title">Esercizio: Risoluzione di un Problema Termico con FEM</p>
+<p>Con i seguenti passaggi possiamo risolvere un problema termico (stazionario) utilizzando
+il metodo degli elementi finiti (FEM). Non ci soffermeremo sugli aspetti che pertengono la
+discretizzazione, ma su quelli che hanno a che fare con la soluzione del sistema
+lineare risultante.</p>
+<p><strong>Passo 1: Creazione del modello</strong>
+Inizia creando un modello FEM per un’analisi termica stazionaria. Utilizza la geometria definita da <code class="docutils literal notranslate"><span class="pre">crackg</span></code>.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">femodel</span><span class="p">(</span><span class="n">AnalysisType</span><span class="p">=</span><span class="s">&quot;thermalSteady&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">  </span><span class="n">Geometry</span><span class="p">=@</span><span class="n">crackg</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Passo 2: Visualizzazione della geometria</strong>
+Visualizza la geometria del modello con le etichette dei bordi attive.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">pdegplot</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="n">EdgeLabels</span><span class="p">=</span><span class="s">&quot;on&quot;</span><span class="p">);</span>
+<span class="n">axis</span><span class="w"> </span><span class="s">equal</span>
+</pre></div>
+</div>
+<p><strong>Passo 3: Definizione delle proprietà del materiale</strong>
+Definisci le proprietà del materiale, inclusa la conducibilità termica, la densità di massa e il calore specifico.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="p">.</span><span class="n">MaterialProperties</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">...</span>
+<span class="w">  </span><span class="n">materialProperties</span><span class="p">(</span><span class="n">ThermalConductivity</span><span class="p">=</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">  </span><span class="n">MassDensity</span><span class="p">=</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">  </span><span class="n">SpecificHeat</span><span class="p">=</span><span class="mi">1</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Passo 4: Impostazione delle condizioni al contorno</strong>
+Imposta le condizioni al contorno per il modello. Ad esempio, imposta la temperatura su un bordo specifico e un carico di calore su un altro.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="p">.</span><span class="n">EdgeBC</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">edgeBC</span><span class="p">(</span><span class="n">Temperature</span><span class="p">=</span><span class="mi">100</span><span class="p">);</span>
+<span class="n">model</span><span class="p">.</span><span class="n">EdgeLoad</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">edgeLoad</span><span class="p">(</span><span class="n">Heat</span><span class="p">=</span><span class="o">-</span><span class="mi">10</span><span class="p">);</span>
+<span class="n">model</span><span class="p">.</span><span class="n">FaceIC</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">faceIC</span><span class="p">(</span><span class="n">Temperature</span><span class="p">=</span><span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Passo 5: Generazione della mesh</strong>
+Genera la mesh per il modello.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">generateMesh</span><span class="p">(</span><span class="n">model</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Passo 6: Visualizzazione della mesh</strong>
+Visualizza la mesh generata con elementi triangolari quadratici.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">figure</span>
+<span class="n">pdemesh</span><span class="p">(</span><span class="n">model</span><span class="p">);</span>
+<span class="nb">title</span><span class="p">(</span><span class="s">&quot;Mesh with Quadratic Triangular Elements&quot;</span><span class="p">)</span>
+<span class="nb">axis</span><span class="w"> </span><span class="n">equal</span>
+</pre></div>
+</div>
+<p><strong>Passo 7: Risoluzione del modello</strong>
+Risolvi il modello per ottenere i risultati.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">%results = solve(model);</span>
+<span class="n">FEMs</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">assembleFEMatrices</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="s">&quot;stiff-spring&quot;</span><span class="p">);</span>
+<span class="n">us</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">FEMs</span><span class="p">.</span><span class="n">Ks</span><span class="o">\</span><span class="n">FEMs</span><span class="p">.</span><span class="n">Fs</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>Passo 8: Visualizzazione della soluzione</strong>
+Visualizza la soluzione PDE sulla mesh utilizzando i valori ottenuti.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">pdeplot</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">Mesh</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;XYData&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">us</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;ColorMap&#39;</span><span class="p">,</span><span class="s">&#39;hot&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Mesh&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;on&#39;</span><span class="p">);</span>
+<span class="nb">colorbar</span><span class="p">;</span>
+<span class="nb">xlabel</span><span class="p">(</span><span class="s">&#39;X-axis&#39;</span><span class="p">);</span>
+<span class="nb">ylabel</span><span class="p">(</span><span class="s">&#39;Y-axis&#39;</span><span class="p">);</span>
+<span class="nb">title</span><span class="p">(</span><span class="s">&#39;PDE Solution Visualization&#39;</span><span class="p">);</span>
+<span class="n">axis</span><span class="w"> </span><span class="s">equal</span>
+</pre></div>
+</div>
+<p><strong>Sperimentazione</strong></p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">[L,U]</span> <span class="pre">=</span> <span class="pre">lu(A)</span></code>, restituisce una matrice triangolare superiore in <span class="math notranslate nohighlight">\(U\)</span> e
-una matrice triangolare inferiore <strong>permutata</strong> in <span class="math notranslate nohighlight">\(L\)</span>, tale che <span class="math notranslate nohighlight">\(A = LU\)</span>.
-La matrice di input <span class="math notranslate nohighlight">\(A\)</span> può essere <em>densa</em> o <em>sparsa</em>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">[L,U,P]</span> <span class="pre">=</span> <span class="pre">lu(A)</span></code>, restituisce una matrice triangolare inferiore <span class="math notranslate nohighlight">\(L\)</span> con
-diagonale di uno, matrice triangolare superiore <span class="math notranslate nohighlight">\(U\)</span> ed una matrice di
-permutazione <span class="math notranslate nohighlight">\(P\)</span> tale che <span class="math notranslate nohighlight">\(PA = LU\)</span>. Con un argomento di input <em>opzionale</em> è
-possibile scegliere il formato della <span class="math notranslate nohighlight">\(P\)</span>, ovvero se chiama <code class="docutils literal notranslate"><span class="pre">lu(A,</span> <span class="pre">outputForm)</span></code>
-con <code class="docutils literal notranslate"><span class="pre">outputForm</span></code> uguale a <code class="docutils literal notranslate"><span class="pre">'matrix'</span></code> (default) <span class="math notranslate nohighlight">\(P\)</span> è memorizzata come una matrice,
-se si chiama con l’opzione <code class="docutils literal notranslate"><span class="pre">'vector'</span></code> allora <span class="math notranslate nohighlight">\(P\)</span> è un vettore tale che <code class="docutils literal notranslate"><span class="pre">A(P,:)</span> <span class="pre">=</span> <span class="pre">L*U</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">[L,U,P,Q]</span> <span class="pre">=</span> <span class="pre">lu(A)</span></code> restituisce una matrice triangolare inferiore <span class="math notranslate nohighlight">\(L\)</span> con
-diagonale di uno, matrice triangolare superiore <span class="math notranslate nohighlight">\(U\)</span> e due matrici di
-permutazione <span class="math notranslate nohighlight">\(P\)</span> e <span class="math notranslate nohighlight">\(Q\)</span> tali che <span class="math notranslate nohighlight">\(PAQ = LU\)</span>. Per una matrice sparsa questa opzione
-è significativamente più efficiente della versione con tre output.</p></li>
+<li><p>Si verifichi la dimensione del sistema lineare con il comando <code class="docutils literal notranslate"><span class="pre">size</span></code> e si visualizzi la matrice con il comando <code class="docutils literal notranslate"><span class="pre">spy</span></code>: cosa si osserva?</p></li>
+<li><p>Si può modificare la finezza della discretizzazione modificando il comando: <code class="docutils literal notranslate"><span class="pre">model</span> <span class="pre">=</span> <span class="pre">generateMesh(model,'Hmax',0.02);</span></code>, dove <code class="docutils literal notranslate"><span class="pre">Hmax</span></code> rappresenta
+la dimensione massima del lato dei triangoli; si provi a verificare la variazione del costo al rifinire delle mesh.</p></li>
+<li><p>Si faccia sperimentazione usando direttamente il comando <code class="docutils literal notranslate"><span class="pre">\</span></code>, oppure le varianti del comando <code class="docutils literal notranslate"><span class="pre">lu</span></code> illustrate nella teoria.</p></li>
 </ul>
-<div class="proof definition admonition" id="definition-0">
-<p class="admonition-title"><span class="caption-number">Definition 6 </span></p>
-<section class="definition-content" id="proof-content">
-<p>Una <strong>matrice sparsa</strong> o <strong>array sparso</strong> è una matrice in cui la maggior parte
-degli elementi è zero. Per dare una definizione rigorosa riguardo alla
-proporzione di elementi di valore zero affinché una matrice sia qualificata
-come sparsa è tipicamente necessario considerare la sorgente del problema che la
-ha generata, e.g., la discretizzazione di una PDE. Un <strong>criterio comune</strong> è che
-il numero di elementi diversi da zero sia approssimativamente uguale al numero
-di righe o colonne.</p>
-<p>Al contrario, se la maggior parte degli elementi è diversa da zero, la matrice è
-considerata densa.</p>
-</section>
-</div><p>Informazioni sulle matrici sparse possono essere recuperate dal manuale di
-MATLAB (<code class="docutils literal notranslate"><span class="pre">help</span> <span class="pre">sparse</span></code>). Non scenderemo qui in ulteriori dettagli.</p>
-<p>La funzione per <strong>risolvere i sistemi lineari</strong> è la funzione <code class="docutils literal notranslate"><span class="pre">mldivide</span></code> <code class="docutils literal notranslate"><span class="pre">\</span></code>.
-Si tratta di una delle funzioni più elaborate di MATLAB, il comando <code class="docutils literal notranslate"><span class="pre">A\B</span></code> è la
-<em>divisione matriciale</em> di <code class="docutils literal notranslate"><span class="pre">A</span></code> in <code class="docutils literal notranslate"><span class="pre">B</span></code>, moralmente è la stessa operazione di
-<code class="docutils literal notranslate"><span class="pre">INV(A)*B</span></code>, ma è <strong>calcolata in modo diverso</strong>, <strong>stabile</strong> ed <strong>efficiente</strong>.</p>
-<p>Se <span class="math notranslate nohighlight">\(A\)</span> è una matrice <span class="math notranslate nohighlight">\(N\)</span> per <span class="math notranslate nohighlight">\(N\)</span> e <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> è un vettore colonna con <span class="math notranslate nohighlight">\(N\)</span>
-componenti, o una matrice con più di queste colonne, allora <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">A\b</span></code> è la
-soluzione dell’equazione <code class="docutils literal notranslate"><span class="pre">A*X</span> <span class="pre">=</span> <span class="pre">B</span></code>.</p>
-<div class="admonition warning">
-<p class="admonition-title">Avvertimento</p>
-<p>Viene stampato un messaggio di avviso se A è scalata male o malcondizionata, ad
-<strong>esempio</strong></p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">hilb</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span><span class="o">\</span><span class="nb">ones</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+## Bibliografia
+
+ ```{bibliography}
+ :filter: docname in docnames
 </pre></div>
-</div>
-<p>restituisce</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">Warning</span><span class="p">:</span> <span class="n">Matrix</span> <span class="ow">is</span> <span class="n">close</span> <span class="n">to</span> <span class="n">singular</span> <span class="ow">or</span> <span class="n">badly</span> <span class="n">scaled</span><span class="o">.</span> <span class="n">Results</span> <span class="n">may</span> <span class="n">be</span> <span class="n">inaccurate</span><span class="o">.</span>
-<span class="n">RCOND</span> <span class="o">=</span>  <span class="mf">5.460912e-19</span><span class="o">.</span>
-</pre></div>
-</div>
-</div>
-</section>
-<section id="bibliografia">
-<h2>Bibliografia<a class="headerlink" href="#bibliografia" title="Link a questa intestazione">#</a></h2>
-<div class="docutils container" id="id2">
-<dl class="citation">
-<dt class="label" id="id10"><span class="brackets"><a class="fn-backref" href="#id1">Kiu15</a></span></dt>
-<dd><p>Jaan Kiusalaas. <em>Numerical Methods in Engineering with MATLAB®</em>. Cambridge University Press, 3 edition, 2015. <a class="reference external" href="https://doi.org/10.1017/CBO9781316341599">doi:10.1017/CBO9781316341599</a>.</p>
-</dd>
-</dl>
 </div>
 </section>
 </section>
@@ -1032,7 +1149,7 @@ soluzione dell’equazione <code class="docutils literal notranslate"><span clas
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./."
         },
         predefinedOutput: true
@@ -1040,50 +1157,114 @@ soluzione dell’equazione <code class="docutils literal notranslate"><span clas
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="laboratorio5.html" title="precedente pagina">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">precedente</p>
-            <p class="prev-next-title">Laboratorio 5 : Soluzione di Sistemi Triangolari</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="laboratorio7.html" title="successivo pagina">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">successivo</p>
-        <p class="prev-next-title">Laboratorio 7 : Metodi Stazionari per Sistemi Lineari</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By P. Boito, F. Durastante<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
-    
-</div>
 
-
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="laboratorio5.html"
+       title="pagina precedente">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">precedente</p>
+        <p class="prev-next-title">Laboratorio 3 : Soluzione di Sistemi Triangolari</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="laboratorio7.html"
+       title="pagina seguente">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">successivo</p>
+        <p class="prev-next-title">Laboratorio 5 : Metodi Stazionari per Sistemi Lineari</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenuti
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#i-comandi-per-le-fattorizzazioni-in-matlab">I comandi per le fattorizzazioni in Matlab</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-del-comando-lu-in-matlab">Uso del comando <code class="docutils literal notranslate"><span class="pre">lu</span></code> in MATLAB</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fattorizzazione-per-matrici-sparse">Fattorizzazione per matrici sparse</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#soluzione-diretta-del-sistema-senza-passare-per-la-fattorizzazione">Soluzione diretta del sistema senza passare per la fattorizzazione</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementare-la-fattorizzazione-lu-facoltativo">Implementare la fattorizzazione LU (facoltativo)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#la-fattorizzazione-con-pivoting">La fattorizzazione con <em>pivoting</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calcolo-del-determinante">Calcolo del determinante</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esercizi">Esercizi</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Di P. Boito, F. Durastante
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
