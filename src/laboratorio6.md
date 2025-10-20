@@ -1,4 +1,4 @@
-# Laboratorio 6 : L'Eliminazione di Gauss il Metodo LU
+# Laboratorio 4 : L'Eliminazione di Gauss il Metodo LU
 
 L'**eliminazione gaussiana** (Carl Friedrich Gauss, 1777-1855), noto anche come
 algoritmo di riduzione per le righe, è un algoritmo per risolvere sistemi
@@ -37,7 +37,7 @@ Come illustra questo esempio, `condest` non restituisce necessariamente lo
 stesso risultato ad ogni chiamata, poiché fa uso della funzione `rand` al suo
 interno (si tratta di uno stimatore stocastico).
 
-## Implementare la fattorizzazione LU
+## I comandi per le fattorizzazioni in Matlab
 
 Se $A$ è una matrice $n$ per $n$ su un campo $\mathbb{K}$ ($A  \in M_n(\mathbb{K})$),
 allora $A$ si dice "avere una fattorizzazione $LU$" se esiste una matrice
@@ -111,6 +111,150 @@ necessario porre determinati vincoli su $L$ o $U$ ({numref}`tipidilu`).
   - $U = L^T$
 ```
 :::
+
+### Uso del comando `lu` in MATLAB
+
+MATLAB fornisce il comando `lu` per calcolare la fattorizzazione $LU$ di una matrice. Questa funzione è ottimizzata, stabile numericamente e offre diverse modalità d'uso a seconda delle esigenze.
+
+La forma più semplice del comando è:
+```matlab
+[L,U] = lu(A)
+```
+che restituisce una matrice triangolare superiore `U` e una matrice triangolare inferiore **permutata** `L` tali che `A = L*U`. Questa forma è utile per computazioni rapide ma non fornisce esplicitamente la matrice di permutazione.
+
+Per ottenere la classica fattorizzazione $PA = LU$, si utilizza:
+```matlab
+[L,U,P] = lu(A)
+```
+Questa forma restituisce:
+- `L`: matrice triangolare inferiore con diagonale unitaria
+- `U`: matrice triangolare superiore  
+- `P`: matrice di permutazione tale che `P*A = L*U`
+
+La matrice `P` può essere restituita in due formati:
+```matlab
+[L,U,P] = lu(A,'matrix')  % P è una matrice (default)
+[L,U,P] = lu(A,'vector')  % P è un vettore di indici
+```
+Nel formato vettoriale, `P` contiene gli indici di permutazione tali che `A(P,:) = L*U`.
+
+```matlab
+A = [3 -1  4;
+  -2  0  5;
+   7  2 -2];
+   
+% Fattorizzazione base
+[L,U] = lu(A);
+norm(A - L*U)  % Verifica: dovrebbe essere piccolo
+
+% Con matrice di permutazione
+[L,U,P] = lu(A);
+norm(P*A - L*U)  % Verifica: dovrebbe essere ~0
+
+% Formato vettoriale
+[L,U,p] = lu(A,'vector');
+norm(A(p,:) - L*U)  % Equivalente alla forma matriciale
+```
+
+Il comando `lu` di MATLAB implementa automaticamente:
+- **Pivoting parziale** per garantire stabilità numerica
+- **Ottimizzazioni** per matrici dense e sparse
+- **Scaling** automatico quando necessario
+- **Gestione efficiente** della memoria
+
+Per questa ragione, è generalmente preferibile usare `lu` piuttosto che implementazioni personalizzate, a meno che non si abbiano esigenze didattiche o di ricerca particolari.
+
+#### Fattorizzazione per matrici sparse
+
+```{prf:definition}
+Una **matrice sparsa** o **array sparso** è una matrice in cui la maggior parte
+degli elementi è zero. Per dare una definizione rigorosa riguardo alla
+proporzione di elementi di valore zero affinché una matrice sia qualificata
+come sparsa è tipicamente necessario considerare la sorgente del problema che la
+ha generata, e.g., la discretizzazione di una PDE. Un **criterio comune** è che
+il numero di elementi diversi da zero sia approssimativamente uguale al numero
+di righe o colonne.
+
+Al contrario, se la maggior parte degli elementi è diversa da zero, la matrice è
+considerata densa.
+```
+
+
+Per matrici sparse, MATLAB utilizza una struttura dati ottimizzata che memorizza solo gli elementi non nulli e le loro posizioni. Questo approccio permette di:
+- **Ridurre significativamente** l'uso di memoria
+- **Accelerare** le operazioni che coinvolgono molti zeri
+- **Gestire** matrici di dimensioni molto grandi che sarebbero impraticabili in formato denso
+
+```matlab
+% Esempio: matrice sparsa tridiagonale
+n = 1000;
+A_sparse = spdiags(ones(n,3)*[1 -2 1], -1:1, n, n);
+
+% Informazioni sulla sparsità
+fprintf('Elementi totali: %d\n', n^2);
+fprintf('Elementi non nulli: %d\n', nnz(A_sparse));
+fprintf('Percentuale di sparsità: %.2f%%\n', ...
+  100*(1 - nnz(A_sparse)/n^2));
+
+% Confronto di memoria
+whos A_sparse  % Mostra l'uso di memoria
+
+% Conversione da densa a sparsa e viceversa
+A_full = full(A_sparse);  % Converte in formato denso
+A_sp = sparse(A_full);    % Converte in formato sparso
+```
+
+:::{margin} Visualizzare una matrice sparsa.
+
+Il comando `spy` in MATLAB è utilizzato per visualizzare la struttura di una matrice sparsa. Mostra un grafico in cui ogni punto rappresenta un elemento non nullo della matrice, permettendo di avere una rapida comprensione della distribuzione degli elementi non nulli. La sintassi di base è:
+
+```matlab
+spy(A_sparse)
+```
+
+Dove `A_sparse` è la matrice sparsa che si desidera visualizzare. Questo comando è particolarmente utile per analizzare la sparsità e la struttura delle matrici in applicazioni ingegneristiche e scientifiche.
+
+:::
+Esempi comuni di matrici sparse di interesse ingegneristico includono:
+- **Matrici tridiagonali**: derivanti dalla discretizzazione di equazioni differenziali con il metodo delle differenze finite (es. problemi di conduzione termica, diffusione)
+- **Matrici a banda**: tipiche dell'analisi strutturale con elementi finiti per travi, telai e strutture reticolari
+- **Matrici di connettività**: rappresentanti reti elettriche, idrauliche o di trasporto mediante grafi
+- **Laplaciani discreti**: dalla discretizzazione di operatori differenziali in problemi di campo (elettromagnetismo, fluidodinamica)
+
+
+Per matrici sparse, MATLAB offre una versione più efficiente con doppio pivoting:
+```matlab
+[L,U,P,Q] = lu(A)
+```
+che calcola la fattorizzazione $PAQ = LU$, dove sia `P` che `Q` sono matrici di permutazione. Questa variante minimizza il *fill-in* (creazione di nuovi elementi non nulli) durante la fattorizzazione, rendendo il calcolo significativamente più efficiente per matrici sparse di grandi dimensioni.
+
+
+### Soluzione diretta del sistema senza passare per la fattorizzazione
+
+La funzione per **risolvere i sistemi lineari** è la funzione `mldivide` `\`.
+Si tratta di una delle funzioni più elaborate di MATLAB, il comando `A\B` è la
+*divisione matriciale* di `A` in `B`, moralmente è la stessa operazione di
+`INV(A)*B`, ma è **calcolata in modo diverso**, **stabile** ed **efficiente**.
+
+Se $A$ è una matrice $N$ per $N$ e $\mathbf{b}$ è un vettore colonna con $N$
+componenti, o una matrice con più di queste colonne, allora `X = A\b` è la
+soluzione dell'equazione `A*X = B`.
+
+:::{warning}
+Viene stampato un messaggio di avviso se A è scalata male o malcondizionata, ad
+**esempio**
+```matlab
+x = hilb(15)\ones(15,1);
+```
+restituisce
+```
+Warning: Matrix is close to singular or badly scaled. Results may be inaccurate.
+RCOND =  5.460912e-19.
+```
+:::
+
+### Implementare la fattorizzazione LU (facoltativo)
+
 Come primo esercizio implementeremo la fattorizzazione $LU$ nella forma di Doolittle,
 che è quella più strettamente legata all'algoritmo di eleminazione di Gauss che
 conoscete sin dal corso di *algebra lineare*.
@@ -520,64 +664,93 @@ k_1 = k_2 = k_3 = 10\, \text{N}/\text{mm}\;\; k_4 = k_5 = 5\, \text{N}/\text{mm}
 ```
 :::
 
-## Le funzioni di MATLAB
+::::{admonition} Esercizio: Risoluzione di un Problema Termico con FEM
+Con i seguenti passaggi possiamo risolvere un problema termico (stazionario) utilizzando 
+il metodo degli elementi finiti (FEM). Non ci soffermeremo sugli aspetti che pertengono la
+discretizzazione, ma su quelli che hanno a che fare con la soluzione del sistema
+lineare risultante.
 
-MATLAB implementa ovviamente una sua versione della fattorizzazione $LU$ ed un
-suo algoritmo per la soluzione dei sistemi lineari.
+**Passo 1: Creazione del modello**
+Inizia creando un modello FEM per un'analisi termica stazionaria. Utilizza la geometria definita da `crackg`.
 
-Per la fattorizzazione il comando ha il medesimo nome `lu` e permette una certa
-flessibilità.
-- `[L,U] = lu(A)`, restituisce una matrice triangolare superiore in $U$ e
-una matrice triangolare inferiore **permutata** in $L$, tale che $A = LU$.
-La matrice di input $A$ può essere *densa* o *sparsa*.
-- `[L,U,P] = lu(A)`, restituisce una matrice triangolare inferiore $L$ con
-diagonale di uno, matrice triangolare superiore $U$ ed una matrice di
-permutazione $P$ tale che $PA = LU$. Con un argomento di input *opzionale* è
-possibile scegliere il formato della $P$, ovvero se chiama `lu(A, outputForm)`
-con `outputForm` uguale a `'matrix'` (default) $P$ è memorizzata come una matrice,
-se si chiama con l'opzione `'vector'` allora $P$ è un vettore tale che `A(P,:) = L*U`.  
-- `[L,U,P,Q] = lu(A)` restituisce una matrice triangolare inferiore $L$ con
-diagonale di uno, matrice triangolare superiore $U$ e due matrici di
-permutazione $P$ e $Q$ tali che $PAQ = LU$. Per una matrice sparsa questa opzione
-è significativamente più efficiente della versione con tre output.
-
-```{prf:definition}
-Una **matrice sparsa** o **array sparso** è una matrice in cui la maggior parte
-degli elementi è zero. Per dare una definizione rigorosa riguardo alla
-proporzione di elementi di valore zero affinché una matrice sia qualificata
-come sparsa è tipicamente necessario considerare la sorgente del problema che la
-ha generata, e.g., la discretizzazione di una PDE. Un **criterio comune** è che
-il numero di elementi diversi da zero sia approssimativamente uguale al numero
-di righe o colonne.
-
-Al contrario, se la maggior parte degli elementi è diversa da zero, la matrice è
-considerata densa.
-```
-
-Informazioni sulle matrici sparse possono essere recuperate dal manuale di
-MATLAB (`help sparse`). Non scenderemo qui in ulteriori dettagli.
-
-La funzione per **risolvere i sistemi lineari** è la funzione `mldivide` `\`.
-Si tratta di una delle funzioni più elaborate di MATLAB, il comando `A\B` è la
-*divisione matriciale* di `A` in `B`, moralmente è la stessa operazione di
-`INV(A)*B`, ma è **calcolata in modo diverso**, **stabile** ed **efficiente**.
-
-Se $A$ è una matrice $N$ per $N$ e $\mathbf{b}$ è un vettore colonna con $N$
-componenti, o una matrice con più di queste colonne, allora `X = A\b` è la
-soluzione dell'equazione `A*X = B`.
-
-:::{warning}
-Viene stampato un messaggio di avviso se A è scalata male o malcondizionata, ad
-**esempio**
 ```matlab
-x = hilb(15)\ones(15,1);
+model = femodel(AnalysisType="thermalSteady", ...
+  Geometry=@crackg);
 ```
-restituisce
+
+**Passo 2: Visualizzazione della geometria**
+Visualizza la geometria del modello con le etichette dei bordi attive.
+
+```matlab
+pdegplot(model,EdgeLabels="on");
+axis equal
 ```
-Warning: Matrix is close to singular or badly scaled. Results may be inaccurate.
-RCOND =  5.460912e-19.
+
+**Passo 3: Definizione delle proprietà del materiale**
+Definisci le proprietà del materiale, inclusa la conducibilità termica, la densità di massa e il calore specifico.
+
+```matlab
+model.MaterialProperties = ...
+  materialProperties(ThermalConductivity=1, ...
+  MassDensity=1, ...
+  SpecificHeat=1);
 ```
-:::
+
+**Passo 4: Impostazione delle condizioni al contorno**
+Imposta le condizioni al contorno per il modello. Ad esempio, imposta la temperatura su un bordo specifico e un carico di calore su un altro.
+
+```matlab
+model.EdgeBC(6) = edgeBC(Temperature=100);
+model.EdgeLoad(1) = edgeLoad(Heat=-10);
+model.FaceIC = faceIC(Temperature=0);
+```
+
+**Passo 5: Generazione della mesh**
+Genera la mesh per il modello.
+
+```matlab
+model = generateMesh(model);
+```
+
+**Passo 6: Visualizzazione della mesh**
+Visualizza la mesh generata con elementi triangolari quadratici.
+
+```matlab
+figure
+pdemesh(model);
+title("Mesh with Quadratic Triangular Elements")
+axis equal
+```
+
+**Passo 7: Risoluzione del modello**
+Risolvi il modello per ottenere i risultati.
+
+```matlab
+%results = solve(model);
+FEMs = assembleFEMatrices(model,"stiff-spring");
+us = FEMs.Ks\FEMs.Fs;
+```
+
+**Passo 8: Visualizzazione della soluzione**
+Visualizza la soluzione PDE sulla mesh utilizzando i valori ottenuti.
+
+```matlab
+pdeplot(model.Mesh, 'XYData', us, 'ColorMap','hot', 'Mesh', 'on');
+colorbar;
+xlabel('X-axis');
+ylabel('Y-axis');
+title('PDE Solution Visualization');
+axis equal
+```
+
+**Sperimentazione**
+- Si verifichi la dimensione del sistema lineare con il comando `size` e si visualizzi la matrice con il comando `spy`: cosa si osserva?
+- Si può modificare la finezza della discretizzazione modificando il comando: `model = generateMesh(model,'Hmax',0.02);`, dove `Hmax` rappresenta
+la dimensione massima del lato dei triangoli; si provi a verificare la variazione del costo al rifinire delle mesh.
+- Si faccia sperimentazione usando direttamente il comando `\`, oppure le varianti del comando `lu` illustrate nella teoria.
+::::
+
+```
 
 ## Bibliografia
 
