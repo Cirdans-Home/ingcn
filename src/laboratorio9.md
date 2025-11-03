@@ -1,4 +1,4 @@
-# Laboratorio 9 : Metodi per la Soluzione di ODE
+# Laboratorio 8 : Metodi per la Soluzione di ODE
 
 In questo laboratorio ci vogliamo occupare di alcuni metodi per la
 soluzione di un'**equazione differenziale del primo ordine**, la cui forma

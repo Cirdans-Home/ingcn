@@ -1,4 +1,4 @@
-# Laboratorio 10 : Metodi di tipo Runge-Kutta
+# Laboratorio 9 : Metodi di tipo Runge-Kutta
 
 Come abbiamo visto nello scorso laboratorio i metodi di Eulero in avanti
 e all'indietro, ovvero, esplicito ed implicito, hanno un ordine di
