@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Laboratorio 8 : Metodi di Quadratura &#8212; Calcolo Numerico - Note ed Esercitazioni di Laboratorio</title>
+    <title>Laboratorio 7 : Metodi di Quadratura &#8212; Calcolo Numerico - Note ed Esercitazioni di Laboratorio</title>
   
   
   
@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -64,8 +64,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'laboratorio8';</script>
     <link rel="index" title="Indice" href="genindex.html" />
     <link rel="search" title="Cerca" href="search.html" />
-    <link rel="next" title="Laboratorio 9 : Metodi per la Soluzione di ODE" href="laboratorio9.html" />
-    <link rel="prev" title="Laboratorio 7 : Metodi Stazionari per Sistemi Lineari" href="laboratorio7.html" />
+    <link rel="next" title="Laboratorio 8 : Metodi per la Soluzione di ODE" href="laboratorio9.html" />
+    <link rel="prev" title="Laboratorio 6 : Il Metodo di Newton" href="laboratorio4.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="it"/>
   </head>
@@ -193,6 +193,8 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="laboratorio2.html">Laboratorio 2 : L’Aritmetica di Precisione Finita</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio5.html">Laboratorio 3 : Soluzione di Sistemi Triangolari</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio6.html">Laboratorio 4 : L’Eliminazione di Gauss il Metodo LU</a></li>
 <li class="toctree-l1"><a class="reference internal" href="eqnonlineari.html">Risoluzione numerica di equazioni nonlineari</a></li>
 
 
@@ -201,14 +203,12 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="laboratorio3.html">Laboratorio 3 : Il Metodo di Bisezione</a></li>
-<li class="toctree-l1"><a class="reference internal" href="laboratorio4.html">Laboratorio 4 : Il Metodo di Newton</a></li>
-<li class="toctree-l1"><a class="reference internal" href="laboratorio5.html">Laboratorio 5 : Soluzione di Sistemi Triangolari</a></li>
-<li class="toctree-l1"><a class="reference internal" href="laboratorio6.html">Laboratorio 6 : L’Eliminazione di Gauss il Metodo LU</a></li>
-<li class="toctree-l1"><a class="reference internal" href="laboratorio7.html">Laboratorio 7 : Metodi Stazionari per Sistemi Lineari</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Laboratorio 8 : Metodi di Quadratura</a></li>
-<li class="toctree-l1"><a class="reference internal" href="laboratorio9.html">Laboratorio 9 : Metodi per la Soluzione di ODE</a></li>
-<li class="toctree-l1"><a class="reference internal" href="laboratorio10.html">Laboratorio 10 : Metodi di tipo Runge-Kutta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio3.html">Laboratorio 5 : Il Metodo di Bisezione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio4.html">Laboratorio 6 : Il Metodo di Newton</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Laboratorio 7 : Metodi di Quadratura</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio9.html">Laboratorio 8 : Metodi per la Soluzione di ODE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio10.html">Laboratorio 9 : Metodi di tipo Runge-Kutta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio7.html">Laboratorio 10 : Metodi Stazionari per Sistemi Lineari</a></li>
 </ul>
 
     </div>
@@ -394,7 +394,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Laboratorio 8 : Metodi di Quadratura</h1>
+    <h1>Laboratorio 7 : Metodi di Quadratura</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -423,8 +423,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="laboratorio-8-metodi-di-quadratura">
-<h1>Laboratorio 8 : Metodi di Quadratura<a class="headerlink" href="#laboratorio-8-metodi-di-quadratura" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="laboratorio-7-metodi-di-quadratura">
+<h1>Laboratorio 7 : Metodi di Quadratura<a class="headerlink" href="#laboratorio-7-metodi-di-quadratura" title="Link to this heading">#</a></h1>
 <p>Compito dell’integrazione numerica, o <em>quadrature</em> è quello di
 approssimare il valore dell’integrale</p>
 <div class="math notranslate nohighlight">
@@ -832,7 +832,7 @@ formule stampandoli sullo stesso grafico</p>
 <figure class="align-default" id="id13">
 <img alt="_images/simpson_error2.png" src="_images/simpson_error2.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 18 </span><span class="caption-text">Confronto tra l’errore relativo compiuto con la formula dei Trapezi e
+<p><span class="caption-number">Fig. 17 </span><span class="caption-text">Confronto tra l’errore relativo compiuto con la formula dei Trapezi e
 quello ottenuto con la formula di Simpson.</span><a class="headerlink" href="#id13" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
@@ -1022,12 +1022,12 @@ Cosa si osserva?</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="laboratorio7.html"
+       href="laboratorio4.html"
        title="pagina precedente">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">precedente</p>
-        <p class="prev-next-title">Laboratorio 7 : Metodi Stazionari per Sistemi Lineari</p>
+        <p class="prev-next-title">Laboratorio 6 : Il Metodo di Newton</p>
       </div>
     </a>
     <a class="right-next"
@@ -1035,7 +1035,7 @@ Cosa si osserva?</p>
        title="pagina seguente">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">successivo</p>
-        <p class="prev-next-title">Laboratorio 9 : Metodi per la Soluzione di ODE</p>
+        <p class="prev-next-title">Laboratorio 8 : Metodi per la Soluzione di ODE</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Laboratorio 9 : Metodi per la Soluzione di ODE &#8212; Calcolo Numerico - Note ed Esercitazioni di Laboratorio</title>
+    <title>Laboratorio 8 : Metodi per la Soluzione di ODE &#8212; Calcolo Numerico - Note ed Esercitazioni di Laboratorio</title>
   
   
   
@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -64,8 +64,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'laboratorio9';</script>
     <link rel="index" title="Indice" href="genindex.html" />
     <link rel="search" title="Cerca" href="search.html" />
-    <link rel="next" title="Laboratorio 10 : Metodi di tipo Runge-Kutta" href="laboratorio10.html" />
-    <link rel="prev" title="Laboratorio 8 : Metodi di Quadratura" href="laboratorio8.html" />
+    <link rel="next" title="Laboratorio 9 : Metodi di tipo Runge-Kutta" href="laboratorio10.html" />
+    <link rel="prev" title="Laboratorio 7 : Metodi di Quadratura" href="laboratorio8.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="it"/>
   </head>
@@ -193,6 +193,8 @@
 
 
 <li class="toctree-l1"><a class="reference internal" href="laboratorio2.html">Laboratorio 2 : L’Aritmetica di Precisione Finita</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio5.html">Laboratorio 3 : Soluzione di Sistemi Triangolari</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio6.html">Laboratorio 4 : L’Eliminazione di Gauss il Metodo LU</a></li>
 <li class="toctree-l1"><a class="reference internal" href="eqnonlineari.html">Risoluzione numerica di equazioni nonlineari</a></li>
 
 
@@ -201,14 +203,12 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="laboratorio3.html">Laboratorio 3 : Il Metodo di Bisezione</a></li>
-<li class="toctree-l1"><a class="reference internal" href="laboratorio4.html">Laboratorio 4 : Il Metodo di Newton</a></li>
-<li class="toctree-l1"><a class="reference internal" href="laboratorio5.html">Laboratorio 5 : Soluzione di Sistemi Triangolari</a></li>
-<li class="toctree-l1"><a class="reference internal" href="laboratorio6.html">Laboratorio 6 : L’Eliminazione di Gauss il Metodo LU</a></li>
-<li class="toctree-l1"><a class="reference internal" href="laboratorio7.html">Laboratorio 7 : Metodi Stazionari per Sistemi Lineari</a></li>
-<li class="toctree-l1"><a class="reference internal" href="laboratorio8.html">Laboratorio 8 : Metodi di Quadratura</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Laboratorio 9 : Metodi per la Soluzione di ODE</a></li>
-<li class="toctree-l1"><a class="reference internal" href="laboratorio10.html">Laboratorio 10 : Metodi di tipo Runge-Kutta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio3.html">Laboratorio 5 : Il Metodo di Bisezione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio4.html">Laboratorio 6 : Il Metodo di Newton</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio8.html">Laboratorio 7 : Metodi di Quadratura</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Laboratorio 8 : Metodi per la Soluzione di ODE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio10.html">Laboratorio 9 : Metodi di tipo Runge-Kutta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio7.html">Laboratorio 10 : Metodi Stazionari per Sistemi Lineari</a></li>
 </ul>
 
     </div>
@@ -394,7 +394,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Laboratorio 9 : Metodi per la Soluzione di ODE</h1>
+    <h1>Laboratorio 8 : Metodi per la Soluzione di ODE</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -422,8 +422,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="laboratorio-9-metodi-per-la-soluzione-di-ode">
-<h1>Laboratorio 9 : Metodi per la Soluzione di ODE<a class="headerlink" href="#laboratorio-9-metodi-per-la-soluzione-di-ode" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="laboratorio-8-metodi-per-la-soluzione-di-ode">
+<h1>Laboratorio 8 : Metodi per la Soluzione di ODE<a class="headerlink" href="#laboratorio-8-metodi-per-la-soluzione-di-ode" title="Link to this heading">#</a></h1>
 <p>In questo laboratorio ci vogliamo occupare di alcuni metodi per la
 soluzione di un”<strong>equazione differenziale del primo ordine</strong>, la cui forma
 generale è</p>
@@ -637,7 +637,7 @@ per stimare numericamente l’ordine di convergenza:</p>
 <figure class="align-default" id="id1">
 <img alt="_images/forward_euler_error.png" src="_images/forward_euler_error.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 19 </span><span class="caption-text">Errore del metodo di Eulero in avanti.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 18 </span><span class="caption-text">Errore del metodo di Eulero in avanti.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>ed il valore di <span class="math notranslate nohighlight">\(q = [0.9784, 0.9972, 1.0000, 1.0001, 1.0000, 1.0000]\)</span> ed
@@ -701,7 +701,7 @@ y(1)=10
 <figure class="align-default" id="id2">
 <img alt="_images/forward_euler_error2.png" src="_images/forward_euler_error2.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 20 </span><span class="caption-text">Convergenza del metodo di Eulero per diverse condizioni iniziali.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 19 </span><span class="caption-text">Convergenza del metodo di Eulero per diverse condizioni iniziali.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Quello che vediamo è che per il valore di <span class="math notranslate nohighlight">\(h\)</span> più grande, ovvero <span class="math notranslate nohighlight">\(h =
@@ -824,7 +824,7 @@ ed implicito.</p>
 <figure class="align-default" id="id3">
 <img alt="_images/implicit_euler_error.png" src="_images/implicit_euler_error.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 21 </span><span class="caption-text">Differenza in stabilità tra il metodo di Eulero implicito ed esplicito.</span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 20 </span><span class="caption-text">Differenza in stabilità tra il metodo di Eulero implicito ed esplicito.</span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -836,7 +836,7 @@ ed implicito.</p>
 <figure class="align-default" id="fig-spacecraft">
 <img alt="_images/spacecraft.png" src="_images/spacecraft.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 22 </span><span class="caption-text">Condizioni iniziali</span><a class="headerlink" href="#fig-spacecraft" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 21 </span><span class="caption-text">Condizioni iniziali</span><a class="headerlink" href="#fig-spacecraft" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </aside>
@@ -844,7 +844,7 @@ ed implicito.</p>
 <p class="admonition-title">Esercizio</p>
 <p>Un veicolo spaziale è lanciato ad una altitudine di <span class="math notranslate nohighlight">\(H = 772 \text{ km}\)</span>
 sul livello del mare con velocità iniziale <span class="math notranslate nohighlight">\(v_0 = 6700\,\text{m/s}\)</span> nella
-direzione illustrata in <a class="reference internal" href="#fig-spacecraft"><span class="std std-numref">Fig. 22</span></a>. Le equazioni differenziali che descrivono
+direzione illustrata in <a class="reference internal" href="#fig-spacecraft"><span class="std std-numref">Fig. 21</span></a>. Le equazioni differenziali che descrivono
 il moto dell’oggetto in coordinate polari sono</p>
 <div class="math notranslate nohighlight">
 \[\ddot{r} = r \dot{\theta}^2 - \frac{G M_e}{r^2}, \quad \ddot{\theta} = - 2 \frac{\dot{r}\dot{\theta}}{r}.\]</div>
@@ -922,7 +922,7 @@ verso il basso dall’inizio della caduta. L’equazione differenziale che descr
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">precedente</p>
-        <p class="prev-next-title">Laboratorio 8 : Metodi di Quadratura</p>
+        <p class="prev-next-title">Laboratorio 7 : Metodi di Quadratura</p>
       </div>
     </a>
     <a class="right-next"
@@ -930,7 +930,7 @@ verso il basso dall’inizio della caduta. L’equazione differenziale che descr
        title="pagina seguente">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">successivo</p>
-        <p class="prev-next-title">Laboratorio 10 : Metodi di tipo Runge-Kutta</p>
+        <p class="prev-next-title">Laboratorio 9 : Metodi di tipo Runge-Kutta</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

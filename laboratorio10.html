@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Laboratorio 10 : Metodi di tipo Runge-Kutta &#8212; Calcolo Numerico - Note ed Esercitazioni di Laboratorio</title>
+    <title>Laboratorio 9 : Metodi di tipo Runge-Kutta &#8212; Calcolo Numerico - Note ed Esercitazioni di Laboratorio</title>
   
   
   
@@ -64,7 +64,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'laboratorio10';</script>
     <link rel="index" title="Indice" href="genindex.html" />
     <link rel="search" title="Cerca" href="search.html" />
-    <link rel="prev" title="Laboratorio 9 : Metodi per la Soluzione di ODE" href="laboratorio9.html" />
+    <link rel="next" title="Laboratorio 10 : Metodi Stazionari per Sistemi Lineari" href="laboratorio7.html" />
+    <link rel="prev" title="Laboratorio 8 : Metodi per la Soluzione di ODE" href="laboratorio9.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="it"/>
   </head>
@@ -194,7 +195,6 @@
 <li class="toctree-l1"><a class="reference internal" href="laboratorio2.html">Laboratorio 2 : L’Aritmetica di Precisione Finita</a></li>
 <li class="toctree-l1"><a class="reference internal" href="laboratorio5.html">Laboratorio 3 : Soluzione di Sistemi Triangolari</a></li>
 <li class="toctree-l1"><a class="reference internal" href="laboratorio6.html">Laboratorio 4 : L’Eliminazione di Gauss il Metodo LU</a></li>
-<li class="toctree-l1"><a class="reference internal" href="laboratorio7.html">Laboratorio 5 : Metodi Stazionari per Sistemi Lineari</a></li>
 <li class="toctree-l1"><a class="reference internal" href="eqnonlineari.html">Risoluzione numerica di equazioni nonlineari</a></li>
 
 
@@ -203,11 +203,12 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="laboratorio3.html">Laboratorio 6 : Il Metodo di Bisezione</a></li>
-<li class="toctree-l1"><a class="reference internal" href="laboratorio4.html">Laboratorio 7 : Il Metodo di Newton</a></li>
-<li class="toctree-l1"><a class="reference internal" href="laboratorio8.html">Laboratorio 8 : Metodi di Quadratura</a></li>
-<li class="toctree-l1"><a class="reference internal" href="laboratorio9.html">Laboratorio 9 : Metodi per la Soluzione di ODE</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Laboratorio 10 : Metodi di tipo Runge-Kutta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio3.html">Laboratorio 5 : Il Metodo di Bisezione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio4.html">Laboratorio 6 : Il Metodo di Newton</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio8.html">Laboratorio 7 : Metodi di Quadratura</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio9.html">Laboratorio 8 : Metodi per la Soluzione di ODE</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Laboratorio 9 : Metodi di tipo Runge-Kutta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio7.html">Laboratorio 10 : Metodi Stazionari per Sistemi Lineari</a></li>
 </ul>
 
     </div>
@@ -393,7 +394,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Laboratorio 10 : Metodi di tipo Runge-Kutta</h1>
+    <h1>Laboratorio 9 : Metodi di tipo Runge-Kutta</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -416,8 +417,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="laboratorio-10-metodi-di-tipo-runge-kutta">
-<h1>Laboratorio 10 : Metodi di tipo Runge-Kutta<a class="headerlink" href="#laboratorio-10-metodi-di-tipo-runge-kutta" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="laboratorio-9-metodi-di-tipo-runge-kutta">
+<h1>Laboratorio 9 : Metodi di tipo Runge-Kutta<a class="headerlink" href="#laboratorio-9-metodi-di-tipo-runge-kutta" title="Link to this heading">#</a></h1>
 <p>Come abbiamo visto nello scorso laboratorio i metodi di Eulero in avanti
 e all’indietro, ovvero, esplicito ed implicito, hanno un ordine di
 convergenza di uno. Questo fa sì che per raggiungere una accuratezza
@@ -555,11 +556,11 @@ durante lo scorso laboratorio</p>
 <span class="nb">ylabel</span><span class="p">(</span><span class="s">&#39;Errore Relativo&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Da cui otteniamo i risultati in <a class="reference internal" href="#fig-rk4"><span class="std std-numref">Fig. 23</span></a>.</p>
+<p>Da cui otteniamo i risultati in <a class="reference internal" href="#fig-rk4"><span class="std std-numref">Fig. 22</span></a>.</p>
 <figure class="align-default" id="fig-rk4">
 <img alt="_images/RK4_convergence.png" src="_images/RK4_convergence.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 23 </span><span class="caption-text">Paragone tra la convergenza del metodo di Eulero in avanti (esplicito) e
+<p><span class="caption-number">Fig. 22 </span><span class="caption-text">Paragone tra la convergenza del metodo di Eulero in avanti (esplicito) e
 il metodo esplicito di Runge-Kutta di ordine 4.</span><a class="headerlink" href="#fig-rk4" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
@@ -605,8 +606,17 @@ l’effetto dell’ordine più alto.</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">precedente</p>
-        <p class="prev-next-title">Laboratorio 9 : Metodi per la Soluzione di ODE</p>
+        <p class="prev-next-title">Laboratorio 8 : Metodi per la Soluzione di ODE</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="laboratorio7.html"
+       title="pagina seguente">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">successivo</p>
+        <p class="prev-next-title">Laboratorio 10 : Metodi Stazionari per Sistemi Lineari</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>

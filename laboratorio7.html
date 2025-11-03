@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Laboratorio 5 : Metodi Stazionari per Sistemi Lineari &#8212; Calcolo Numerico - Note ed Esercitazioni di Laboratorio</title>
+    <title>Laboratorio 10 : Metodi Stazionari per Sistemi Lineari &#8212; Calcolo Numerico - Note ed Esercitazioni di Laboratorio</title>
   
   
   
@@ -64,8 +64,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'laboratorio7';</script>
     <link rel="index" title="Indice" href="genindex.html" />
     <link rel="search" title="Cerca" href="search.html" />
-    <link rel="next" title="Risoluzione numerica di equazioni nonlineari" href="eqnonlineari.html" />
-    <link rel="prev" title="Laboratorio 4 : L’Eliminazione di Gauss il Metodo LU" href="laboratorio6.html" />
+    <link rel="prev" title="Laboratorio 9 : Metodi di tipo Runge-Kutta" href="laboratorio10.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="it"/>
   </head>
@@ -195,7 +194,6 @@
 <li class="toctree-l1"><a class="reference internal" href="laboratorio2.html">Laboratorio 2 : L’Aritmetica di Precisione Finita</a></li>
 <li class="toctree-l1"><a class="reference internal" href="laboratorio5.html">Laboratorio 3 : Soluzione di Sistemi Triangolari</a></li>
 <li class="toctree-l1"><a class="reference internal" href="laboratorio6.html">Laboratorio 4 : L’Eliminazione di Gauss il Metodo LU</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Laboratorio 5 : Metodi Stazionari per Sistemi Lineari</a></li>
 <li class="toctree-l1"><a class="reference internal" href="eqnonlineari.html">Risoluzione numerica di equazioni nonlineari</a></li>
 
 
@@ -204,11 +202,12 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="laboratorio3.html">Laboratorio 6 : Il Metodo di Bisezione</a></li>
-<li class="toctree-l1"><a class="reference internal" href="laboratorio4.html">Laboratorio 7 : Il Metodo di Newton</a></li>
-<li class="toctree-l1"><a class="reference internal" href="laboratorio8.html">Laboratorio 8 : Metodi di Quadratura</a></li>
-<li class="toctree-l1"><a class="reference internal" href="laboratorio9.html">Laboratorio 9 : Metodi per la Soluzione di ODE</a></li>
-<li class="toctree-l1"><a class="reference internal" href="laboratorio10.html">Laboratorio 10 : Metodi di tipo Runge-Kutta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio3.html">Laboratorio 5 : Il Metodo di Bisezione</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio4.html">Laboratorio 6 : Il Metodo di Newton</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio8.html">Laboratorio 7 : Metodi di Quadratura</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio9.html">Laboratorio 8 : Metodi per la Soluzione di ODE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="laboratorio10.html">Laboratorio 9 : Metodi di tipo Runge-Kutta</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Laboratorio 10 : Metodi Stazionari per Sistemi Lineari</a></li>
 </ul>
 
     </div>
@@ -394,7 +393,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Laboratorio 5 : Metodi Stazionari per Sistemi Lineari</h1>
+    <h1>Laboratorio 10 : Metodi Stazionari per Sistemi Lineari</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -422,8 +421,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="laboratorio-5-metodi-stazionari-per-sistemi-lineari">
-<h1>Laboratorio 5 : Metodi Stazionari per Sistemi Lineari<a class="headerlink" href="#laboratorio-5-metodi-stazionari-per-sistemi-lineari" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="laboratorio-10-metodi-stazionari-per-sistemi-lineari">
+<h1>Laboratorio 10 : Metodi Stazionari per Sistemi Lineari<a class="headerlink" href="#laboratorio-10-metodi-stazionari-per-sistemi-lineari" title="Link to this heading">#</a></h1>
 <p>Un <strong>metodo iterativo</strong> è una procedura matematica che a partire da un <em>valore iniziale</em> genera una sequenza di <em>soluzioni approssimate</em> migliorative per una
 determinata classe di problemi, in cui l’approssimazione <span class="math notranslate nohighlight">\(n\)</span>esima è derivata dai precedenti. Abbiamo già visto, <strong>ed implementato</strong>, metodi di questo tipo per la ricerca degli zeri di una funzione.</p>
 <p>In questo laboratorio vogliamo concentrarci invece sulla costruzione di alcuni
@@ -681,12 +680,12 @@ per questo metodo la decomposizione additiva della matrice <span class="math not
 <span class="w">    </span><span class="s">&#39;FontSize&#39;</span><span class="p">,</span><span class="mi">14</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Da cui osserviamo che il metodo di Gauss-Seidel (forward) impiega meno iterazioni per raggiungere la convergenza desiderata (<a class="reference internal" href="#gaussjac1"><span class="std std-numref">Fig. 9</span></a>).</p>
+<p>Da cui osserviamo che il metodo di Gauss-Seidel (forward) impiega meno iterazioni per raggiungere la convergenza desiderata (<a class="reference internal" href="#gaussjac1"><span class="std std-numref">Fig. 23</span></a>).</p>
 <figure class="align-default" id="gaussjac1">
 <a class="reference internal image-reference" href="_images/gaussjacobicomparison1.png"><img alt="convergenza-metodi" src="_images/gaussjacobicomparison1.png" style="width: 50%;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 9 </span><span class="caption-text">Evoluzione del residuo per i metodi di Jacobi e Gauss-Seidel.</span><a class="headerlink" href="#gaussjac1" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 23 </span><span class="caption-text">Evoluzione del residuo per i metodi di Jacobi e Gauss-Seidel.</span><a class="headerlink" href="#gaussjac1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Possiamo indagare la cosa dal punto di vista teorico andando a guardare il raggio spettrale delle due matrici di iterazione, infatti</p>
@@ -753,22 +752,13 @@ per questo metodo la decomposizione additiva della matrice <span class="math not
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="laboratorio6.html"
+       href="laboratorio10.html"
        title="pagina precedente">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">precedente</p>
-        <p class="prev-next-title">Laboratorio 4 : L’Eliminazione di Gauss il Metodo LU</p>
+        <p class="prev-next-title">Laboratorio 9 : Metodi di tipo Runge-Kutta</p>
       </div>
-    </a>
-    <a class="right-next"
-       href="eqnonlineari.html"
-       title="pagina seguente">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">successivo</p>
-        <p class="prev-next-title">Risoluzione numerica di equazioni nonlineari</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
